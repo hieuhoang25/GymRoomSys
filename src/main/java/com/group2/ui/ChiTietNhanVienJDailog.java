@@ -54,10 +54,10 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                 rdoQL.setSelected(true);
             }
             if (nv.getHinh() != null) {
-                imgHinh.setImage(GImage.read("nvIMG/",nv.getHinh()));
+                imgHinh.setImage(GImage.read("nvIMG/", nv.getHinh()));
                 imgHinh.setToolTipText(nv.getHinh());
             } else {
-                imgHinh.setImage(GImage.read("khachhangIMG/","macdinh.png"));
+                imgHinh.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
                 imgHinh.setToolTipText("macdinh.png");
             }
         } else {
@@ -70,6 +70,8 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
+        
+        imgHinh.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
         if (kt == false) {
             titile.setText("Sửa thông tin nhân viên");
         } else {
@@ -383,8 +385,8 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
         try {
             nvDAO.update(nv);
             MsgBox.alert(this, "Thông báo", "Sửa nhân viên thành công!", Alert.AlertType.SUCCESS);
-             
-       } catch (Exception e) {
+
+        } catch (Exception e) {
             MsgBox.alert(this, "Sửa nhân viên thất bại !", "Mã nhân viên hoặc số điện thoại đã tồn tại!", Alert.AlertType.ERROR);
 
             e.printStackTrace();
@@ -397,8 +399,8 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
         if (rVal == JFileChooser.APPROVE_OPTION) {
             File file = c.getSelectedFile();
             ImageIcon icon = new ImageIcon(file.getAbsolutePath());
-            GImage.save("nvIMG/",file);
-            ImageIcon ic = GImage.read("nvIMG/",file.getName());
+            GImage.save("nvIMG/", file);
+            ImageIcon ic = GImage.read("nvIMG/", file.getName());
             imgHinh.setImage(ic);
             imgHinh.setToolTipText(file.getName());
         }

@@ -15,7 +15,7 @@ import javax.swing.ListCellRenderer;
  *
  * @author HieuHoang
  */
-public class ItemCartPanelQR extends javax.swing.JPanel implements ListCellRenderer<SanPhamMua>{
+public class ItemCartPanelQR extends javax.swing.JPanel implements ListCellRenderer<SanPhamMua> {
 
     /**
      * Creates new form ItemCartPanelQR
@@ -102,9 +102,16 @@ public class ItemCartPanelQR extends javax.swing.JPanel implements ListCellRende
     @Override
     public Component getListCellRendererComponent(JList<? extends SanPhamMua> list, SanPhamMua value, int index, boolean isSelected, boolean cellHasFocus) {
         lblTenSP.setText(value.getTenSP());
-        imgHinh.setImage(GImage.read("sanphamIMG/",value.getHinh()));
-        lblMaSP.setText(value.getMaSP());
-        lblSL.setText(value.getSoLuong()+"");
+        if (value.getHinh() != null) {
+            imgHinh.setImage(GImage.read("sanphamIMG/", value.getHinh()));
+            lblMaSP.setText(value.getMaSP());
+            lblSL.setText(value.getSoLuong() + "");
+        } else {
+            imgHinh.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
+            lblMaSP.setText(value.getMaSP());
+            lblSL.setText(value.getSoLuong() + "");
+        }
+
         return this;
     }
 }

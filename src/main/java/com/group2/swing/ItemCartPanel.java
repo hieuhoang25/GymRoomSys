@@ -5,9 +5,11 @@
  */
 package com.group2.swing;
 
+import com.group2.dao.SanPhamDAO;
 import com.group2.entity.GioHangSP;
 import com.group2.entity.SanPhamMua;
 import com.group2.utils.GImage;
+import com.group2.utils.MsgBox;
 import java.awt.Component;
 import java.text.DecimalFormat;
 import javax.swing.JLabel;
@@ -26,6 +28,7 @@ public class ItemCartPanel extends javax.swing.JPanel {
     SanPhamMua spm;
     JLabel labelTongTien, tongTienTT;
     GioHangSPPanel gioHangPanel;
+    SanPhamDAO spDAO = new SanPhamDAO();
 
     /**
      * Creates new form ItemCartPanel
@@ -42,12 +45,12 @@ public class ItemCartPanel extends javax.swing.JPanel {
         this.labelTongTien = labelTongTien;
         this.gioHangPanel = gioHangPanel;
         this.tongTienTT = tongTienTT;
-        if(spm.getHinh()!= null){
-        imgHinh.setImage(GImage.read("sanphamIMG/",spm.getHinh()));
-        }else{
-        imgHinh.setImage(GImage.read("khachhangIMG/","macdinh.png"));
+        if (spm.getHinh() != null) {
+            imgHinh.setImage(GImage.read("sanphamIMG/", spm.getHinh()));
+        } else {
+            imgHinh.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
         }
-        
+
         lblTenSP.setText(spm.getTenSP());
         lblMaSP.setText(spm.getMaSP());
         lblDonGia.setText(df.format(spm.getDonGia()) + "₫");
@@ -163,10 +166,16 @@ public class ItemCartPanel extends javax.swing.JPanel {
 
     private void spSoLuongStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spSoLuongStateChanged
         // TODO add your handling code here:
-        spm.setSoLuong((int) spSoLuong.getValue());
-        lblThanhTien.setText(df.format(spm.getThanhTien()) + "₫");
-        labelTongTien.setText(df.format(GioHangSP.tongTienGH()) + "₫");
-        tongTienTT.setText(df.format(GioHangSP.tienThanhToan()) + "₫");
+        int SoLuong = spDAO.selectById(spm.getMaSP()).getSoLuong();
+        if (SoLuong >= Integer.parseInt(spSoLuong.getValue() + "")) {
+            spm.setSoLuong((int) spSoLuong.getValue());
+            lblThanhTien.setText(df.format(spm.getThanhTien()) + "₫");
+            labelTongTien.setText(df.format(GioHangSP.tongTienGH()) + "₫");
+            tongTienTT.setText(df.format(GioHangSP.tienThanhToan()) + "₫");
+        }else{
+            MsgBox.alert(null, "Thông báo", "Vượt quá số lượng sản phẩm trong kho!", Alert.AlertType.ERROR);
+        }
+
     }//GEN-LAST:event_spSoLuongStateChanged
 
 

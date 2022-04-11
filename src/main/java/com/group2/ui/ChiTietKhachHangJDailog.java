@@ -57,9 +57,9 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
                 rdoNu.setSelected(true);
             }
             if (kh.getHinh() != null) {
-                imgHinh.setImage(GImage.read("khachhangIMG/",kh.getHinh()));
+                imgHinh.setImage(GImage.read("khachhangIMG/", kh.getHinh()));
             } else {
-                imgHinh.setImage(GImage.read("khachhangIMG/","macdinh.png"));
+                imgHinh.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
             }
             main.remove(btnLuu);
         } else {
@@ -75,6 +75,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
         designJList();
+        imgHinh.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
         if (kt == false) {
             titile.setText("Sửa thông tin khách hàng");
             main.remove(btnLuu);
@@ -83,13 +84,14 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
             main.remove(btnSua);
         }
     }
-    
+
     DefaultListModel<String> model;
+
     public void fillToList() {
         model = new DefaultListModel();
         List<Object[]> list = tkDAO.BuyHistory(kh.getSoDT());
         for (Object[] objects : list) {
-            model.addElement("Loai:"+objects[0] + " - Time:"+ objects[1]);
+            model.addElement("Loai:" + objects[0] + " - Time:" + objects[1]);
             jList1.setModel(model);
         }
 
@@ -349,7 +351,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         suaKhachHang();
-        
+
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
@@ -423,8 +425,8 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
         if (rVal == JFileChooser.APPROVE_OPTION) {
             File file = c.getSelectedFile();
             ImageIcon icon = new ImageIcon(file.getAbsolutePath());
-            GImage.save("KhachhangIMG/",file );
-            ImageIcon ic = GImage.read("KhachhangIMG/",file.getName());
+            GImage.save("KhachhangIMG/", file);
+            ImageIcon ic = GImage.read("KhachhangIMG/", file.getName());
             imgHinh.setImage(ic);
             imgHinh.setToolTipText(file.getName());
         }

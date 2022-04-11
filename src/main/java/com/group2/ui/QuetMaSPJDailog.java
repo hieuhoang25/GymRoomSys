@@ -25,6 +25,7 @@ import net.miginfocom.swing.MigLayout;
 public class QuetMaSPJDailog extends javax.swing.JDialog {
 
     GioHangSPPanel gioHangPanel;
+    SanPhamDAO spDAO = new SanPhamDAO();
 
     /**
      * Creates new form QuetMaSPJDailog
@@ -33,7 +34,7 @@ public class QuetMaSPJDailog extends javax.swing.JDialog {
         this.gioHangPanel = gioHangPanel;
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
-        jList1.setModel(dlm);
+        jlist1.setModel(dlm);
         designPanel();
         fillToList();
 
@@ -72,7 +73,7 @@ public class QuetMaSPJDailog extends javax.swing.JDialog {
         button1 = new com.group2.swing.Button();
         button2 = new com.group2.swing.Button();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jlist1 = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
@@ -99,6 +100,11 @@ public class QuetMaSPJDailog extends javax.swing.JDialog {
 
         spSL.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         spSL.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        spSL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spSLStateChanged(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(150, 150, 150));
@@ -128,8 +134,8 @@ public class QuetMaSPJDailog extends javax.swing.JDialog {
 
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        jList1.setCellRenderer(new ItemCartPanelQR());
-        jScrollPane2.setViewportView(jList1);
+        jlist1.setCellRenderer(new ItemCartPanelQR());
+        jScrollPane2.setViewportView(jlist1);
 
         javax.swing.GroupLayout gradientBackGround1Layout = new javax.swing.GroupLayout(gradientBackGround1);
         gradientBackGround1.setLayout(gradientBackGround1Layout);
@@ -220,20 +226,29 @@ public class QuetMaSPJDailog extends javax.swing.JDialog {
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         // TODO add your handling code here:
-        SanPhamMua sanPhamMua = getSanPhamMua();
-        if (sanPhamMua == null) {
-            MsgBox.alert(null, "Thông báo", "Sản phẩm này không tồn tại", Alert.AlertType.ERROR);
+        int SoLuong = spDAO.selectById(txtMa.getText()).getSoLuong();
+        if (SoLuong >= Integer.parseInt(spSL.getValue() + "")) {
+            SanPhamMua sanPhamMua = getSanPhamMua();
+            if (sanPhamMua == null) {
+                MsgBox.alert(null, "Thông báo", "Sản phẩm này không tồn tại", Alert.AlertType.ERROR);
+            } else {
+                sanPhamMua.setSoLuong((int) spSL.getValue());
+                GioHangSP.spDaMua(sanPhamMua);
+                gioHangPanel.setSLSanPham();
+                MsgBox.alert(null, "Thông báo", "Thêm vào giỏ hàng thành công!", Alert.AlertType.SUCCESS);
+                txtMa.setText("");
+                fillToList();
+            }
         } else {
-            sanPhamMua.setSoLuong((int) spSL.getValue());
-            
-            GioHangSP.spDaMua(sanPhamMua);
-            gioHangPanel.setSLSanPham();
-            MsgBox.alert(null, "Thông báo", "Thêm vào giỏ hàng thành công!", Alert.AlertType.SUCCESS);
-            txtMa.setText("");
-            fillToList();
-            
+            MsgBox.alert(null, "Thông báo", "Vượt quá số lượng sản phẩm trong kho!", Alert.AlertType.ERROR);
         }
+
     }//GEN-LAST:event_button1ActionPerformed
+
+    private void spSLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spSLStateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_spSLStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.group2.swing.Button button1;
@@ -242,9 +257,9 @@ public class QuetMaSPJDailog extends javax.swing.JDialog {
     private com.group2.swing.GradientBackGround gradientBackGround1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<SanPhamMua> jList1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JList<SanPhamMua> jlist1;
     private javax.swing.JSpinner spSL;
     private javax.swing.JLabel titile;
     private com.group2.swing.TextField txtMa;

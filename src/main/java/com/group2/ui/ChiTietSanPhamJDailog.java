@@ -58,6 +58,7 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
+        imageView1.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
         if (kt == true) {
             titile.setText("Sửa thông tin sản phẩm");
             main.remove(btnLuu);
