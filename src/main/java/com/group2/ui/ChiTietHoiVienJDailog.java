@@ -257,8 +257,10 @@ public class ChiTietHoiVienJDailog extends javax.swing.JDialog {
         txtMaNV.setText("" + list.get(0)[4]);
         if (list.get(0)[5] == null) {
             imgHinh.setImage(GImage.read("khachhangIMG/","macdinh.png"));
+            imgHinh.setToolTipText("macdinh.png");
         } else {
             imgHinh.setImage(GImage.read("khachhangIMG/",list.get(0)[5] + ""));
+            imgHinh.setToolTipText(list.get(0)[5] + "");
         }
     }
 

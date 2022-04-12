@@ -9,6 +9,7 @@ import com.group2.dao.GoiTapDAO;
 import com.group2.entity.GoiTap;
 import com.group2.swing.Alert;
 import com.group2.utils.MsgBox;
+import com.group2.utils.Validation;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.lang.StringUtils;
@@ -220,7 +221,30 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
             gt.setMaLoai(StringUtils.lowerCase(cboLoaiGT.getSelectedItem().toString()));
             gt.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
             gt.setTenGoiTap(txtTenGT.getText());
-
+            //check ma
+            if (Validation.checkLength(txtMaGT.getText()) == false) {
+                MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại mã gói tập", Alert.AlertType.ERROR);
+                txtMaGT.requestFocus();
+                return;
+            }
+            //check tên
+            if (Validation.checkLength(txtTenGT.getText()) == false) {
+                MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại tên gói tập", Alert.AlertType.ERROR);
+                txtTenGT.requestFocus();
+                return;
+            }
+            //check giá
+            if (Validation.checkDouble(txtGia.getText()) == false || txtMaGT.equals("")) {
+                MsgBox.alert(this, "Thông báo", "Vui lòng kiểm tra lại giá", Alert.AlertType.ERROR);
+                txtGia.requestFocus();
+                return;
+            }
+            //check thời lượng
+            if (Validation.checkInt(txtThoiLuong.getText()) == false || txtThoiLuong.equals("")) {
+                MsgBox.alert(this, "Thông báo", "Vui lòng kiểm tra lại thời lượng", Alert.AlertType.ERROR);
+                txtThoiLuong.requestFocus();
+                return;
+            }
             dao.insert(gt);
             fillTable(model1);
             MsgBox.alert(ChiTietGoiTapJDailog.this, "Thông báo", "Thêm thành công", Alert.AlertType.SUCCESS);

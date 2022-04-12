@@ -5,6 +5,7 @@
 package com.group2.entity;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  *
@@ -36,6 +37,28 @@ public class KhachHang {
         this.NgaySinh = NgaySinh;
         this.GioiTinh = GioiTinh;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final KhachHang other = (KhachHang) obj;
+        return Objects.equals(this.SoDT, other.SoDT);
+    }
+    
 
     public String getSoDT() {
         return SoDT;

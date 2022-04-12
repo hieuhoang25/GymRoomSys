@@ -11,8 +11,11 @@ import com.group2.swing.Alert;
 import com.group2.utils.GJDBC;
 import com.group2.utils.GImage;
 import com.group2.utils.MsgBox;
+import com.group2.utils.Validation;
 import java.awt.Color;
 import java.io.File;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 
@@ -35,17 +38,21 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         if (kt == true) {
             titile.setText("Sửa thông tin sản phẩm");
-            cboLoaiSP.setSelectedItem(GJDBC.value("select TenSP from sanpham where masp = ?", sp.getTenLoai()));
+            cboLoaiSP.setSelectedItem(GJDBC.value("select TenSP from sanpham where masp = ?", sp.getMaLoai()));
+            //cboLoaiSP.setSelectedItem(GJDBC.value("select TenLoai from LoaiSanPham join SanPham on LoaiSanPham.MaLoaiSP = SanPham.MaLoai where masp = ?", sp.getMaSP()));
             txtTen.setText(sp.getTenSP().trim());
             txtDonGia.setText(sp.getDonGia() + "");
             txtSoLuong.setText(sp.getSoLuong() + "");
             txtNhaSanXuat.setText(sp.getNhaSanXuat().trim());
             txtGhiChu.setText((sp.getGhiChu() + "").trim());
             txtMa.setText(sp.getMaSP().trim());
+
             if (sp.getHinh() != null) {
-                imageView1.setImage(GImage.read("sanphamIMG/",sp.getHinh()));
+                imageView1.setImage(GImage.read("sanphamIMG/", sp.getHinh()));
+                imageView1.setToolTipText(sp.getHinh());
             } else {
-                imageView1.setImage(GImage.read("khachhangIMG","macdinh.png"));
+                imageView1.setImage(GImage.read("khachhangIMG", "macdinh.png"));
+                imageView1.setToolTipText("macdinh.png");
             }
             main.remove(btnLuu);
         } else {
@@ -56,6 +63,7 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
 
     public ChiTietSanPhamJDailog(boolean kt) {
         initComponents();
+        txtMa.setEditable(true);
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
         imageView1.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
@@ -66,6 +74,7 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
             titile.setText("Thêm sản phẩm mới");
             main.remove(btnSua);
         }
+
     }
 
     /**
@@ -179,6 +188,8 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
             }
         });
 
+        txtMa.setEditable(false);
+        txtMa.setBackground(new java.awt.Color(255, 255, 255));
         txtMa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtMa.setLabelText("Mã sản phẩm");
 
@@ -347,14 +358,45 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
         sp.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
         sp.setNhaSanXuat(txtNhaSanXuat.getText());
         sp.setGhiChu(txtGhiChu.getText());
-        sp.setMaLoai(String.valueOf(GJDBC.value("select MaSP from sanpham where TenSP = ? ",String.valueOf(cboLoaiSP.getSelectedItem()))));
+        sp.setMaLoai(String.valueOf(GJDBC.value("select MaLoaiSP from LoaiSanPham where Tenloai = ? ", String.valueOf(cboLoaiSP.getSelectedItem()))));
         sp.setHinh(imageView1.getToolTipText());
+        System.err.println("ma loai" + GJDBC.value("select MaLoaiSP from LoaiSanPham where Tenloai = ? ", String.valueOf(cboLoaiSP.getSelectedItem())));
         return sp;
     }
 
     public void suaSanPham() {
         SanPham sp = getForm();
         try {
+            //check mã
+            if (Validation.checkLength(txtMa.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Vui lòng nhập lại mã sản phẩm!", Alert.AlertType.ERROR);
+                txtMa.requestFocus();
+                return;
+            }
+            //check tên
+            if (Validation.checkLength(txtTen.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Vui lòng nhập lại tên sản phẩm!", Alert.AlertType.ERROR);
+                txtTen.requestFocus();
+                return;
+            }
+            //check đơn giá
+            if (Validation.checkDouble(txtDonGia.getText()) == false || Validation.checkLength(txtDonGia.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Vui lòng nhập lại giá sản phẩm!", Alert.AlertType.ERROR);
+                txtDonGia.requestFocus();
+                return;
+            }
+            //check số lượng
+            if (Validation.checkInt(txtSoLuong.getText()) == false || Validation.checkLength(txtSoLuong.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Vui lòng nhập lại số lượng sản phẩm!", Alert.AlertType.ERROR);
+                txtSoLuong.requestFocus();
+                return;
+            }
+            //check nhà sản xuất
+            if (Validation.checkLength(txtNhaSanXuat.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Vui lòng nhập lại nhà sản xuất!", Alert.AlertType.ERROR);
+                txtNhaSanXuat.requestFocus();
+                return;
+            }
             spDAO.update(sp);
             MsgBox.alert(this, "Thông báo", "Cập nhật sản phẩm thành công!", Alert.AlertType.SUCCESS);
 
@@ -366,12 +408,45 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
 
     public void themSanPham() {
         SanPham sp = getForm();
+        List<SanPham> list = spDAO.selectAll();
         try {
-            spDAO.insert(sp);
-            MsgBox.alert(this, "Thông báo", "Cập nhật sản phẩm thành công!", Alert.AlertType.SUCCESS);
+            // check ma
+            for (SanPham sanpham : list) {
+                if (sp.getMaSP().equals(sanpham.getMaSP())) {
+                    MsgBox.alert(this, "Lỗi", "Mã sp đã tồn tại", Alert.AlertType.ERROR);
+                    txtMa.requestFocus();
+                    return;
+                }
+            }
+            //check tên
+            if (Validation.checkLength(txtTen.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Vui lòng nhập lại tên sản phẩm!", Alert.AlertType.ERROR);
+                txtTen.requestFocus();
+                return;
+            }
+            //check đơn giá
+            if (Validation.checkDouble(txtDonGia.getText()) == false || Validation.checkLength(txtDonGia.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Vui lòng nhập lại giá sản phẩm!", Alert.AlertType.ERROR);
+                txtDonGia.requestFocus();
+                return;
+            }
+            //check số lượng
+            if (Validation.checkInt(txtSoLuong.getText()) == false || Validation.checkLength(txtSoLuong.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Vui lòng nhập lại số lượng sản phẩm!", Alert.AlertType.ERROR);
+                txtSoLuong.requestFocus();
+                return;
+            }
+            //check nhà sản xuất
+            if (Validation.checkLength(txtNhaSanXuat.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Vui lòng nhập lại nhà sản xuất!", Alert.AlertType.ERROR);
+                txtNhaSanXuat.requestFocus();
+                return;
+            }
 
+            spDAO.insert(sp);
+            MsgBox.alert(this, "Thông báo", "Thêm sản phẩm thành công!", Alert.AlertType.SUCCESS);
         } catch (Exception e) {
-            MsgBox.alert(this, "Cập nhật thất bại", "Vui lòng kiểm tra lại thông tin", Alert.AlertType.ERROR);
+            MsgBox.alert(this, "Thêm thất bại", "Vui lòng kiểm tra lại thông tin", Alert.AlertType.ERROR);
             e.printStackTrace();
         }
     }
@@ -382,8 +457,8 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
         if (rVal == JFileChooser.APPROVE_OPTION) {
             File file = c.getSelectedFile();
             ImageIcon icon = new ImageIcon(file.getAbsolutePath());
-            GImage.save("sanphamIMG/",file);
-            ImageIcon ic = GImage.read("sanphamIMG/",file.getName());
+            GImage.save("sanphamIMG/", file);
+            ImageIcon ic = GImage.read("sanphamIMG/", file.getName());
             imageView1.setImage(ic);
             imageView1.setToolTipText(file.getName());
         }

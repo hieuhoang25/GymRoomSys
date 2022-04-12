@@ -20,6 +20,7 @@ import com.group2.utils.Auth;
 import com.group2.utils.BuildBill;
 import com.group2.utils.MsgBox;
 import com.group2.utils.GDate;
+import com.group2.utils.Validation;
 import java.awt.Color;
 import java.text.DecimalFormat;
 import java.util.Date;
@@ -508,9 +509,41 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
 //         TODO add your handling code here:
+       
         if (GioHangSP.listSP.size() == 0) {
             MsgBox.alert(null, "Giỏ hàng trống", "Vui lòng chọn sản phẩm hoặc quét mã!", Alert.AlertType.ERROR);
         } else {
+            //check số điện thoại
+            if (Validation.checkExperession(txtSDT.getText(), "^(84|0[3|5|7|8|9])[0-9]{8}$") == false) {
+                txtSDT.requestFocus();
+                MsgBox.alert(this, "Lỗi", "Số điện thoại không đúng định dạng", Alert.AlertType.ERROR);
+                return;
+            }
+            // check họ tên
+            if (Validation.checkLength(txtHoVaTen.getText()) == false) {
+                txtHoVaTen.requestFocus();
+                MsgBox.alert(this, "Lỗi", "Vui lòng nhập lại họ tên", Alert.AlertType.ERROR);
+                return;
+            }
+            // check ngày sinh
+            if (Validation.checkToDate(txtNgaySinh.getText(), "yyyy-MM-dd") == false) {
+                txtNgaySinh.requestFocus();
+                MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại định dạng ngày 'yyyy-MM-dd'", Alert.AlertType.ERROR);
+                return;
+            }
+            // check Email
+            if (Validation.checkExperession(txtEmail.getText(), "^\\w+@\\w+(\\.\\w+){1,2}$") == false) {
+                txtEmail.requestFocus();
+                MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại email", Alert.AlertType.ERROR);
+                return;
+            }
+            // chek địa chỉ
+             if (Validation.checkLength(txtDiaChi.getText()) == false) {
+                txtDiaChi.requestFocus();
+                MsgBox.alert(this, "Lỗi", "Vui lòng nhập địa chỉ", Alert.AlertType.ERROR);
+                return;
+            }
+             
             if (MsgBox.confirm(null, "Khách hàng có muốn xuất hóa đơn không?")) {
                 hdctdao.themKHVaHD(txtSDT.getText(), Auth.user.getMaNV(), txtGhiChu.getText(), txtHoVaTen.getText(), txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, null, txtEmail.getText());
                 for (SanPhamMua sanPhamMua : GioHangSP.listSP) {
@@ -519,7 +552,6 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
                 }
 
                 dispose();
-
                 BuildBill.createBillSP("HDSP"+txtSDT.getText()+"-"+ GDate.toString(new Date(), "hh-mm-ss-dd-MM-yyyy"), txtSDT.getText(), txtHoVaTen.getText(), txtDiaChi.getText(),txtGhiChu.getText() ,(rdoTienMat.isSelected() ? rdoTienMat.getText():rdoThe.getText()));
                 GioHangSP.listSP.clear();
                 gioHangPanel.setSLSanPham();
