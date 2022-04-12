@@ -40,7 +40,7 @@
     <Container class="com.group2.swing.ImageView" name="imageView1">
       <Properties>
         <Property name="image" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/chaobk.jpg"/>
+          <Image iconType="3" name="/com/group2/icons/chaobk.jpg"/>
         </Property>
       </Properties>
 

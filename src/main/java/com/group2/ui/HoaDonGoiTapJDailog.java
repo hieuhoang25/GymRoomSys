@@ -8,9 +8,11 @@ package com.group2.ui;
 import Others.TakePicture;
 import com.group2.dao.GoiTapDAO;
 import com.group2.dao.HoaDonCTDAO;
+import com.group2.dao.HoiVienDAO;
 import com.group2.dao.KhachHangDAO;
 import com.group2.entity.GioHangGT;
 import com.group2.entity.GoiTap;
+import com.group2.entity.HoiVien;
 import com.group2.entity.KhachHang;
 import com.group2.swing.Alert;
 import com.group2.swing.GioHangGTPanel;
@@ -234,6 +236,7 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)), "Hình", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(0, 0, 204))); // NOI18N
         jPanel1.setOpaque(false);
 
+        imgHinh.setImage(new javax.swing.ImageIcon(getClass().getResource("/com/group2/icons/macdinh.png"))); // NOI18N
         imgHinh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 imgHinhMouseClicked(evt);
@@ -680,6 +683,14 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
                     GImage.write("khachhangIMG/" + imgHinh.getName(), data, f);
                     img = imgHinh.getName();
                 }
+                if (hvdao.selectBySDT(txtSDT.getText()) != null) {
+                    if (hvdao.selectBySDT(txtSDT.getText()).getQrCode() == null) {
+                        GImage.createQRCode(txtSDT.getText().trim(), f, txtEmail.getText().trim());
+                    }
+                } else {
+                    GImage.createQRCode(txtSDT.getText().trim(), f, txtEmail.getText().trim());
+
+                }
                 new HoaDonCTDAO().themHoaDonGoiTap(txtSDT.getText(), Auth.user.getMaNV(),
                         null, txtHoVaTen.getText(),
                         txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, img, txtEmail.getText());
@@ -688,14 +699,8 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
                     System.out.println(gt.getMaGT());
 
                 }
-
                 BuildBill.createBillGT("HDGT" + txtSDT.getText() + "-" + GDate.toString(new Date(), "hh-mm-ss-dd-MM-yyyy"), txtSDT.getText(), txtHoVaTen.getText(), txtDiaChi.getText(), txtGhiChu.getText(), (rdoTienMat.isSelected() ? rdoTienMat.getText() : rdoThe.getText()));
                 GioHangGT.clearGT();
-                gioHangGTPanel.setSLGoiTap();
-                             
-
-//                GImage.createQRCode(txtSDT.getText().trim(), f, txtEmail.getText().trim());
-
                 this.dispose();
             } else {
                 String img = "";
@@ -713,7 +718,7 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
                 MsgBox.alert(this, "Thông báo", "Mua gói tập thành công", Alert.AlertType.SUCCESS);
                 GioHangGT.clearGT();
                 gioHangGTPanel.setSLGoiTap();
-                
+
                 GImage.createQRCode(txtSDT.getText().trim(), f, txtEmail.getText().trim());
 
                 this.dispose();
@@ -780,4 +785,6 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
         jScrollPane2.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane2.setHorizontalScrollBar(new ScrollBarCustom());
     }
+    HoiVienDAO hvdao = new HoiVienDAO();
+
 }

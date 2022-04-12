@@ -21,6 +21,7 @@ import java.text.DecimalFormat;
 import java.text.Normalizer;
 import java.util.Date;
 import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -37,10 +38,13 @@ public class BuildBill {
             PdfWriter.getInstance(document, new FileOutputStream(file));
             document.open();
             Font f = new Font();
-
+            Image image1 = Image.getInstance("src/main/resources/com/group2/icons/logo2.PNG");
+            image1.scaleAbsoluteWidth(100);
+                image1.scaleAbsoluteHeight(100);
+            document.add(image1);
             f.setStyle(Font.ITALIC);
             f.setSize(18);
-            document.add(new Paragraph("Gym & Fitness", f));
+           
 
             Paragraph p = new Paragraph();
             p.add("Dia chi: Phan men quang trung, Quan 12, TP.Ho Chi Minh");
@@ -142,6 +146,10 @@ public class BuildBill {
             File file = new File(File_Name_Parent + fileName + ".pdf");
             PdfWriter.getInstance(document, new FileOutputStream(file));
             document.open();
+
+            Image image1 = Image.getInstance("\\src\\main\\resources\\com\\group2\\icons\\logo2.PNG");
+
+            document.add(image1);
             Font f = new Font();
 
             f.setStyle(Font.ITALIC);
@@ -157,7 +165,7 @@ public class BuildBill {
 
             f2.setStyle(Font.BOLD);
             f2.setSize(19);
-            Paragraph pTitle = new Paragraph("HOA DON GoiTap", f2);
+            Paragraph pTitle = new Paragraph("HOA DON GOI TAP", f2);
             pTitle.setSpacingBefore(20);
             pTitle.setSpacingAfter(20);
             pTitle.setAlignment(Element.ALIGN_CENTER);
@@ -262,7 +270,7 @@ public class BuildBill {
             GoiTap gt = GioHangGT.listGT.get(i);
             t.addCell(i + "");
             t.addCell(removeAccent(gt.getTenGoiTap()));
-            t.addCell(gt.getThoiLuong()+"");
+            t.addCell(gt.getThoiLuong() + "");
             t.addCell(df.format(gt.getGia()) + "₫");
 
         }

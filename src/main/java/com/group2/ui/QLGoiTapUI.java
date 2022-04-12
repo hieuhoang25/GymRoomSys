@@ -21,10 +21,12 @@ import javax.swing.table.DefaultTableModel;
  * @author HieuHoang
  */
 public class QLGoiTapUI extends javax.swing.JPanel {
+
     DefaultTableModel model;
     GoiTapDAO goiTapDAO = new GoiTapDAO();
     List<GoiTap> list = goiTapDAO.selectAll();
     DecimalFormat df = new DecimalFormat("###,###.###");
+
     /**
      * Creates new form QLGoiTapUI
      */
@@ -41,7 +43,7 @@ public class QLGoiTapUI extends javax.swing.JPanel {
         tblGT.getTableHeader().setForeground(Color.WHITE);
         tblGT.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 13));
         tblGT.getTableHeader().setOpaque(false);
-                tblGT.getColumnModel().getColumn(0).setCellRenderer(new AvataGioTap());
+        tblGT.getColumnModel().getColumn(0).setCellRenderer(new AvataGioTap());
 
     }
 
@@ -51,11 +53,11 @@ public class QLGoiTapUI extends javax.swing.JPanel {
         model.setRowCount(0);
         for (GoiTap gt : list) {
             if (selected.equals("Tất cả")) {
-                Object[] ob = {gt.getMaGT(), gt.getTenGoiTap(),df.format(gt.getGia())+"₫", gt.getThoiLuong()};
+                Object[] ob = {gt.getMaGT(), gt.getTenGoiTap(), df.format(gt.getGia()) + "₫", gt.getThoiLuong()};
                 model.addRow(ob);
 
             } else if (gt.getMaLoai().trim().equalsIgnoreCase(selected.trim())) {
-                Object[] ob = {gt.getMaGT(), gt.getTenGoiTap(), df.format(gt.getGia())+"₫", gt.getThoiLuong()};
+                Object[] ob = {gt.getMaGT(), gt.getTenGoiTap(), df.format(gt.getGia()) + "₫", gt.getThoiLuong()};
                 model.addRow(ob);
             } else {
 
@@ -78,7 +80,6 @@ public class QLGoiTapUI extends javax.swing.JPanel {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         mnSua = new javax.swing.JMenuItem();
         gradientBackGround1 = new com.group2.swing.GradientBackGround();
-        textField1 = new com.group2.swing.TextField();
         button1 = new com.group2.swing.Button();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblGT = new javax.swing.JTable();
@@ -105,9 +106,6 @@ public class QLGoiTapUI extends javax.swing.JPanel {
 
         gradientBackGround1.setBorderRadius(10);
         gradientBackGround1.setShadowSize(5);
-
-        textField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        textField1.setLabelText("Tìm kiếm gói tập");
 
         button1.setBackground(new java.awt.Color(255, 0, 51));
         button1.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,6 +142,9 @@ public class QLGoiTapUI extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblGTMouseClicked(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblGTMouseReleased(evt);
+            }
         });
         jScrollPane1.setViewportView(tblGT);
 
@@ -171,9 +172,7 @@ public class QLGoiTapUI extends javax.swing.JPanel {
                         .addGroup(gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cboGT, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addComponent(textField1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                        .addGap(410, 410, 410)
                         .addComponent(button1, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                         .addGap(12, 12, 12)))
                 .addContainerGap())
@@ -181,10 +180,9 @@ public class QLGoiTapUI extends javax.swing.JPanel {
         gradientBackGround1Layout.setVerticalGroup(
             gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gradientBackGround1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(13, 13, 13)
                 .addGroup(gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(gradientBackGround1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(3, 3, 3)
@@ -334,12 +332,12 @@ public class QLGoiTapUI extends javax.swing.JPanel {
     private void mnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSuaActionPerformed
 
         GoiTap gt = goiTapDAO.selectById(tblGT.getValueAt(tblGT.getSelectedRow(), 0));
-        new ChiTietGoiTapJDailog(false, gt,model).setVisible(true);
+        new ChiTietGoiTapJDailog(false, gt, model).setVisible(true);
     }//GEN-LAST:event_mnSuaActionPerformed
 
     private void cboGTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboGTActionPerformed
         // TODO add your handling code here:
-                fillTable();
+        fillTable();
 
     }//GEN-LAST:event_cboGTActionPerformed
 
@@ -349,11 +347,25 @@ public class QLGoiTapUI extends javax.swing.JPanel {
 
     private void tblGT1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGT1MouseClicked
         // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+
+            GoiTap gt = goiTapDAO.selectById(tblGT.getValueAt(tblGT.getSelectedRow(), 0));
+            new ChiTietGoiTapJDailog(false, gt, model).setVisible(true);
+        }
     }//GEN-LAST:event_tblGT1MouseClicked
 
     private void cboGT1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboGT1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboGT1ActionPerformed
+
+    private void tblGTMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGTMouseReleased
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+
+            GoiTap gt = goiTapDAO.selectById(tblGT.getValueAt(tblGT.getSelectedRow(), 0));
+            new ChiTietGoiTapJDailog(false, gt, model).setVisible(true);
+        }
+    }//GEN-LAST:event_tblGTMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -372,7 +384,6 @@ public class QLGoiTapUI extends javax.swing.JPanel {
     private javax.swing.JMenuItem mnSua;
     private javax.swing.JTable tblGT;
     private javax.swing.JTable tblGT1;
-    private com.group2.swing.TextField textField1;
     private com.group2.swing.TextField textField2;
     // End of variables declaration//GEN-END:variables
 }

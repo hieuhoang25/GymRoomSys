@@ -38,8 +38,8 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         if (kt == true) {
             titile.setText("Sửa thông tin sản phẩm");
-            cboLoaiSP.setSelectedItem(GJDBC.value("select TenSP from sanpham where masp = ?", sp.getMaLoai()));
-            //cboLoaiSP.setSelectedItem(GJDBC.value("select TenLoai from LoaiSanPham join SanPham on LoaiSanPham.MaLoaiSP = SanPham.MaLoai where masp = ?", sp.getMaSP()));
+
+            cboLoaiSP.setSelectedItem(GJDBC.value("select TenLoai from LoaiSanPham where MaLoaiSP = ?", sp.getMaLoai())+"");
             txtTen.setText(sp.getTenSP().trim());
             txtDonGia.setText(sp.getDonGia() + "");
             txtSoLuong.setText(sp.getSoLuong() + "");
@@ -358,9 +358,8 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
         sp.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
         sp.setNhaSanXuat(txtNhaSanXuat.getText());
         sp.setGhiChu(txtGhiChu.getText());
-        sp.setMaLoai(String.valueOf(GJDBC.value("select MaLoaiSP from LoaiSanPham where Tenloai = ? ", String.valueOf(cboLoaiSP.getSelectedItem()))));
+        sp.setMaLoai(String.valueOf(GJDBC.value("select MaLoaiSP from LoaiSanPham where TenLoai = ? ",String.valueOf(cboLoaiSP.getSelectedItem()))));
         sp.setHinh(imageView1.getToolTipText());
-        System.err.println("ma loai" + GJDBC.value("select MaLoaiSP from LoaiSanPham where Tenloai = ? ", String.valueOf(cboLoaiSP.getSelectedItem())));
         return sp;
     }
 

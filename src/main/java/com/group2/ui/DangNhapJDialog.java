@@ -30,7 +30,7 @@ public class DangNhapJDialog extends javax.swing.JFrame {
     public DangNhapJDialog() {
         initComponents();
         getContentPane().setBackground(Color.white);
-        slideshow1.initSlideshow(new Slide(new ImageIcon(getClass().getResource("/com/group2/icons/dnbk0.png"))), new Slide(new ImageIcon(getClass().getResource("/com/group2/icons/dnbk1.jpg"))), new Slide(new ImageIcon(getClass().getResource("/com/group2/icons/dnbk3.jpg"))));
+        slideshow1.initSlideshow(new Slide(new ImageIcon(getClass().getResource("/com/group2/icons/logo2.PNG"))), new Slide(new ImageIcon(getClass().getResource("/com/group2/icons/dnbk1.jpg"))), new Slide(new ImageIcon(getClass().getResource("/com/group2/icons/dnbk3.jpg"))));
 
     }
 
