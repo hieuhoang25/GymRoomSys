@@ -51,7 +51,7 @@ public class ThongKeDAO {
             ResultSet rs = GJDBC.query(sql);
             while (rs.next()) {
                 ThongKe tk = new ThongKe();
-                tk.setMaSP(rs.getString("MaSP"));
+                tk.setMaSP(rs.getString("MaSP").trim());
                 tk.setSoLuong(rs.getInt("SoLuong"));
                 tk.setTenSP(rs.getString("TenSP"));
                 list.add(tk);
@@ -68,7 +68,7 @@ public class ThongKeDAO {
         List<ThongKe> list = new ArrayList<>();
         String sql = "select HoTen,kh.SoDT,NgayHetHan from CTGoiTap ct join HoiVien hv\n"
                 + "on ct.ID = hv.ID join KhachHang kh on kh.SoDT = hv.SoDT\n"
-                + "where DATEDIFF(DAY,CAST(GETDATE() as date),NgayHetHan) > 5";
+                + "where DATEDIFF(DAY,CAST(GETDATE() as date),NgayHetHan) <= 5";
         try {
             ResultSet rs = GJDBC.query(sql);
             while (rs.next()) {

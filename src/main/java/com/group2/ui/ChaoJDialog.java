@@ -46,7 +46,7 @@ public class ChaoJDialog extends javax.swing.JDialog {
             }
         });
 
-        imageView1.setImage(new javax.swing.ImageIcon(getClass().getResource("/chaobk.jpg"))); // NOI18N
+        imageView1.setImage(new javax.swing.ImageIcon(getClass().getResource("/com/group2/icons/chaobk.jpg"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

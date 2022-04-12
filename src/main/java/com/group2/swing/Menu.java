@@ -142,7 +142,7 @@ public class Menu extends javax.swing.JPanel {
 
         jPanel1.setOpaque(false);
 
-        imageView1.setImage(new javax.swing.ImageIcon(getClass().getResource("/com/group2/icons/icons8_treadmill_40px.png"))); // NOI18N
+        imageView1.setImage(new javax.swing.ImageIcon(getClass().getResource("/com/group2/icons/logo.png"))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));

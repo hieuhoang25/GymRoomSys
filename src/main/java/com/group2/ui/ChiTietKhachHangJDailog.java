@@ -61,7 +61,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
             } else {
                 imgHinh.setImage(GImage.read("khachhangIMG/","macdinh.png"));
             }
-            main.remove(btnLuu);
+           
         } else {
             titile.setText("Thêm thông tin khách hàng mới");
             main.remove(btnSua);
@@ -70,19 +70,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
 
     }
 
-    public ChiTietKhachHangJDailog(boolean kt) {
-        initComponents();
-        setBackground(new Color(0, 0, 0, 0));
-        setLocationRelativeTo(null);
-        designJList();
-        if (kt == false) {
-            titile.setText("Sửa thông tin khách hàng");
-            main.remove(btnLuu);
-        } else {
-            titile.setText("Thêm thông tin khách hàng mới");
-            main.remove(btnSua);
-        }
-    }
+
     
     DefaultListModel<String> model;
     public void fillToList() {
@@ -117,7 +105,6 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
         rdoNu = new com.group2.swing.RadioButtonCustom();
         jLabel3 = new javax.swing.JLabel();
         txtNgaySinh = new com.group2.swing.TextField();
-        btnLuu = new com.group2.swing.Button();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -195,16 +182,6 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
         txtNgaySinh.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtNgaySinh.setLabelText("Ngày sinh");
 
-        btnLuu.setBackground(new java.awt.Color(0, 51, 153));
-        btnLuu.setForeground(new java.awt.Color(255, 255, 255));
-        btnLuu.setText("Lưu khách hàng");
-        btnLuu.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnLuu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLuuActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Lịch sử mua hàng");
 
@@ -267,9 +244,6 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
                                     .addGroup(mainLayout.createSequentialGroup()
                                         .addGap(1, 1, 1)
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(mainLayout.createSequentialGroup()
-                                        .addGap(244, 244, 244)
-                                        .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(textAreaScroll1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
@@ -317,9 +291,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
 
@@ -352,16 +324,11 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
         
     }//GEN-LAST:event_btnSuaActionPerformed
 
-    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        luuKhachHang();
-    }//GEN-LAST:event_btnLuuActionPerformed
-
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.group2.swing.Button btnLuu;
     private com.group2.swing.Button btnSua;
     private javax.swing.ButtonGroup buttonGroup1;
     private com.group2.swing.ConBtn conBtn1;

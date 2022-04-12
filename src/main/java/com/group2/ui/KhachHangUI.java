@@ -48,7 +48,6 @@ public class KhachHangUI extends javax.swing.JPanel {
 
         gradientBackGround1 = new com.group2.swing.GradientBackGround();
         txtTimKiem = new com.group2.swing.TextField();
-        btnThemKhachHang = new com.group2.swing.Button();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblKhachHang = new javax.swing.JTable();
 
@@ -62,16 +61,6 @@ public class KhachHangUI extends javax.swing.JPanel {
         txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimKiemKeyReleased(evt);
-            }
-        });
-
-        btnThemKhachHang.setBackground(new java.awt.Color(255, 0, 0));
-        btnThemKhachHang.setForeground(new java.awt.Color(255, 255, 255));
-        btnThemKhachHang.setText("+ Thêm khách hàng");
-        btnThemKhachHang.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnThemKhachHang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemKhachHangActionPerformed(evt);
             }
         });
 
@@ -108,23 +97,17 @@ public class KhachHangUI extends javax.swing.JPanel {
         gradientBackGround1Layout.setHorizontalGroup(
             gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gradientBackGround1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnThemKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
-            .addGroup(gradientBackGround1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE)
+                .addGroup(gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE))
                 .addContainerGap())
         );
         gradientBackGround1Layout.setVerticalGroup(
             gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gradientBackGround1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnThemKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1)
                 .addContainerGap())
@@ -141,13 +124,6 @@ public class KhachHangUI extends javax.swing.JPanel {
             .addComponent(gradientBackGround1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnThemKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKhachHangActionPerformed
-        // TODO add your handling code here:
-        kt = true;
-        new ChiTietKhachHangJDailog(kt).setVisible(true);
-        fillToTable();
-    }//GEN-LAST:event_btnThemKhachHangActionPerformed
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
         timKiem();
@@ -195,7 +171,6 @@ public class KhachHangUI extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.group2.swing.Button btnThemKhachHang;
     private com.group2.swing.GradientBackGround gradientBackGround1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblKhachHang;

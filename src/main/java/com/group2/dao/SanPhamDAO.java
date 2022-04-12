@@ -15,13 +15,14 @@ import java.util.List;
  *
  * @author lenovo
  */
-public class SanPhamDAO extends GymSysDAO<SanPham, Object> {
+public class SanPhamDAO extends GymSysDAO<SanPham, String> {
 
     final String INSERT_SQL = "INSERT INTO SanPham (MaSP, TenSP, DonGia, SoLuong, NhaSanXuat, Hinh, GhiChu)  VALUES  (?, ?, ?, ?, ?, ?, ?)";
     final String UPDATE_SQL = "UPDATE  SanPham  SET MaSP = ?,  TenSP =?,  DonGia=?,  SoLuong=? , NhaSanXuat=?, MaLoai =?, Hinh=?, GhiChu=? WHERE  MaSP=?";
     final String DELETE_SQL = "DELETE FROM SanPham WHERE MaSP=?";
     final String SELECT_ALL_SQL = "SELECT * FROM SanPham";
     final String SELECT_BY_ID_SQL = "SELECT * FROM SanPham WHERE MaSP=?";
+    
 
     @Override
     public void insert(SanPham entity) {
@@ -36,7 +37,7 @@ public class SanPhamDAO extends GymSysDAO<SanPham, Object> {
     }
 
     @Override
-    public void delete(Object id) {
+    public void delete(String id) {
         GJDBC.update(DELETE_SQL, id);
     }
 
@@ -46,7 +47,7 @@ public class SanPhamDAO extends GymSysDAO<SanPham, Object> {
     }
 
     @Override
-    public SanPham selectById(Object id) {
+    public SanPham selectById(String id) {
         List<SanPham> list = selectBySql(SELECT_BY_ID_SQL, id);
         if (list.isEmpty()) {
             return null;
@@ -67,7 +68,7 @@ public class SanPhamDAO extends GymSysDAO<SanPham, Object> {
                 sp.setSoLuong(rs.getInt("SoLuong"));
                 sp.setNhaSanXuat(rs.getString("NhaSanXuat"));
                 sp.setHinh(rs.getString("Hinh"));
-                sp.setMaLoai(rs.getString("MaLoai").trim());
+                sp.setMaLoai(rs.getString("MaLoai"));
                 sp.setGhiChu(rs.getString("GhiChu"));
                 list.add(sp);
             }
@@ -89,7 +90,7 @@ public class SanPhamDAO extends GymSysDAO<SanPham, Object> {
         String sql = "select * from SanPham where MaSP like ? or tenSP like ?";
         return selectBySql(sql, args);
     }
-
+    
     public List<SanPham> getLoaiSP() {
         String sql = "select * from SanPham sp join LoaiSanPham lsp\n"
                 + "on sp.MaLoai = lsp.MaLoaiSP";

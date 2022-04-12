@@ -24,9 +24,9 @@ public class ThongKeUI extends javax.swing.JPanel {
         initComponents();
 
         designScrollBar();
-        polarAreaChart1.addItem(new ModelPolarAreaChart(new Color(52, 148, 203), "Gym", thongKeDAO.thongKeGoiTap("gym")));
-        polarAreaChart1.addItem(new ModelPolarAreaChart(new Color(175, 67, 237), "Yoga", thongKeDAO.thongKeGoiTap("yoga")));
-        polarAreaChart1.addItem(new ModelPolarAreaChart(new Color(87, 218, 137), "Boxing", thongKeDAO.thongKeGoiTap("boxing")));
+        polarAreaChart1.addItem(new ModelPolarAreaChart(new Color(62, 197, 0), "Gym", thongKeDAO.thongKeGoiTap("gym")));
+        polarAreaChart1.addItem(new ModelPolarAreaChart(new Color(40, 62, 81), "Yoga", thongKeDAO.thongKeGoiTap("yoga")));
+        polarAreaChart1.addItem(new ModelPolarAreaChart(new Color(38, 204, 254), "Boxing", thongKeDAO.thongKeGoiTap("boxing")));
         polarAreaChart1.start();
 
         polarAreaChart2.addItem(new ModelPolarAreaChart(new Color(52, 148, 203), "Khách hàng", thongKeDAO.thongKeKhachHang()));
@@ -34,8 +34,8 @@ public class ThongKeUI extends javax.swing.JPanel {
 
         polarAreaChart2.start();
 
-        chart.addLegend("Gói tập", new Color(245, 189, 135));
-        chart.addLegend("Sản phẩm", new Color(135, 189, 245));
+        chart.addLegend("Gói tập", new Color(240, 80, 83));
+        chart.addLegend("Sản phẩm", new Color(0, 78, 146));
 
         
         for(int i = 1; i <= 12;i++){
@@ -66,7 +66,8 @@ public class ThongKeUI extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         gradientBackGround4 = new com.group2.swing.GradientBackGround();
         chart = new com.group2.swing.Chart();
-        jLabel6 = new javax.swing.JLabel();
+        comboBoxSuggestion2 = new com.group2.swing.ComboBoxSuggestion();
+        jLabel4 = new javax.swing.JLabel();
 
         setOpaque(false);
 
@@ -103,7 +104,7 @@ public class ThongKeUI extends javax.swing.JPanel {
                         .addGap(8, 8, 8))
                     .addGroup(gradientBackGround1Layout.createSequentialGroup()
                         .addGap(93, 93, 93)
-                        .addComponent(polarAreaChart2, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                        .addComponent(polarAreaChart2, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                         .addGap(78, 78, 78)))
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -138,9 +139,8 @@ public class ThongKeUI extends javax.swing.JPanel {
         gradientBackGround4.setShadowColor(new java.awt.Color(0, 4, 40));
         gradientBackGround4.setShadowOpacity(0.3F);
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Doanh thu của phòng tập trong năm nay");
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel4.setText("Doanh thu của phòng tập trong năm");
 
         javax.swing.GroupLayout gradientBackGround4Layout = new javax.swing.GroupLayout(gradientBackGround4);
         gradientBackGround4.setLayout(gradientBackGround4Layout);
@@ -148,18 +148,25 @@ public class ThongKeUI extends javax.swing.JPanel {
             gradientBackGround4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gradientBackGround4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(gradientBackGround4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+                    .addGroup(gradientBackGround4Layout.createSequentialGroup()
+                        .addGroup(gradientBackGround4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboBoxSuggestion2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         gradientBackGround4Layout.setVerticalGroup(
             gradientBackGround4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gradientBackGround4Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gradientBackGround4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(comboBoxSuggestion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnTKLayout = new javax.swing.GroupLayout(pnTK);
@@ -184,7 +191,7 @@ public class ThongKeUI extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
@@ -196,12 +203,13 @@ public class ThongKeUI extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.group2.swing.Chart chart;
+    private com.group2.swing.ComboBoxSuggestion comboBoxSuggestion2;
     private com.group2.swing.GradientBackGround gradientBackGround1;
     private com.group2.swing.GradientBackGround gradientBackGround4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnTK;
     private com.group2.swing.PolarAreaChart polarAreaChart1;
