@@ -18,7 +18,7 @@ import java.util.List;
 public class SanPhamDAO extends GymSysDAO<SanPham, Object> {
 
     final String INSERT_SQL = "INSERT INTO SanPham (MaSP, TenSP, DonGia, SoLuong, NhaSanXuat, Hinh, GhiChu)  VALUES  (?, ?, ?, ?, ?, ?, ?)";
-    final String UPDATE_SQL = "UPDATE  SanPham  SET MaSP = ?,  TenSP =?,  DonGia=?,  SoLuong=? , NhaSanXuat=?, MaLoai =?, Hinh=?, GhiChu=? WHERE  MaSP=?";
+    final String UPDATE_SQL = "UPDATE  SanPham  SET TenSP =?,  DonGia=?,  SoLuong=? , NhaSanXuat=?, MaLoai =?, Hinh=?, GhiChu=? WHERE  MaSP=?";
     final String DELETE_SQL = "DELETE FROM SanPham WHERE MaSP=?";
     final String SELECT_ALL_SQL = "SELECT * FROM SanPham";
     final String SELECT_BY_ID_SQL = "SELECT * FROM SanPham WHERE MaSP=?";
@@ -31,7 +31,7 @@ public class SanPhamDAO extends GymSysDAO<SanPham, Object> {
 
     @Override
     public void update(SanPham entity) {
-        GJDBC.update(UPDATE_SQL, entity.getMaSP(), entity.getTenSP(), entity.getDonGia(), entity.getSoLuong(),
+        GJDBC.update(UPDATE_SQL,entity.getTenSP(), entity.getDonGia(), entity.getSoLuong(),
                 entity.getNhaSanXuat(),entity.getMaLoai(), entity.getHinh(), entity.getGhiChu(), entity.getMaSP());
     }
 
@@ -67,7 +67,7 @@ public class SanPhamDAO extends GymSysDAO<SanPham, Object> {
                 sp.setSoLuong(rs.getInt("SoLuong"));
                 sp.setNhaSanXuat(rs.getString("NhaSanXuat"));
                 sp.setHinh(rs.getString("Hinh"));
-                sp.setMaLoai(rs.getString("MaLoai").trim());
+                sp.setMaLoai(rs.getString("MaLoai"));
                 sp.setGhiChu(rs.getString("GhiChu"));
                 list.add(sp);
             }
@@ -132,4 +132,27 @@ public class SanPhamDAO extends GymSysDAO<SanPham, Object> {
 //        String sql = "select * from SanPham where MaSP like ? or tenSP like ?";
 //        return selectBySql(sql, args);
 //    }
+        private List<Object[]> getListOfArray(String Sql, String[] cols, Object... args) {
+        try {
+            List<Object[]> list = new ArrayList<>();
+            ResultSet rs = GJDBC.query(Sql, args);
+            while (rs.next()) {
+                Object[] vals = new Object[cols.length];
+                for (int i = 0; i < cols.length; i++) {
+                    vals[i] = rs.getObject(cols[i]);
+                }
+                list.add(vals);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return null;
+    }
+    public List<Object[]> selectLoai(String...arg){
+        String sql = "select TenLoai from LoaiSanPham where MaLoaiSP = ?";
+        String[] cols={"TenLoai"};
+        return getListOfArray(sql,cols,arg);
+    }
 }

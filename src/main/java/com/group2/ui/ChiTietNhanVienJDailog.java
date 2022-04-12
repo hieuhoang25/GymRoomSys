@@ -12,6 +12,7 @@ import com.group2.swing.ImageView;
 import com.group2.utils.GImage;
 import com.group2.utils.MsgBox;
 import com.group2.utils.GDate;
+import com.group2.utils.Validation;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
@@ -70,7 +71,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
-        
+        txtMa.setEditable(true);
         imgHinh.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
         if (kt == false) {
             titile.setText("Sửa thông tin nhân viên");
@@ -156,6 +157,8 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                 .addGap(0, 0, 0))
         );
 
+        txtMa.setEditable(false);
+        txtMa.setBackground(new java.awt.Color(255, 255, 255));
         txtMa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtMa.setLabelText("Mã nhân viên");
 
@@ -370,7 +373,41 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
 
     private void themNhanVien() {
         NhanVien nv = getForm();
+        List<NhanVien> list = nvDAO.selectAll();
         try {
+            if (Validation.checkLength(txtMa.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Mã nhân viên không hợp lệ", Alert.AlertType.ERROR);
+                txtMa.requestFocus();
+                return;
+            }
+            for (NhanVien nhanvien : list) {
+                if (nv.getMaNV().equals(nhanvien.getMaNV())) {
+                    MsgBox.alert(this, "Thông báo", "Mã nhân viên đã tồn tại", Alert.AlertType.ERROR);
+                    txtMa.requestFocus();
+                    return;
+                }
+            }
+
+            if (Validation.correctString(txtMatKhau.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Mật khẩu không hợp lệ", Alert.AlertType.ERROR);
+                txtMatKhau.requestFocus();
+                return;
+            }
+            if (Validation.checkLength(txtHoTen.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Họ tên không hợp lệ", Alert.AlertType.ERROR);
+                txtHoTen.requestFocus();
+                return;
+            }
+            if (Validation.checkToDate(txtNgaySinh.getText(), "yyyy-MM-dd") == false) {
+                MsgBox.alert(this, "Thông báo", "Ngày sinh không hợp lệ", Alert.AlertType.ERROR);
+                txtNgaySinh.requestFocus();
+                return;
+            }
+            if (Validation.checkLength(txtDiaChi.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Địa chỉ không hợp lệ", Alert.AlertType.ERROR);
+                txtDiaChi.requestFocus();
+                return;
+            }
             nvDAO.insert(nv);
             MsgBox.alert(this, "Thông báo", "Thêm nhân viên thành công!", Alert.AlertType.SUCCESS);
 
@@ -383,6 +420,27 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
     private void suaNhanVien() {
         NhanVien nv = getForm();
         try {
+            if (Validation.correctString(txtMatKhau.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Mật khẩu không hợp lệ", Alert.AlertType.ERROR);
+                txtMatKhau.requestFocus();
+                return;
+            }
+            if (Validation.checkLength(txtHoTen.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Họ tên không hợp lệ", Alert.AlertType.ERROR);
+                txtHoTen.requestFocus();
+                return;
+            }
+            if (Validation.checkToDate(txtNgaySinh.getText(), "yyyy-MM-dd") == false) {
+                MsgBox.alert(this, "Thông báo", "Ngày sinh không hợp lệ", Alert.AlertType.ERROR);
+                txtNgaySinh.requestFocus();
+                return;
+            }
+            if (Validation.checkLength(txtDiaChi.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Địa chỉ không hợp lệ", Alert.AlertType.ERROR);
+                txtDiaChi.requestFocus();
+                return;
+            }
+
             nvDAO.update(nv);
             MsgBox.alert(this, "Thông báo", "Sửa nhân viên thành công!", Alert.AlertType.SUCCESS);
 
