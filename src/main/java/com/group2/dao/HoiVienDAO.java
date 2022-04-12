@@ -7,6 +7,7 @@ package com.group2.dao;
 import com.group2.entity.HoiVien;
 import com.group2.utils.GJDBC;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +61,17 @@ public class HoiVienDAO extends GymSysDAO<HoiVien, String> {
         }
         return list.get(0);
     }
-
+    
+    public void kiemTraHVHetHan() {
+        String sql = "{CALL pr_XoaHV_QuaHan}";
+        try {
+              ResultSet rs = GJDBC.query(sql);
+        rs.close();
+        } catch (Exception e) {
+            System.out.println("HVDAO-kiemTraHVHetHan" + e.getMessage());
+        }    
+    }
+    
     @Override
     public List<HoiVien> selectBySql(String sqlString, Object... args) {
         List<HoiVien> list = new ArrayList<>();

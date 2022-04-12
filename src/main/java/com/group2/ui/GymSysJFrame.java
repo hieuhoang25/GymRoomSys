@@ -44,8 +44,7 @@ public class GymSysJFrame extends javax.swing.JFrame {
         initComponents();
         status1.setListModelCheckIn(homeUI1.getDlmList1(), homeUI1.getCard4());
         checkInDAO.deleteCheckIn(GDate.toDate(java.time.LocalDate.now().toString(), "yyyy-MM-dd"));
-
-        //aaaaaaa
+        hoiVienDAO.kiemTraHVHetHan();
         setBackground(new Color(0, 0, 0, 0));
         menu2.setMainFrame(GymSysJFrame.this);
         status1.setMainFrame(GymSysJFrame.this);

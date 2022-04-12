@@ -227,7 +227,6 @@ public class HoiVienUI extends javax.swing.JPanel {
 
     private void fillToTable() {
         model = (DefaultTableModel) tblHoiVien.getModel();
-
         model.setRowCount(0);
         List<Object[]> listHoiVien = hvDAO.getHoiVien();
         for (Object[] hv : listHoiVien) {
