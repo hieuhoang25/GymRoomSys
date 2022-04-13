@@ -257,7 +257,7 @@
                 <Property name="labelText" type="java.lang.String" value="H&#x1ecd; v&#xe0; t&#xea;n"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtHoVaTenActionPerformed"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtHoVaTenKeyReleased"/>
               </Events>
             </Component>
             <Component class="com.group2.swing.RadioButtonCustom" name="rdoNam">
@@ -271,6 +271,9 @@
                   <Font name="Tahoma" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoNamActionPerformed"/>
+              </Events>
             </Component>
             <Component class="com.group2.swing.RadioButtonCustom" name="rdoNu">
               <Properties>
@@ -282,6 +285,9 @@
                   <Font name="Tahoma" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoNuActionPerformed"/>
+              </Events>
             </Component>
             <Component class="com.group2.swing.TextField" name="txtNgaySinh">
               <Properties>
@@ -291,7 +297,7 @@
                 <Property name="labelText" type="java.lang.String" value="Ng&#xe0;y sinh"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNgaySinhActionPerformed"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNgaySinhKeyReleased"/>
               </Events>
             </Component>
             <Component class="com.group2.swing.TextField" name="txtEmail">
@@ -301,6 +307,9 @@
                 </Property>
                 <Property name="labelText" type="java.lang.String" value="Email"/>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEmailKeyReleased"/>
+              </Events>
             </Component>
             <Container class="com.group2.swing.TextAreaScroll" name="textAreaScroll1">
               <Properties>
@@ -321,6 +330,9 @@
                       <Font name="Tahoma" size="12" style="0"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDiaChiKeyReleased"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -410,6 +422,9 @@
                   <Font name="Tahoma" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoTienMatActionPerformed"/>
+              </Events>
             </Component>
             <Component class="com.group2.swing.RadioButtonCustom" name="rdoThe">
               <Properties>
@@ -421,6 +436,9 @@
                   <Font name="Tahoma" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoTheActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
@@ -706,6 +724,9 @@
                       <Font name="Tahoma" size="12" style="0"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtGhiChuKeyReleased"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
