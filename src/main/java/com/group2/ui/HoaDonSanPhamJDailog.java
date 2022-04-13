@@ -17,7 +17,7 @@ import com.group2.swing.GioHangSPPanel;
 import com.group2.swing.ItemCartPanel;
 import com.group2.swing.ScrollBarCustom;
 import com.group2.utils.Auth;
-import com.group2.utils.BuildBill;
+import com.group2.utils.BillSP;
 import com.group2.utils.MsgBox;
 import com.group2.utils.GDate;
 import com.group2.utils.Validation;
@@ -136,7 +136,6 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Thông tin khách hàng");
 
-        txtSDT.setToolTipText("");
         txtSDT.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtSDT.setLabelText("Số điện thoại");
         txtSDT.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -549,7 +548,9 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
                 }
 
                 dispose();
-                BuildBill.createBillSP("HDSP"+txtSDT.getText()+"-"+ GDate.toString(new Date(), "hh-mm-ss-dd-MM-yyyy"), txtSDT.getText(), txtHoVaTen.getText(), txtDiaChi.getText(),txtGhiChu.getText() ,(rdoTienMat.isSelected() ? rdoTienMat.getText():rdoThe.getText()));
+                BillSP billSP = new BillSP();
+                billSP.printBill(txtSDT.getText(), Auth.user.getMaNV());
+//                BuildBillSP.createBillSP("HDSP"+txtSDT.getText()+"-"+ GDate.toString(new Date(), "hh-mm-ss-dd-MM-yyyy"), txtSDT.getText(), txtHoVaTen.getText(), txtDiaChi.getText(),txtGhiChu.getText() ,(rdoTienMat.isSelected() ? rdoTienMat.getText():rdoThe.getText()));
                 GioHangSP.listSP.clear();
                 gioHangPanel.setSLSanPham();
             } else {
