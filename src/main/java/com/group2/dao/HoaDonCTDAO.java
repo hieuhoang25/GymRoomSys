@@ -15,10 +15,10 @@ import java.util.Date;
 public class HoaDonCTDAO {
 
     public void themHoaDonGoiTap(String soDT, String maNV, String ghiChu, String hoTen, String diaChi, 
-            Date ngaySinh, Integer gioiTinh, String hinh, String email) {
-        String sql = "{CALL pr_hoaDonGoiTap (?,?,?,?,?,?,?,?,?)}"; 
+            Date ngaySinh, Integer gioiTinh, String hinh, String email, String QrCode) {
+        String sql = "{CALL pr_hoaDonGoiTap (?,?,?,?,?,?,?,?,?,?)}"; 
         try {
-            ResultSet rs = GJDBC.query(sql, soDT, maNV, ghiChu, hoTen, diaChi, ngaySinh, gioiTinh, hinh, email);
+            ResultSet rs = GJDBC.query(sql, soDT, maNV, ghiChu, hoTen, diaChi, ngaySinh, gioiTinh, hinh, email, QrCode);
             rs.getStatement().getConnection().close();
         } catch (Exception e) {
             System.out.println("HoaDonCTDAO-themHoaDonGoiTap: " + e.getMessage());

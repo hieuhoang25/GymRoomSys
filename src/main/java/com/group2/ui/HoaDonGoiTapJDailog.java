@@ -5,7 +5,6 @@
  */
 package com.group2.ui;
 
-import Others.TakePicture;
 import com.group2.dao.GoiTapDAO;
 import com.group2.dao.HoaDonCTDAO;
 import com.group2.dao.HoiVienDAO;
@@ -19,12 +18,12 @@ import com.group2.swing.GioHangGTPanel;
 import com.group2.swing.ItemCartGTPanel;
 import com.group2.swing.ScrollBarCustom;
 import com.group2.utils.Auth;
-import com.group2.utils.BuildBill;
+import com.group2.utils.BillGT;
 import com.group2.utils.GImage;
 import com.group2.utils.MsgBox;
 import com.group2.utils.GDate;
+import com.group2.utils.TakePicture;
 import java.awt.Color;
-import java.awt.Image;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -49,31 +48,22 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
      * Creates new form ChiTietGoiTap1JDailog
      */
     public HoaDonGoiTapJDailog(GioHangGTPanel gioHangGTPanel) {
-        for(int i = 0;i < 7;i++){
-            clone.add(i,"");
+        for (int i = 0; i < 7; i++) {
+            clone.add(i, "");
         }
         this.gioHangGTPanel = gioHangGTPanel;
-        initComponents();
-        setBackground(new Color(0, 0, 0, 0));
-        listItemGT.setLayout(new MigLayout("wrap 1"));
-        fillGTToPanel();
-        designPanel();
-        txtTongTien.setText(df.format(GioHangGT.tongTienGH()) + "₫");
-        tongTienTT.setText(df.format(GioHangGT.tienThanhToan()) + "₫");
-    }
-
-    public HoaDonGoiTapJDailog() {
-
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
         listItemGT.setLayout(new MigLayout("wrap 1"));
         fillGTToPanel();
         designPanel();
+        imgHinh.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
+        f = new File("khachhangIMG/", "macdinh.png");
         if (!GymSysJFrame.maKH.equals("")) {
             loadDataOfPerSon();
-            imgHinh.setImage(new ImageIcon(new ImageIcon(new File("khachhangIMG").getAbsolutePath() + "/" + GymSysJFrame.maKH + ".png").getImage().getScaledInstance(158, 160,
-                    Image.SCALE_DEFAULT)));
+            imgHinh.setImage(GImage.read("khachhangIMG/", GymSysJFrame.maKH + ".png"));
+            f = new File("khachhangIMG/", GymSysJFrame.maKH);
         }
         txtTongTien.setText(df.format(GioHangGT.tongTienGH()) + "₫");
         tongTienTT.setText(df.format(GioHangGT.tienThanhToan()) + "₫");
@@ -102,15 +92,15 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
 
         } else {
             txtSDT.setText(GymSysJFrame.maKH);
-             txtDiaChi.setText(clone.get(4));
+            txtDiaChi.setText(clone.get(4));
             if (clone.get(1).equals("nam")) {
                 rdoNam.setSelected(true);
-            }else{
+            } else {
                 rdoNu.setSelected(true);
             }
-            if(clone.get(5).equals("true")){
+            if (clone.get(5).equals("true")) {
                 rdoTienMat.setSelected(true);
-            }else{
+            } else {
                 rdoThe.setSelected(true);
             }
             txtHoVaTen.setText(clone.get(0));
@@ -202,7 +192,6 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
         gradientBackGround2.setBorderRadius(5);
         gradientBackGround2.setShadowOpacity(0.3F);
 
-        txtSDT.setToolTipText("");
         txtSDT.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtSDT.setLabelText("Số điện thoại");
         txtSDT.addActionListener(new java.awt.event.ActionListener() {
@@ -631,6 +620,8 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
     private void conBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conBtn2ActionPerformed
         // TODO add your handling code here:
         dispose();
+        clone.clear();
+        GymSysJFrame.maKH = "";
     }//GEN-LAST:event_conBtn2ActionPerformed
 
 
@@ -655,7 +646,9 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
             txtDiaChi.setText(kh.get(0).getDiaChi());
             txtHoVaTen.setText(kh.get(0).getHoTen());
             txtNgaySinh.setText(kh.get(0).getNgaySinh().toString());
-            imgHinh.setImage(new ImageIcon("khachhangIMG/" + kh.get(0).getSoDT().trim() + ".png"));
+//          GImage.read("khachhangIMG/", kh.get(0).getHinh() == null ? "macdinh.png":GImage.read("khachhangIMG/", kh.get(0).getHinh()));
+            imgHinh.setImage(GImage.read("khachhangIMG/", kh.get(0).getHinh() == null ? "macdinh.png" : kh.get(0).getHinh()));
+            f = new File("khachhangIMG/", kh.get(0).getHinh() == null ? "macdinh.png" : kh.get(0).getHinh());
             if (kh.get(0).isGioiTinh() == true) {
                 rdoNam.setSelected(true);
             } else {
@@ -671,12 +664,12 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
             txtDiaChi.setText(clone.get(4));
             if (clone.get(1).equals("nam")) {
                 rdoNam.setSelected(true);
-            }else{
+            } else {
                 rdoNu.setSelected(true);
             }
-            if(clone.get(5).equals("true")){
+            if (clone.get(5).equals("true")) {
                 rdoTienMat.setSelected(true);
-            }else{
+            } else {
                 rdoThe.setSelected(true);
             }
             txtHoVaTen.setText(clone.get(0));
@@ -687,7 +680,8 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
             txtGhiChu.setText(clone.get(6));
             txtTongTien.setText(df.format(GioHangGT.tongTienGH()) + "₫");
             tongTienTT.setText(df.format(GioHangGT.tienThanhToan()) + "₫");
-            imgHinh.setImage(new ImageIcon("khachhangIMG/" + "macdinh.png"));
+            imgHinh.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
+            f = new File("khachhangIMG/", "macdinh.png");
         }
     }//GEN-LAST:event_txtSDTKeyReleased
     public float checkVIP(Float n) {
@@ -706,13 +700,13 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
     private void imgHinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgHinhMouseClicked
         GymSysJFrame.trangThai = "HDGT";
         if (txtSDT.getText().equals("")) {
-            MsgBox.alert(HoaDonGoiTapJDailog.this, "Lỗi", "Bạn chưua nhập đầy đủ thông tin", Alert.AlertType.ERROR);
+            MsgBox.alert(HoaDonGoiTapJDailog.this, "Lỗi", "Bạn chưa nhập đầy đủ thông tin", Alert.AlertType.ERROR);
         } else {
             Boolean n = MsgBox.confirm(this, "Khách hàng đã có ảnh chưa ? ");
             if (n) {
                 GymSysJFrame.maKH = txtSDT.getText();
-                TakePicture t = null;
-                t.main(null);
+                TakePicture t = new TakePicture(gioHangGTPanel);
+                t.start();
                 this.hide();
 
             } else {
@@ -720,10 +714,8 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
                 data = null;
                 if (result == jf.APPROVE_OPTION) {
                     f = jf.getSelectedFile();
-                    String adr = String.valueOf(f.getAbsoluteFile());
-                    data = GImage.read1(adr);
-                    imgHinh.setImage(new ImageIcon(new ImageIcon(adr).getImage().getScaledInstance(158, 160,
-                            Image.SCALE_DEFAULT)));
+                    GImage.save("khachhangIMG/", f);
+                    imgHinh.setImage(GImage.read("khachhangIMG/", f.getName()));
                 }
             }
         }
@@ -734,52 +726,46 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
         if (GioHangGT.tienThanhToan() == 0) {
             MsgBox.alert(null, "Giỏ hàng gói tập trống", "Vui lòng chọn gói tập", Alert.AlertType.ERROR);
         } else {
-            if (MsgBox.confirm(null, "Khách hàng có muốn xuất hóa đơn không?")) {
-                String img = "";
-                if (data != null) {
-                    imgHinh.setName(txtSDT.getText() + ".png");
-                    GImage.write("khachhangIMG/" + imgHinh.getName(), data, f);
-                    img = imgHinh.getName();
-                }
-                if (hvdao.selectBySDT(txtSDT.getText()) != null) {
-                    if (hvdao.selectBySDT(txtSDT.getText()).getQrCode() == null) {
-                        GImage.createQRCode(txtSDT.getText().trim(), f, txtEmail.getText().trim());
-                    }
-                } else {
-                    GImage.createQRCode(txtSDT.getText().trim(), f, txtEmail.getText().trim());
+            String qrcode = "";
+            HoiVien hv = hvdao.selectBySDT(txtSDT.getText().trim());
 
+            if (hv != null) {
+                if (hv.getQrCode() == null) {
+                    qrcode = GImage.createQRCode(txtSDT.getText().trim(), f, txtEmail.getText().trim());
+                } else {
+                    qrcode = hv.getQrCode();
                 }
+            } else {
+                qrcode = GImage.createQRCode(txtSDT.getText().trim(), f, txtEmail.getText().trim());
+            }
+
+            if (MsgBox.confirm(null, "Khách hàng có muốn xuất hóa đơn không?")) {
+
                 new HoaDonCTDAO().themHoaDonGoiTap(txtSDT.getText(), Auth.user.getMaNV(),
                         null, txtHoVaTen.getText(),
-                        txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, img, txtEmail.getText());
+                        txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, f.getName(), txtEmail.getText(), qrcode);
                 for (GoiTap gt : GioHangGT.listGT) {
                     new HoaDonCTDAO().themHDCTGoiTap(gt.getMaGT(), txtSDT.getText(), gt.getGia());
-                    System.out.println(gt.getMaGT());
-
                 }
-                BuildBill.createBillGT("HDGT" + txtSDT.getText() + "-" + GDate.toString(new Date(), "hh-mm-ss-dd-MM-yyyy"), txtSDT.getText(), txtHoVaTen.getText(), txtDiaChi.getText(), txtGhiChu.getText(), (rdoTienMat.isSelected() ? rdoTienMat.getText() : rdoThe.getText()));
+                BillGT billgt = new BillGT();
+                billgt.printBill(txtSDT.getText(), Auth.user.getMaNV());
                 GioHangGT.clearGT();
                 this.dispose();
+                clone.clear();
+                GymSysJFrame.maKH = "";
             } else {
-                String img = "";
-                if (data != null) {
-                    imgHinh.setName(txtSDT.getText() + ".png");
-                    GImage.write("khachhangIMG/" + imgHinh.getName(), data, f);
-                    img = imgHinh.getName();
-                }
                 new HoaDonCTDAO().themHoaDonGoiTap(txtSDT.getText(), Auth.user.getMaNV(),
                         null, txtHoVaTen.getText(),
-                        txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, img, txtEmail.getText());
+                        txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, f.getName(), txtEmail.getText(), qrcode);
                 for (GoiTap gt : GioHangGT.listGT) {
                     new HoaDonCTDAO().themHDCTGoiTap(gt.getMaGT(), txtSDT.getText(), gt.getGia());
                 }
                 MsgBox.alert(this, "Thông báo", "Mua gói tập thành công", Alert.AlertType.SUCCESS);
                 GioHangGT.clearGT();
                 gioHangGTPanel.setSLGoiTap();
-
-                GImage.createQRCode(txtSDT.getText().trim(), f, txtEmail.getText().trim());
-
                 this.dispose();
+                clone.clear();
+                GymSysJFrame.maKH = "";
 
             }
         }
@@ -798,7 +784,7 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
     }//GEN-LAST:event_rdoNuActionPerformed
 
     private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
-         clone.set(3, txtEmail.getText());
+        clone.set(3, txtEmail.getText());
     }//GEN-LAST:event_txtEmailKeyReleased
 
     private void txtNgaySinhKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNgaySinhKeyReleased

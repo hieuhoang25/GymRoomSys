@@ -80,7 +80,7 @@ public class GImage {
         }
     }
 
-    public static void createQRCode(String sdt, File src, String email) {
+    public static String createQRCode(String sdt, File src, String email) {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         try {
             BitMatrix matrix = qrCodeWriter.encode(sdt, BarcodeFormat.QR_CODE, 200, 200);
@@ -93,14 +93,18 @@ public class GImage {
                 Path to = Paths.get(dst.getAbsolutePath());
                 Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
             } catch (Exception e) {
+                e.printStackTrace();
                 throw new RuntimeException();
+                
             }
             Path path = FileSystems.getDefault().getPath(dst.getPath());
             MatrixToImageWriter.writeToPath(matrix, "PNG", path);
             Email.sendEmail(email, "Mã QR Hội Viên", "",
                 "Hãy dùng mã qr của mình để checkin khi vào phòng tập hihi! :))", dst);
+            return dst.getName();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        return null;
     }
 }
