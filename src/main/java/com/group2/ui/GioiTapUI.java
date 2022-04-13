@@ -6,9 +6,12 @@
 package com.group2.ui;
 
 import com.group2.dao.GoiTapDAO;
+import com.group2.entity.GioHangGT;
 import com.group2.entity.GoiTap;
+import com.group2.swing.Alert;
 import com.group2.swing.EpisodePackModel;
 import com.group2.swing.ScrollBarCustom;
+import com.group2.utils.MsgBox;
 import java.util.List;
 import net.miginfocom.swing.MigLayout;
 
@@ -20,7 +23,7 @@ public class GioiTapUI extends javax.swing.JPanel {
 
     GoiTapDAO goiTapDAO = new GoiTapDAO();
     List<GoiTap> list = goiTapDAO.selectAll();
-    
+
     /**
      * Creates new form GioiTapUI
      */
@@ -43,8 +46,7 @@ public class GioiTapUI extends javax.swing.JPanel {
         for (GoiTap gt : list) {
             if (gt.getMaLoai().trim().equalsIgnoreCase(cbo.trim())) {
 
-                addItemGoiTap(new EpisodePackModel(gt, cbo,gioHangGTPanel1));
-             
+                addItemGoiTap(new EpisodePackModel(gt, cbo, gioHangGTPanel1));
 
             }
         }
@@ -161,7 +163,13 @@ public class GioiTapUI extends javax.swing.JPanel {
 
     private void gioHangGTPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gioHangGTPanel1MousePressed
         // TODO add your handling code here:
-        new HoaDonGoiTapJDailog(gioHangGTPanel1).setVisible(true);
+        if (GioHangGT.listGT.size() == 0) {
+            MsgBox.alert(null, "Giỏ hàng trống", "Vui lòng chọn gói tập!", Alert.AlertType.ERROR);
+
+        } else {
+            new HoaDonGoiTapJDailog(gioHangGTPanel1).setVisible(true);
+
+        }
     }//GEN-LAST:event_gioHangGTPanel1MousePressed
 
 

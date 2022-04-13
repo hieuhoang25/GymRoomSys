@@ -52,6 +52,14 @@ public class Chart extends javax.swing.JPanel {
         });
     }
 
+    public List<ModelChart> getModel() {
+        return model;
+    }
+
+    public void setModel(List<ModelChart> model) {
+        this.model = model;
+    }
+
     public void addLegend(String name, Color color) {
         ModelLegend data = new ModelLegend(name, color);
         legends.add(data);

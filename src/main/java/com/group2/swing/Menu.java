@@ -20,6 +20,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import net.miginfocom.swing.MigLayout;
 
 /**
  *
@@ -28,6 +30,7 @@ import javax.swing.JFrame;
 public class Menu extends javax.swing.JPanel {
 
     private EventSelected event;
+    private JPanel panel;
 
     public void addEventSelectedMenuItem(EventSelected event) {
         this.event = event;
@@ -42,10 +45,10 @@ public class Menu extends javax.swing.JPanel {
      */
     public Menu() {
         initComponents();
-     
+
         jPopupMenu1.setBackground(new Color(0, 0, 0, 0));
         jPopupMenu1.add(jPanel2);
-      
+
         jPanel1.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -204,12 +207,20 @@ public class Menu extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setPanel(JPanel panel) {
+        this.panel = panel;
+    }
+
     private void conBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conBtn2ActionPerformed
         // TODO add your handling code here:
         if (mainFrame.getExtendedState() == JFrame.MAXIMIZED_BOTH) {
             mainFrame.setExtendedState(JFrame.NORMAL);
+            panel.setLayout(new MigLayout("wrap 4, insets 20"));
+
         } else {
             mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            panel.setLayout(new MigLayout("wrap 5, insets 5"));
+
         }
     }//GEN-LAST:event_conBtn2ActionPerformed
 
@@ -277,7 +288,7 @@ public class Menu extends javax.swing.JPanel {
             listMenuItem2.addItem(new MenuItemModel("/com/group2/icons/icons8_gym_48px.png", "Trang chủ", MenuItemModel.MenuItemType.EMPTY));
 
         } else {
-        //0
+            //0
             listMenuItem2.addItem(new MenuItemModel("/com/group2/icons/icons8_gym_48px.png", "Trang chủ", MenuItemModel.MenuItemType.MENUITEM));
             listMenuItem2.addItem(new MenuItemModel("/com/group2/icons/icons8_gym_48px.png", "Trang chủ", MenuItemModel.MenuItemType.EMPTY));
 ///2

@@ -20,6 +20,7 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import net.miginfocom.swing.MigLayout;
@@ -42,6 +43,14 @@ public class SanPhamUI extends javax.swing.JPanel {
         main.setLayout(new MigLayout("wrap 4, insets 20"));
         fillProcduct(cboLoaiSP.getSelectedItem().toString());
 //        themTableGioHang();
+    }
+
+    public JPanel getMain() {
+        return main;
+    }
+
+    public void setMain(JPanel main) {
+        this.main = main;
     }
 
     public void addItemSanPham(ProductModel pm) {

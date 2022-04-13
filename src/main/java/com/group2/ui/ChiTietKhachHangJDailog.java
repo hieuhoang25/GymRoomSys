@@ -81,7 +81,6 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
         imgHinh.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
         if (kt == false) {
             titile.setText("Sửa thông tin khách hàng");
-            main.remove(btnLuu);
         } else {
             titile.setText("Thêm thông tin khách hàng mới");
             main.remove(btnSua);
