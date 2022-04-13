@@ -87,12 +87,11 @@ public class ThongKeDAO {
         return list;
     }
 
-    public Double thongKeGoiTapTheoThang(int Thang) {
-        String sql = "select TongTien from (select sum(ThanhTien) as TongTien,MONTH(ThoiGianMua) as Thang from HDCTGoiTap hdct join Hoadon hd\n"
-                + "on hdct.MaHD = hd.MaHD  group by MONTH(ThoiGianMua))as tb WHERE  tb.Thang = ?";
+    public Double thongKeGoiTapTheoThang(int Thang, int Nam) {
+        String sql = "select TongTien from (select sum(ThanhTien) as TongTien,MONTH(ThoiGianMua) as Thang from HDCTGoiTap hdct join Hoadon hd on hdct.MaHD = hd.MaHD where year(hd.ThoiGianMua) = ? group by MONTH(ThoiGianMua))as tb WHERE  tb.Thang = ?";
         Double n = 0.0;
         try {
-            ResultSet rs = GJDBC.query(sql, Thang);
+            ResultSet rs = GJDBC.query(sql,Nam ,Thang);
             while (rs.next()) {
                 n = rs.getDouble("TongTien");
                 return n;
@@ -105,12 +104,11 @@ public class ThongKeDAO {
         return 0.0;
     }
 
-    public Double thongKeSanPhamTheoThang(int Thang) {
-        String sql = "select TongTien from (select sum(TongTien) as TongTien,MONTH(ThoiGianMua) as Thang from HDCTSanPham hdct join Hoadon hd\n"
-                + "on hdct.MaHD = hd.MaHD group by MONTH(ThoiGianMua))as tb WHERE  tb.Thang = ?";
+    public Double thongKeSanPhamTheoThang(int Thang, int Nam) {
+        String sql = "select TongTien from (select sum(TongTien) as TongTien,MONTH(ThoiGianMua) as Thang from HDCTSanPham hdct join Hoadon hd on hdct.MaHD = hd.MaHD where year(hd.ThoiGianMua) = ?  group by MONTH(ThoiGianMua))as tb WHERE  tb.Thang = ?";
         Double n = 0.0;
         try {
-            ResultSet rs = GJDBC.query(sql, Thang);
+            ResultSet rs = GJDBC.query(sql, Nam,Thang);
             while (rs.next()) {
                 n = rs.getDouble("TongTien");
                 return n;
@@ -175,9 +173,24 @@ public class ThongKeDAO {
     }
 
     public List<Object[]> BuyHistory(String MaKH) {
-        String sql = "select iif( hd.MaHD  in (select ct.MaHD from HDCTSanPham as ct),'HDSP','HDGT') as LoaiHoaDon,  hd.ThoiGianMua from HoaDon as hd \n" +
-                        " where HD.MaKH = ?";
-        String[] cols = {"LoaiHoaDon","ThoiGianMua"};
+        String sql = "select iif( hd.MaHD  in (select ct.MaHD from HDCTSanPham as ct),'HDSP','HDGT') as LoaiHoaDon,  hd.ThoiGianMua from HoaDon as hd \n"
+                + " where HD.MaKH = ?";
+        String[] cols = {"LoaiHoaDon", "ThoiGianMua"};
         return this.getListOfArray(sql, cols, MaKH);
+    }
+
+    public List<Integer> getYears() {
+        String sql = "select DISTINCT year(ThoiGianMua) from HoaDon";
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = GJDBC.query(sql);
+        try {
+            while (rs.next()) {
+                list.add(rs.getInt(1));
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

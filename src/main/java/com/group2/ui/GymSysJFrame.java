@@ -148,7 +148,9 @@ public class GymSysJFrame extends javax.swing.JFrame {
                                         if (index == 8) {
 
                                             main.removeAll();
-                                            main.add(new SanPhamUI());
+                                            SanPhamUI ui = new SanPhamUI();
+                                            menu2.setPanel(ui.getMain());
+                                            main.add(ui);
                                             main.revalidate();
 
                                         }

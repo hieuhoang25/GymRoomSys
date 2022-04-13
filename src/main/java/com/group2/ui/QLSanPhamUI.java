@@ -9,6 +9,7 @@ import com.group2.dao.SanPhamDAO;
 import com.group2.entity.SanPham;
 import com.group2.swing.AvataSanPham;
 import com.group2.swing.AvataTbHoiVien;
+import com.group2.swing.ProductModel;
 import com.group2.swing.ScrollBarCustom;
 import java.awt.Color;
 import java.awt.Font;
@@ -54,6 +55,7 @@ public class QLSanPhamUI extends javax.swing.JPanel {
         btnThem = new com.group2.swing.Button();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSanPham = new javax.swing.JTable();
+        cboLoaiSP = new com.group2.swing.ComboBoxSuggestion();
 
         mnuLamMoi.setText("Làm mới bảng");
         mnuLamMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -97,17 +99,17 @@ public class QLSanPhamUI extends javax.swing.JPanel {
         tblSanPham.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã SP", "Tên SP", "Đơn giá", "Số lượng", "Nhà sản xuất", ""
+                "Mã SP", "Tên SP", "Đơn giá", "Số lượng", "Nhà sản xuất"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -127,6 +129,14 @@ public class QLSanPhamUI extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblSanPham);
 
+        cboLoaiSP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất cả", "Sữa tăng cân", "Sữa tăng cơ", "Bao tay", "Giày thể thao", "Quần Thể Thao", "Áo thể thao" }));
+        cboLoaiSP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cboLoaiSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboLoaiSPActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout gradientBackGround1Layout = new javax.swing.GroupLayout(gradientBackGround1);
         gradientBackGround1.setLayout(gradientBackGround1Layout);
         gradientBackGround1Layout.setHorizontalGroup(
@@ -134,9 +144,11 @@ public class QLSanPhamUI extends javax.swing.JPanel {
             .addGroup(gradientBackGround1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE)
                     .addGroup(gradientBackGround1Layout.createSequentialGroup()
-                        .addComponent(txtTim, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
+                        .addComponent(cboLoaiSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -147,7 +159,9 @@ public class QLSanPhamUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboLoaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1)
                 .addContainerGap())
@@ -196,12 +210,17 @@ public class QLSanPhamUI extends javax.swing.JPanel {
     }//GEN-LAST:event_mnuSuaActionPerformed
 
     private void mnuLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuLamMoiActionPerformed
-       fillToTable();
+        fillToTable();
     }//GEN-LAST:event_mnuLamMoiActionPerformed
 
     private void tblSanPhamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblSanPhamKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_tblSanPhamKeyPressed
+
+    private void cboLoaiSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLoaiSPActionPerformed
+        // TODO add your handling code here:
+        fillToTable();
+    }//GEN-LAST:event_cboLoaiSPActionPerformed
     private void designTable() {
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane1.setHorizontalScrollBar(new ScrollBarCustom());
@@ -209,17 +228,25 @@ public class QLSanPhamUI extends javax.swing.JPanel {
         tblSanPham.getTableHeader().setForeground(Color.WHITE);
         tblSanPham.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 13));
         tblSanPham.getTableHeader().setOpaque(false);
-                tblSanPham.getColumnModel().getColumn(0).setCellRenderer(new AvataSanPham());
+        tblSanPham.getColumnModel().getColumn(0).setCellRenderer(new AvataSanPham());
 
     }
 
     private void fillToTable() {
         model = (DefaultTableModel) tblSanPham.getModel();
         model.setRowCount(0);
-        List<SanPham> listNV = spDAO.selectAll();
+        String LoaiSP = (String) cboLoaiSP.getSelectedItem();
+        List<SanPham> listNV = spDAO.getLoaiSP();
         for (SanPham sp : listNV) {
-            Object row[] = {sp.getMaSP(), sp.getTenSP(), df.format(sp.getDonGia())+"₫", sp.getSoLuong(), sp.getNhaSanXuat()};
-            model.addRow(row);
+            if (LoaiSP.equals("Tất cả")) {
+                Object row[] = {sp.getMaSP(), sp.getTenSP(), df.format(sp.getDonGia()) + "₫", sp.getSoLuong(), sp.getNhaSanXuat()};
+                model.addRow(row);
+                continue;
+            } else if (LoaiSP.equals(sp.getTenLoai())) {
+                Object row[] = {sp.getMaSP(), sp.getTenSP(), df.format(sp.getDonGia()) + "₫", sp.getSoLuong(), sp.getNhaSanXuat()};
+                model.addRow(row);
+                continue;
+            }
         }
     }
 
@@ -228,12 +255,13 @@ public class QLSanPhamUI extends javax.swing.JPanel {
         model.setRowCount(0);
         List<SanPham> listSP = spDAO.timSanPham("%" + txtTim.getText() + "%", "%" + txtTim.getText() + "%");
         for (SanPham sp : listSP) {
-            Object row[] = {sp.getMaSP(), sp.getTenSP(), df.format(sp.getDonGia())+"₫", sp.getSoLuong(), sp.getNhaSanXuat()};
+            Object row[] = {sp.getMaSP(), sp.getTenSP(), df.format(sp.getDonGia()) + "₫", sp.getSoLuong(), sp.getNhaSanXuat()};
             model.addRow(row);
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.group2.swing.Button btnThem;
+    private com.group2.swing.ComboBoxSuggestion cboLoaiSP;
     private com.group2.swing.GradientBackGround gradientBackGround1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;

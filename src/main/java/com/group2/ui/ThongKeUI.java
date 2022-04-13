@@ -10,19 +10,24 @@ import com.group2.swing.ModelChart;
 import com.group2.swing.ModelPolarAreaChart;
 import com.group2.swing.ScrollBarCustom;
 import java.awt.Color;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
  * @author HieuHoang
  */
 public class ThongKeUI extends javax.swing.JPanel {
+
     ThongKeDAO thongKeDAO = new ThongKeDAO();
+
     /**
      * Creates new form TKUI
      */
     public ThongKeUI() {
         initComponents();
-
+        for (Integer year : thongKeDAO.getYears()) {
+            comboBoxSuggestion2.addItem(year);
+        }
         designScrollBar();
         polarAreaChart1.addItem(new ModelPolarAreaChart(new Color(62, 197, 0), "Gym", thongKeDAO.thongKeGoiTap("gym")));
         polarAreaChart1.addItem(new ModelPolarAreaChart(new Color(40, 62, 81), "Yoga", thongKeDAO.thongKeGoiTap("yoga")));
@@ -37,9 +42,11 @@ public class ThongKeUI extends javax.swing.JPanel {
         chart.addLegend("Gói tập", new Color(240, 80, 83));
         chart.addLegend("Sản phẩm", new Color(0, 78, 146));
 
-        
-        for(int i = 1; i <= 12;i++){
-            chart.addData(new ModelChart("Tháng " + i, new double[]{thongKeDAO.thongKeGoiTapTheoThang(i), thongKeDAO.thongKeSanPhamTheoThang(i),}));
+        int nam = (int) comboBoxSuggestion2.getSelectedItem();
+                chart.getModel().clear();
+
+        for (int i = 1; i <= 12; i++) {
+            chart.addData(new ModelChart("Tháng " + i, new double[]{thongKeDAO.thongKeGoiTapTheoThang(i, nam), thongKeDAO.thongKeSanPhamTheoThang(i, nam),}));
         }
 //      
 
@@ -139,7 +146,14 @@ public class ThongKeUI extends javax.swing.JPanel {
         gradientBackGround4.setShadowColor(new java.awt.Color(0, 4, 40));
         gradientBackGround4.setShadowOpacity(0.3F);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        comboBoxSuggestion2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        comboBoxSuggestion2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxSuggestion2ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel4.setText("Doanh thu của phòng tập trong năm");
 
         javax.swing.GroupLayout gradientBackGround4Layout = new javax.swing.GroupLayout(gradientBackGround4);
@@ -162,7 +176,7 @@ public class ThongKeUI extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gradientBackGround4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(1, 1, 1)
                 .addComponent(comboBoxSuggestion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,7 +205,7 @@ public class ThongKeUI extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
@@ -199,6 +213,18 @@ public class ThongKeUI extends javax.swing.JPanel {
             .addComponent(jScrollPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void comboBoxSuggestion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSuggestion2ActionPerformed
+        // TODO add your handling code here:
+
+        int nam = (int) comboBoxSuggestion2.getSelectedItem();
+        chart.getModel().clear();
+        for (int i = 1; i <= 12; i++) {
+            chart.addData(new ModelChart("Tháng " + i, new double[]{thongKeDAO.thongKeGoiTapTheoThang(i, nam), thongKeDAO.thongKeSanPhamTheoThang(i, nam),}));
+        }
+        chart.start();
+
+    }//GEN-LAST:event_comboBoxSuggestion2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
