@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -40,11 +41,15 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
 
     GioHangGTPanel gioHangGTPanel;
     DecimalFormat df = new DecimalFormat("###,###.###");
+    static List<String> clone = new ArrayList<>();
 
     /**
      * Creates new form ChiTietGoiTap1JDailog
      */
     public HoaDonGoiTapJDailog(GioHangGTPanel gioHangGTPanel) {
+        for(int i = 0;i < 7;i++){
+            clone.add(i,"");
+        }
         this.gioHangGTPanel = gioHangGTPanel;
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
@@ -95,11 +100,26 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
 
         } else {
             txtSDT.setText(GymSysJFrame.maKH);
-            txtDiaChi.setText("");
-            txtHoVaTen.setText("");
-            txtNgaySinh.setText("");
+             txtDiaChi.setText(clone.get(4));
+            if (clone.get(1).equals("nam")) {
+                rdoNam.setSelected(true);
+            }else{
+                rdoNu.setSelected(true);
+            }
+            if(clone.get(5).equals("true")){
+                rdoTienMat.setSelected(true);
+            }else{
+                rdoThe.setSelected(true);
+            }
+            txtHoVaTen.setText(clone.get(0));
+            txtNgaySinh.setText(clone.get(2));
             giamGia.setText("0%");
-            txtEmail.setText("");
+            GioHangGT.giamGia = 0;
+            txtEmail.setText(clone.get(3));
+            txtGhiChu.setText(clone.get(6));
+            txtTongTien.setText(df.format(GioHangGT.tongTienGH()) + "₫");
+            tongTienTT.setText(df.format(GioHangGT.tienThanhToan()) + "₫");
+            imgHinh.setImage(new ImageIcon("khachhangIMG/" + "macdinh.png"));
             GioHangGT.giamGia = 0;
             txtTongTien.setText(df.format(GioHangGT.tongTienGH()) + "₫");
             tongTienTT.setText(df.format(GioHangGT.tienThanhToan()) + "₫");
@@ -196,9 +216,9 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
 
         txtHoVaTen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtHoVaTen.setLabelText("Họ và tên");
-        txtHoVaTen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtHoVaTenActionPerformed(evt);
+        txtHoVaTen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtHoVaTenKeyReleased(evt);
             }
         });
 
@@ -206,21 +226,36 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
         rdoNam.setSelected(true);
         rdoNam.setText("Nam");
         rdoNam.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rdoNam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoNamActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rdoNu);
         rdoNu.setText("Nữ");
         rdoNu.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rdoNu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoNuActionPerformed(evt);
+            }
+        });
 
         txtNgaySinh.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtNgaySinh.setLabelText("Ngày sinh");
-        txtNgaySinh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNgaySinhActionPerformed(evt);
+        txtNgaySinh.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNgaySinhKeyReleased(evt);
             }
         });
 
         txtEmail.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtEmail.setLabelText("Email");
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEmailKeyReleased(evt);
+            }
+        });
 
         textAreaScroll1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         textAreaScroll1.setLabelText("Địa chỉ");
@@ -229,6 +264,11 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
         txtDiaChi.setColumns(20);
         txtDiaChi.setRows(5);
         txtDiaChi.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDiaChi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDiaChiKeyReleased(evt);
+            }
+        });
         textAreaScroll1.setViewportView(txtDiaChi);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)), "Hình", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(0, 0, 204))); // NOI18N
@@ -265,10 +305,20 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
         rdoTienMat.setSelected(true);
         rdoTienMat.setText("Thanh toán bằng tiền mặt");
         rdoTienMat.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rdoTienMat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoTienMatActionPerformed(evt);
+            }
+        });
 
         buttonGroup2.add(rdoThe);
         rdoThe.setText("Thanh toán trực tuyến(Momo, Ví điện tử VNPAY, Visa)");
         rdoThe.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rdoThe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoTheActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(150, 150, 150));
@@ -449,6 +499,11 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
         txtGhiChu.setColumns(20);
         txtGhiChu.setRows(5);
         txtGhiChu.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtGhiChu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtGhiChuKeyReleased(evt);
+            }
+        });
         textAreaScroll2.setViewportView(txtGhiChu);
 
         javax.swing.GroupLayout gradientBackGround3Layout = new javax.swing.GroupLayout(gradientBackGround3);
@@ -610,12 +665,23 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
             txtTongTien.setText(df.format(GioHangGT.tongTienGH()) + "₫");
             tongTienTT.setText(df.format(GioHangGT.tienThanhToan()) + "₫");
         } else {
-            txtDiaChi.setText("");
-            txtHoVaTen.setText("");
-            txtNgaySinh.setText("");
+            txtDiaChi.setText(clone.get(4));
+            if (clone.get(1).equals("nam")) {
+                rdoNam.setSelected(true);
+            }else{
+                rdoNu.setSelected(true);
+            }
+            if(clone.get(5).equals("true")){
+                rdoTienMat.setSelected(true);
+            }else{
+                rdoThe.setSelected(true);
+            }
+            txtHoVaTen.setText(clone.get(0));
+            txtNgaySinh.setText(clone.get(2));
             giamGia.setText("0%");
             GioHangGT.giamGia = 0;
-            txtEmail.setText("");
+            txtEmail.setText(clone.get(3));
+            txtGhiChu.setText(clone.get(6));
             txtTongTien.setText(df.format(GioHangGT.tongTienGH()) + "₫");
             tongTienTT.setText(df.format(GioHangGT.tienThanhToan()) + "₫");
             imgHinh.setImage(new ImageIcon("khachhangIMG/" + "macdinh.png"));
@@ -634,10 +700,6 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
             return (float) 0.2;
         }
     }
-    private void txtHoVaTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoVaTenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtHoVaTenActionPerformed
-
     private void imgHinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgHinhMouseClicked
         GymSysJFrame.trangThai = "HDGT";
         if (txtSDT.getText().equals("")) {
@@ -664,10 +726,6 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_imgHinhMouseClicked
-
-    private void txtNgaySinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNgaySinhActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNgaySinhActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         if (GioHangGT.tienThanhToan() == 0) {
@@ -721,6 +779,42 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_btnThanhToanActionPerformed
+
+    private void txtHoVaTenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHoVaTenKeyReleased
+        clone.set(0, txtHoVaTen.getText());
+    }//GEN-LAST:event_txtHoVaTenKeyReleased
+
+    private void rdoNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNamActionPerformed
+        clone.set(1, "nam");
+    }//GEN-LAST:event_rdoNamActionPerformed
+
+    private void rdoNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNuActionPerformed
+        clone.set(1, "nu");
+    }//GEN-LAST:event_rdoNuActionPerformed
+
+    private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
+         clone.set(3, txtEmail.getText());
+    }//GEN-LAST:event_txtEmailKeyReleased
+
+    private void txtNgaySinhKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNgaySinhKeyReleased
+        clone.set(2, txtNgaySinh.getText());
+    }//GEN-LAST:event_txtNgaySinhKeyReleased
+
+    private void rdoTienMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTienMatActionPerformed
+        clone.set(5, "true");
+    }//GEN-LAST:event_rdoTienMatActionPerformed
+
+    private void txtDiaChiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiaChiKeyReleased
+        clone.set(4, txtDiaChi.getText());
+    }//GEN-LAST:event_txtDiaChiKeyReleased
+
+    private void rdoTheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTheActionPerformed
+        clone.set(5, "false");
+    }//GEN-LAST:event_rdoTheActionPerformed
+
+    private void txtGhiChuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGhiChuKeyReleased
+        clone.set(6, txtGhiChu.getText());
+    }//GEN-LAST:event_txtGhiChuKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
