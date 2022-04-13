@@ -16,20 +16,20 @@ import java.util.List;
  * @author lenovo
  */
 public class NhanVienDAO extends GymSysDAO<NhanVien, String> {
-    final String INSERT_SQL = "INSERT INTO  NhanVien (MaNV, MatKhau, HoTen, ChucVu, Hinh, DiaChi, NgaySinh)  VALUES  (?, ?, ?, ?, ?, ?, ?)";
-    final String UPDATE_SQL = "UPDATE  NhanVien  SET  MatKhau=?,  HoTen=?,  ChucVu=? , Hinh=?, DiaChi=?, NgaySinh=? WHERE  MaNV=?";
+    final String INSERT_SQL = "INSERT INTO  NhanVien (MaNV, MatKhau, HoTen, ChucVu, SoDT , Hinh, DiaChi, NgaySinh)  VALUES  (?, ?, ?, ?, ?, ?, ?, ?)";
+    final String UPDATE_SQL = "UPDATE  NhanVien  SET  MatKhau=?,  HoTen=?,  ChucVu=? , SoDT =? , Hinh=?, DiaChi=?, NgaySinh=? WHERE  MaNV=?";
     final String DELETE_SQL = "DELETE FROM NhanVien WHERE MaNV=?";
     final String SELECT_ALL_SQL = "SELECT * FROM NhanVien";
     final String SELECT_BY_ID_SQL = "SELECT * FROM NhanVien WHERE MaNV=?";
     @Override
     public void insert(NhanVien entity) {
         GJDBC.update(INSERT_SQL, entity.getMaNV(), entity.getMatKhau(), entity.getHoTen(), entity.getChucVu(), 
-                entity.getHinh(), entity.getDiaChi(),entity.getNgaySinh());
+                entity.getSoDT(),entity.getHinh(), entity.getDiaChi(),entity.getNgaySinh());
     }
 
     @Override
     public void update(NhanVien entity) {
-        GJDBC.update(UPDATE_SQL, entity.getMatKhau(), entity.getHoTen(), entity.getChucVu(), entity.getHinh(), 
+        GJDBC.update(UPDATE_SQL, entity.getMatKhau(), entity.getHoTen(), entity.getChucVu(),entity.getSoDT(),entity.getHinh(), 
                 entity.getDiaChi(), entity.getNgaySinh(), entity.getMaNV());
     }
 
@@ -65,6 +65,7 @@ public class NhanVienDAO extends GymSysDAO<NhanVien, String> {
                 nv.setChucVu(rs.getString("ChucVu"));
                 nv.setHinh(rs.getString("Hinh"));
                 nv.setDiaChi(rs.getString("DiaChi"));
+                nv.setSoDT(rs.getString("SoDT"));
                 nv.setNgaySinh( rs.getDate("NgaySinh"));
                 list.add(nv);         
             }

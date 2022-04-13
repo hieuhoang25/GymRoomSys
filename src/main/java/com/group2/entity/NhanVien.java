@@ -9,7 +9,7 @@ import java.util.Date;
  * @author lenovo
  */
 public class NhanVien {
-    private String MaNV, MatKhau, HoTen, ChucVu, Hinh, DiaChi;
+    private String MaNV, MatKhau, HoTen, ChucVu, Hinh, DiaChi, SoDT;
     private Date NgaySinh;
 
     public NhanVien() {
@@ -79,6 +79,14 @@ public class NhanVien {
 
     public void setNgaySinh(Date NgaySinh) {
         this.NgaySinh = NgaySinh;
+    }
+
+    public String getSoDT() {
+        return SoDT;
+    }
+
+    public void setSoDT(String SoDT) {
+        this.SoDT = SoDT;
     }
     
 }

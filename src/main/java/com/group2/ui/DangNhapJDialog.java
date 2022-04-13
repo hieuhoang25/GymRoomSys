@@ -238,7 +238,7 @@ void dangNhap() {
         NhanVien nv = nvDAO.selectById(TenDangNhapString);
 
         if (!nv.getMaNV().trim().equals(TenDangNhapString)) {
-            JOptionPane.showMessageDialog(this, "sai ten dang nhap");
+            JOptionPane.showMessageDialog(this, "Sai tên đăng nhập");
             MsgBox.alert(this, "Đăng nhập thất bại", "Tên đăng nhập hoặc mật khẩu không chính xác !", Alert.AlertType.ERROR);
         } else {
             if (!nv.getMatKhau().trim().equals(MatKhauString)) {
