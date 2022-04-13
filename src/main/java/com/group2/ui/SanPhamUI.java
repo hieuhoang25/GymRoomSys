@@ -54,11 +54,11 @@ public class SanPhamUI extends javax.swing.JPanel {
         listClone = new ArrayList<>();
 
         for (SanPham sp : list) {
-            if (LoaiSP.equals("Tất cả")) {
+            if (LoaiSP.equals("Tất cả") && sp.getSoLuong() > 0) {
                 addItemSanPham(new ProductModel(sp, gioHangPanel1));
                 listClone.add(sp);
                 continue;
-            } else if (LoaiSP.equals(sp.getTenLoai())) {
+            } else if (LoaiSP.equals(sp.getTenLoai()) && sp.getSoLuong() > 0) {
                 addItemSanPham(new ProductModel(sp, gioHangPanel1));
                 listClone.add(sp);
                 continue;

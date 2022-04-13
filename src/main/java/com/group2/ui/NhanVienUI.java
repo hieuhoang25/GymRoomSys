@@ -114,7 +114,7 @@ public class NhanVienUI extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã NV", "Mật khẩu", "Họ tên", "Chức vụ", "Ngày sinh", "Địa chỉ"
+                "Mã NV", "Số ĐT", "Họ tên", "Chức vụ", "Ngày sinh", "Địa chỉ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -223,7 +223,7 @@ public class NhanVienUI extends javax.swing.JPanel {
         model.setRowCount(0);
         List<NhanVien> listNV = nvDAO.selectAll();
         for (NhanVien nv : listNV) {
-            Object row[] = {nv.getMaNV(), nv.getMatKhau(), nv.getHoTen(), nv.getChucVu(), nv.getNgaySinh(), nv.getDiaChi()};
+            Object row[] = {nv.getMaNV(),nv.getSoDT(),nv.getHoTen(), nv.getChucVu(), nv.getNgaySinh(), nv.getDiaChi()};
             model.addRow(row);
         }
     }
@@ -233,7 +233,7 @@ public class NhanVienUI extends javax.swing.JPanel {
         model.setRowCount(0);
         List<NhanVien> listNV = nvDAO.timNhanVien("%" + txtTim.getText() + "%", "%" + txtTim.getText() + "%");
         for (NhanVien nv : listNV) {
-            Object row[] = {nv.getMaNV(), nv.getMatKhau(), nv.getHoTen(), nv.getChucVu(), nv.getNgaySinh(), nv.getDiaChi()};
+            Object row[] = {nv.getMaNV(), nv.getSoDT(), nv.getHoTen(), nv.getChucVu(), nv.getNgaySinh(), nv.getDiaChi()};
             model.addRow(row);
         }
     }

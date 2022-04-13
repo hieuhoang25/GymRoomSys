@@ -47,6 +47,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
             txtDiaChi.setText(nv.getDiaChi().trim());
             txtMatKhau.setText(nv.getMatKhau().trim());
             txtNgaySinh.setText(nv.getNgaySinh() + "");
+            txtSoDT.setText(nv.getSoDT());
             if (nv.getChucVu().equalsIgnoreCase("PT")) {
                 rdoPT.setSelected(true);
             } else if (nv.getChucVu().equalsIgnoreCase("Nhân viên")) {
@@ -110,6 +111,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
         btnSua = new com.group2.swing.Button();
         textAreaScroll1 = new com.group2.swing.TextAreaScroll();
         txtDiaChi = new com.group2.swing.TextArea();
+        txtSoDT = new com.group2.swing.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
@@ -217,6 +219,9 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
         txtDiaChi.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         textAreaScroll1.setViewportView(txtDiaChi);
 
+        txtSoDT.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtSoDT.setLabelText("Số điện thoại\n");
+
         javax.swing.GroupLayout mainLayout = new javax.swing.GroupLayout(main);
         main.setLayout(mainLayout);
         mainLayout.setHorizontalGroup(
@@ -249,7 +254,8 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(rdoNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(rdoPT, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                .addComponent(rdoPT, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txtSoDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                             .addComponent(titile)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,8 +292,10 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                     .addComponent(rdoQL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdoNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdoPT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textAreaScroll1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                .addGap(4, 4, 4)
+                .addComponent(txtSoDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -352,6 +360,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
     private com.group2.swing.TextField txtMa;
     private com.group2.swing.TextField txtMatKhau;
     private com.group2.swing.TextField txtNgaySinh;
+    private com.group2.swing.TextField txtSoDT;
     // End of variables declaration//GEN-END:variables
     NhanVien getForm() {
         NhanVien nv = new NhanVien();
@@ -359,6 +368,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
         nv.setMatKhau(txtMatKhau.getText());
         nv.setHoTen(txtHoTen.getText());
         nv.setNgaySinh(GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"));
+        nv.setSoDT(txtSoDT.getText());
         if (rdoNV.isSelected()) {
             nv.setChucVu("Nhân viên");
         } else if (rdoQL.isSelected()) {
@@ -433,6 +443,11 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
             if (Validation.checkToDate(txtNgaySinh.getText(), "yyyy-MM-dd") == false) {
                 MsgBox.alert(this, "Thông báo", "Ngày sinh không hợp lệ", Alert.AlertType.ERROR);
                 txtNgaySinh.requestFocus();
+                return;
+            }
+            if (Validation.checkExperession(txtSoDT.getText(), "^(84|0[3|5|7|8|9])[0-9]{8}$") == false) {
+                txtSoDT.requestFocus();
+                MsgBox.alert(this, "Lỗi", "Số điện thoại không đúng định dạng", Alert.AlertType.ERROR);
                 return;
             }
             if (Validation.checkLength(txtDiaChi.getText()) == false) {
