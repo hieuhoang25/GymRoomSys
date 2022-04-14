@@ -23,6 +23,7 @@ import com.group2.utils.GImage;
 import com.group2.utils.MsgBox;
 import com.group2.utils.GDate;
 import com.group2.utils.TakePicture;
+import com.group2.utils.Validation;
 import java.awt.Color;
 import java.io.File;
 import java.text.DecimalFormat;
@@ -43,6 +44,7 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
     GioHangGTPanel gioHangGTPanel;
     DecimalFormat df = new DecimalFormat("###,###.###");
     static List<String> clone = new ArrayList<>();
+    Validation v = new Validation();
 
     /**
      * Creates new form ChiTietGoiTap1JDailog
@@ -68,6 +70,31 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
         txtTongTien.setText(df.format(GioHangGT.tongTienGH()) + "₫");
         tongTienTT.setText(df.format(GioHangGT.tienThanhToan()) + "₫");
 
+    }
+
+    public boolean check() {
+        if (v.checkName(txtHoVaTen.getText()) == false) {
+            MsgBox.alert(HoaDonGoiTapJDailog.this, "Lỗi", "Tên không hợp lệ", Alert.AlertType.ERROR);
+            txtHoVaTen.requestFocus();
+            return false;
+        } else if (v.checkExperession(txtSDT.getText(), "^(84|0[3|5|7|8|9])[0-9]{8}$") == false) {
+            MsgBox.alert(this, "Lỗi", "Số điện thoại không đúng định dạng", Alert.AlertType.ERROR);
+            txtSDT.requestFocus();
+            return false;
+        } else if (v.checkDate(txtNgaySinh.getText()) == false)  {
+            MsgBox.alert(HoaDonGoiTapJDailog.this, "Lỗi", "Vui lòng kiểm tra lại định dạng ngày 'yyyy-MM-dd'", Alert.AlertType.ERROR);
+            txtNgaySinh.requestFocus();
+            return false;
+        } else if (v.checkEmail(txtEmail.getText()) == false) {
+            MsgBox.alert(HoaDonGoiTapJDailog.this, "Lỗi", "Email không hợp lệ", Alert.AlertType.ERROR);
+            txtEmail.requestFocus();
+            return false;
+        } else if (v.checkLength(txtDiaChi.getText()) == false) {
+            MsgBox.alert(HoaDonGoiTapJDailog.this, "Lỗi", "Địa chỉ không được bỏ trống", Alert.AlertType.ERROR);
+            txtDiaChi.requestFocus();
+            return false;
+        }
+        return true;
     }
 
     public void loadDataOfPerSon() {
@@ -723,51 +750,55 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
     }//GEN-LAST:event_imgHinhMouseClicked
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        if (GioHangGT.tienThanhToan() == 0) {
-            MsgBox.alert(null, "Giỏ hàng gói tập trống", "Vui lòng chọn gói tập", Alert.AlertType.ERROR);
-        } else {
-            String qrcode = "";
-            HoiVien hv = hvdao.selectBySDT(txtSDT.getText().trim());
+        if (check()) {
 
-            if (hv != null) {
-                if (hv.getQrCode() == null) {
-                    qrcode = GImage.createQRCode(txtSDT.getText().trim(), f, txtEmail.getText().trim());
+            if (GioHangGT.tienThanhToan() == 0) {
+                MsgBox.alert(null, "Giỏ hàng gói tập trống", "Vui lòng chọn gói tập", Alert.AlertType.ERROR);
+            } else {
+                String qrcode = "";
+                HoiVien hv = hvdao.selectBySDT(txtSDT.getText().trim());
+
+                if (hv != null) {
+                    if (hv.getQrCode() == null) {
+                        qrcode = GImage.createQRCode(txtSDT.getText().trim(), f, txtEmail.getText().trim());
+                    } else {
+                        qrcode = hv.getQrCode();
+                    }
                 } else {
-                    qrcode = hv.getQrCode();
+                    qrcode = GImage.createQRCode(txtSDT.getText().trim(), f, txtEmail.getText().trim());
                 }
-            } else {
-                qrcode = GImage.createQRCode(txtSDT.getText().trim(), f, txtEmail.getText().trim());
+
+                if (MsgBox.confirm(null, "Khách hàng có muốn xuất hóa đơn không?")) {
+
+                    new HoaDonCTDAO().themHoaDonGoiTap(txtSDT.getText(), Auth.user.getMaNV(),
+                            null, txtHoVaTen.getText(),
+                            txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, f.getName(), txtEmail.getText(), qrcode);
+                    for (GoiTap gt : GioHangGT.listGT) {
+                        new HoaDonCTDAO().themHDCTGoiTap(gt.getMaGT(), txtSDT.getText(), gt.getGia());
+                    }
+                    BillGT billgt = new BillGT();
+                    billgt.printBill(txtSDT.getText(), Auth.user.getMaNV());
+                    GioHangGT.clearGT();
+                    this.dispose();
+                    clone.clear();
+                    GymSysJFrame.maKH = "";
+                } else {
+                    new HoaDonCTDAO().themHoaDonGoiTap(txtSDT.getText(), Auth.user.getMaNV(),
+                            null, txtHoVaTen.getText(),
+                            txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, f.getName(), txtEmail.getText(), qrcode);
+                    for (GoiTap gt : GioHangGT.listGT) {
+                        new HoaDonCTDAO().themHDCTGoiTap(gt.getMaGT(), txtSDT.getText(), gt.getGia());
+                    }
+                    MsgBox.alert(this, "Thông báo", "Mua gói tập thành công", Alert.AlertType.SUCCESS);
+                    GioHangGT.clearGT();
+                    gioHangGTPanel.setSLGoiTap();
+                    this.dispose();
+                    clone.clear();
+                    GymSysJFrame.maKH = "";
+
+                }
             }
 
-            if (MsgBox.confirm(null, "Khách hàng có muốn xuất hóa đơn không?")) {
-
-                new HoaDonCTDAO().themHoaDonGoiTap(txtSDT.getText(), Auth.user.getMaNV(),
-                        null, txtHoVaTen.getText(),
-                        txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, f.getName(), txtEmail.getText(), qrcode);
-                for (GoiTap gt : GioHangGT.listGT) {
-                    new HoaDonCTDAO().themHDCTGoiTap(gt.getMaGT(), txtSDT.getText(), gt.getGia());
-                }
-                BillGT billgt = new BillGT();
-                billgt.printBill(txtSDT.getText(), Auth.user.getMaNV());
-                GioHangGT.clearGT();
-                this.dispose();
-                clone.clear();
-                GymSysJFrame.maKH = "";
-            } else {
-                new HoaDonCTDAO().themHoaDonGoiTap(txtSDT.getText(), Auth.user.getMaNV(),
-                        null, txtHoVaTen.getText(),
-                        txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, f.getName(), txtEmail.getText(), qrcode);
-                for (GoiTap gt : GioHangGT.listGT) {
-                    new HoaDonCTDAO().themHDCTGoiTap(gt.getMaGT(), txtSDT.getText(), gt.getGia());
-                }
-                MsgBox.alert(this, "Thông báo", "Mua gói tập thành công", Alert.AlertType.SUCCESS);
-                GioHangGT.clearGT();
-                gioHangGTPanel.setSLGoiTap();
-                this.dispose();
-                clone.clear();
-                GymSysJFrame.maKH = "";
-
-            }
         }
     }//GEN-LAST:event_btnThanhToanActionPerformed
 

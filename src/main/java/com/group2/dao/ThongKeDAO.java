@@ -68,7 +68,8 @@ public class ThongKeDAO {
         List<ThongKe> list = new ArrayList<>();
         String sql = "select HoTen,kh.SoDT,NgayHetHan from CTGoiTap ct join HoiVien hv\n"
                 + "on ct.ID = hv.ID join KhachHang kh on kh.SoDT = hv.SoDT\n"
-                + "where DATEDIFF(DAY,CAST(GETDATE() as date),NgayHetHan) <= 5";
+                + "where DATEDIFF(DAY,CAST(GETDATE() as date),NgayHetHan) <= 5"
+                + "and DATEDIFF(DAY,CAST(GETDATE() as date),NgayHetHan) >= 1";
         try {
             ResultSet rs = GJDBC.query(sql);
             while (rs.next()) {

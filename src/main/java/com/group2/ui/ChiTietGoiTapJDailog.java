@@ -11,6 +11,7 @@ import com.group2.swing.Alert;
 import com.group2.utils.MsgBox;
 import com.group2.utils.Validation;
 import java.awt.Color;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.lang.StringUtils;
 
@@ -21,6 +22,7 @@ import org.apache.commons.lang.StringUtils;
 public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
 
     GoiTapDAO dao = new GoiTapDAO();
+    List<GoiTap> list = dao.selectAll();
     boolean check;
     DefaultTableModel model1;
 
@@ -107,6 +109,7 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
         jLabel2.setBackground(new java.awt.Color(0, 102, 204));
         jLabel2.setOpaque(true);
 
+        txtMaGT.setText("gym");
         txtMaGT.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtMaGT.setLabelText("Mã gói tập");
 
@@ -135,6 +138,11 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
 
         cboLoaiGT.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gym", "Boxing", "Yoga" }));
         cboLoaiGT.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cboLoaiGT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboLoaiGTActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout gradientBackGround1Layout = new javax.swing.GroupLayout(gradientBackGround1);
         gradientBackGround1.setLayout(gradientBackGround1Layout);
@@ -145,27 +153,22 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
                 .addGroup(gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(gradientBackGround1Layout.createSequentialGroup()
                         .addGroup(gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(gradientBackGround1Layout.createSequentialGroup()
-                                .addGroup(gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
-                                .addComponent(conBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(gradientBackGround1Layout.createSequentialGroup()
-                                .addGroup(gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtMaGT, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
-                                    .addComponent(txtTenGT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtThoiLuong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnLuu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                        .addComponent(conBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(gradientBackGround1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
                         .addGroup(gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cboLoaiGT, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtMaGT, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+                                .addComponent(txtTenGT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtThoiLuong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnLuu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         gradientBackGround1Layout.setVerticalGroup(
             gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,6 +181,10 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(conBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cboLoaiGT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(txtMaGT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTenGT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,13 +192,9 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
                 .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtThoiLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel3)
-                .addGap(3, 3, 3)
-                .addComponent(cboLoaiGT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
+                .addGap(20, 20, 20)
                 .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -202,7 +205,9 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(gradientBackGround1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(gradientBackGround1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -221,6 +226,13 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
             gt.setMaLoai(StringUtils.lowerCase(cboLoaiGT.getSelectedItem().toString()));
             gt.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
             gt.setTenGoiTap(txtTenGT.getText());
+            for(GoiTap g : list){
+                if(txtMaGT.getText().toLowerCase().equalsIgnoreCase(g.getMaGT())){
+                     MsgBox.alert(this, "Lỗi", "Mã gói tập đã tồn tại", Alert.AlertType.ERROR);
+                     txtMaGT.requestFocus();
+                     return;
+                }
+            }
             //check ma
             if (Validation.checkLength(txtMaGT.getText()) == false) {
                 MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại mã gói tập", Alert.AlertType.ERROR);
@@ -252,6 +264,13 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
             new QLGoiTapUI().setVisible(true);
 
         } else {
+             for(GoiTap g : list){
+                if(txtMaGT.getText().toLowerCase().equalsIgnoreCase(g.getMaGT())){
+                     MsgBox.alert(this, "Lỗi", "Mã gói tập đã tồn tại", Alert.AlertType.ERROR);
+                     txtMaGT.requestFocus();
+                     return;
+                }
+            }
             GoiTap gt = new GoiTap();
             gt.setGia(Float.valueOf(txtGia.getText()));
             gt.setMaGT(txtMaGT.getText());
@@ -266,6 +285,16 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btnLuuActionPerformed
+
+    private void cboLoaiGTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLoaiGTActionPerformed
+        if(cboLoaiGT.getSelectedItem().toString().equalsIgnoreCase("gym")){
+            txtMaGT.setText("gym");
+        }else if(cboLoaiGT.getSelectedItem().toString().equalsIgnoreCase("yoga")){
+            txtMaGT.setText("yoga");
+        }else{
+            txtMaGT.setText("boxing");
+        }
+    }//GEN-LAST:event_cboLoaiGTActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

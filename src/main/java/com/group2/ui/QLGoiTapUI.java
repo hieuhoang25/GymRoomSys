@@ -87,7 +87,6 @@ public class QLGoiTapUI extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         gradientBackGround2 = new com.group2.swing.GradientBackGround();
-        textField2 = new com.group2.swing.TextField();
         button2 = new com.group2.swing.Button();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblGT1 = new javax.swing.JTable();
@@ -197,9 +196,6 @@ public class QLGoiTapUI extends javax.swing.JPanel {
         gradientBackGround2.setBorderRadius(10);
         gradientBackGround2.setShadowSize(5);
 
-        textField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        textField2.setLabelText("Tìm kiếm gói tập");
-
         button2.setBackground(new java.awt.Color(255, 0, 51));
         button2.setForeground(new java.awt.Color(255, 255, 255));
         button2.setText("+ Thêm gói tập");
@@ -262,9 +258,7 @@ public class QLGoiTapUI extends javax.swing.JPanel {
                         .addGroup(gradientBackGround2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cboGT1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addComponent(textField2, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                        .addGap(410, 410, 410)
                         .addComponent(button2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                         .addGap(12, 12, 12)))
                 .addContainerGap())
@@ -272,10 +266,9 @@ public class QLGoiTapUI extends javax.swing.JPanel {
         gradientBackGround2Layout.setVerticalGroup(
             gradientBackGround2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gradientBackGround2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(15, 15, 15)
                 .addGroup(gradientBackGround2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(gradientBackGround2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(3, 3, 3)
@@ -341,10 +334,6 @@ public class QLGoiTapUI extends javax.swing.JPanel {
 
     }//GEN-LAST:event_cboGTActionPerformed
 
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button2ActionPerformed
-
     private void tblGT1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGT1MouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
@@ -367,6 +356,10 @@ public class QLGoiTapUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblGTMouseReleased
 
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.group2.swing.Button button1;
@@ -384,6 +377,5 @@ public class QLGoiTapUI extends javax.swing.JPanel {
     private javax.swing.JMenuItem mnSua;
     private javax.swing.JTable tblGT;
     private javax.swing.JTable tblGT1;
-    private com.group2.swing.TextField textField2;
     // End of variables declaration//GEN-END:variables
 }

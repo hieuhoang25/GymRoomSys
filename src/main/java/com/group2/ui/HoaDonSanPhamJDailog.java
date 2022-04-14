@@ -522,7 +522,7 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
                 return;
             }
             // check ngày sinh
-            if (Validation.checkToDate(txtNgaySinh.getText(), "yyyy-MM-dd") == false) {
+            if (new Validation().checkDate(txtNgaySinh.getText()) == false) {
                 txtNgaySinh.requestFocus();
                 MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại định dạng ngày 'yyyy-MM-dd'", Alert.AlertType.ERROR);
                 return;
