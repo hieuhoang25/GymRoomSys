@@ -67,7 +67,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" pref="845" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="cboLoaiSP" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -192,14 +192,17 @@
         <Component class="com.group2.swing.ComboBoxSuggestion" name="cboLoaiSP">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="7">
+              <StringArray count="10">
                 <StringItem index="0" value="T&#x1ea5;t c&#x1ea3;"/>
                 <StringItem index="1" value="S&#x1eef;a t&#x103;ng c&#xe2;n"/>
                 <StringItem index="2" value="S&#x1eef;a t&#x103;ng c&#x1a1;"/>
-                <StringItem index="3" value="Bao tay"/>
-                <StringItem index="4" value="Gi&#xe0;y th&#x1ec3; thao"/>
-                <StringItem index="5" value="Qu&#x1ea7;n Th&#x1ec3; Thao"/>
-                <StringItem index="6" value="&#xc1;o th&#x1ec3; thao"/>
+                <StringItem index="3" value="Ph&#x1ee5; ki&#x1ec7;n th&#xe2;n tr&#xea;n"/>
+                <StringItem index="4" value="Th&#x1edd;i trang fitness"/>
+                <StringItem index="5" value="Th&#x1ef1;c ph&#x1ea9;m v&#xe0; t&#x1ea1;p h&#xf3;a th&#x1ec3; thao"/>
+                <StringItem index="6" value="Ph&#x1ee5; ki&#x1ec7;n th&#xe2;n d&#x1b0;&#x1edb;i"/>
+                <StringItem index="7" value="Vitamin v&#xe0; kho&#xe1;ng ch&#x1ea5;t"/>
+                <StringItem index="8" value="T&#x103;ng s&#x1ee9;c m&#x1ea1;nh"/>
+                <StringItem index="9" value="BCAA v&#xe0; Amino Acids"/>
               </StringArray>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

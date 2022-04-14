@@ -424,6 +424,12 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
                     return;
                 }
             }
+            //CHECK MA KO ĐƯỢC CÓ KHOẢNG TRẮNG
+             if(new Validation().checkMa(txtMa.getText()) == false){
+                  MsgBox.alert(this, "Thông báo", "Mã Sản phẩm không hợp lệ - vd: SP01", Alert.AlertType.ERROR);
+                txtMa.requestFocus();
+                return;
+            }
             //check tên
             if (Validation.checkLength(txtTen.getText()) == false) {
                 MsgBox.alert(this, "Thông báo", "Vui lòng nhập lại tên sản phẩm!", Alert.AlertType.ERROR);

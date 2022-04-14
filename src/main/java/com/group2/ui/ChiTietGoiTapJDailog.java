@@ -108,6 +108,7 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
         jLabel2.setBackground(new java.awt.Color(0, 102, 204));
         jLabel2.setOpaque(true);
 
+        txtMaGT.setText("gym");
         txtMaGT.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtMaGT.setLabelText("Mã gói tập");
 
@@ -237,6 +238,11 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
                 txtMaGT.requestFocus();
                 return;
             }
+             if(new Validation().checkMa(txtMaGT.getText()) == false){
+                  MsgBox.alert(this, "Thông báo", "Mã gói tập không hợp lệ - vd: gymFM", Alert.AlertType.ERROR);
+                txtMaGT.requestFocus();
+                return;
+            }
             //check tên
             if (Validation.checkLength(txtTenGT.getText()) == false) {
                 MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại tên gói tập", Alert.AlertType.ERROR);
@@ -255,6 +261,7 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
                 txtThoiLuong.requestFocus();
                 return;
             }
+            
             //
             GoiTap gt = new GoiTap();
             gt.setGia(Float.valueOf(txtGia.getText()));

@@ -518,7 +518,13 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
             // check họ tên
             if (Validation.checkLength(txtHoVaTen.getText()) == false) {
                 txtHoVaTen.requestFocus();
-                MsgBox.alert(this, "Lỗi", "Vui lòng nhập lại họ tên", Alert.AlertType.ERROR);
+                MsgBox.alert(this, "Lỗi", "Họ tên không được để trống", Alert.AlertType.ERROR);
+                return;
+            }
+            
+            if(new Validation().checkName(txtHoVaTen.getText()) == false){
+                txtHoVaTen.requestFocus();
+                MsgBox.alert(this, "Lỗi", "Họ tên không hợp lệ", Alert.AlertType.ERROR);
                 return;
             }
             // check ngày sinh

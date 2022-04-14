@@ -388,7 +388,13 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
         List<NhanVien> list = nvDAO.selectAll();
         try {
             if (Validation.checkLength(txtMa.getText()) == false) {
-                MsgBox.alert(this, "Thông báo", "Mã nhân viên không hợp lệ", Alert.AlertType.ERROR);
+                MsgBox.alert(this, "Thông báo", "Mã nhân viên không được để trống", Alert.AlertType.ERROR);
+                txtMa.requestFocus();
+                return;
+            }
+            //CHECK MA NV KHÔNG ĐƯỢC CÓ KHOẢNG TRẮNG
+            if(new Validation().checkMa(txtMa.getText()) == false){
+                  MsgBox.alert(this, "Thông báo", "Mã nhân viên không hợp lệ - vd: NV01", Alert.AlertType.ERROR);
                 txtMa.requestFocus();
                 return;
             }
@@ -399,14 +405,18 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                     return;
                 }
             }
-
+            if(new Validation().checkName(txtHoTen.getText()) == false){
+                txtHoTen.requestFocus();
+                MsgBox.alert(this, "Lỗi", "Họ tên không hợp lệ", Alert.AlertType.ERROR);
+                return;
+            }
             if (Validation.correctString(txtMatKhau.getText()) == false) {
                 MsgBox.alert(this, "Thông báo", "Mật khẩu không hợp lệ", Alert.AlertType.ERROR);
                 txtMatKhau.requestFocus();
                 return;
             }
             if (Validation.checkLength(txtHoTen.getText()) == false) {
-                MsgBox.alert(this, "Thông báo", "Họ tên không hợp lệ", Alert.AlertType.ERROR);
+                MsgBox.alert(this, "Thông báo", "Họ tên không được để trống", Alert.AlertType.ERROR);
                 txtHoTen.requestFocus();
                 return;
             }

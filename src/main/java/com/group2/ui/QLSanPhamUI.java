@@ -129,7 +129,7 @@ public class QLSanPhamUI extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblSanPham);
 
-        cboLoaiSP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất cả", "Sữa tăng cân", "Sữa tăng cơ", "Bao tay", "Giày thể thao", "Quần Thể Thao", "Áo thể thao" }));
+        cboLoaiSP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất cả", "Sữa tăng cân", "Sữa tăng cơ", "Phụ kiện thân trên", "Thời trang fitness", "Thực phẩm và tạp hóa thể thao", "Phụ kiện thân dưới", "Vitamin và khoáng chất", "Tăng sức mạnh", "BCAA và Amino Acids" }));
         cboLoaiSP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cboLoaiSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,7 +144,7 @@ public class QLSanPhamUI extends javax.swing.JPanel {
             .addGroup(gradientBackGround1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(gradientBackGround1Layout.createSequentialGroup()
                         .addComponent(cboLoaiSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

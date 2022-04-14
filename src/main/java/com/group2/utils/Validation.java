@@ -85,4 +85,10 @@ public class Validation {
        public boolean checkDate(String str){
            return str.matches("((?:19|20)\\d\\d)-(0?[1-9]|1[012])-([12][0-9]|3[01]|0?[1-9])");
        }
+       public boolean checkMa(String str){
+           if(str.replaceAll("[^ ]", "").length() > 0){
+               return false;
+           }
+           return true;
+       }
 }

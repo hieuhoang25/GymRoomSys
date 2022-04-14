@@ -9,6 +9,7 @@ import com.group2.dao.NhanVienDAO;
 import com.group2.swing.Alert;
 import com.group2.utils.Auth;
 import com.group2.utils.MsgBox;
+import com.group2.utils.Validation;
 import java.awt.Color;
 
 /**
@@ -27,6 +28,24 @@ public class DoiMatKhauJDailog extends javax.swing.JDialog {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
+    }
+
+    public boolean check() {
+        Validation v = new Validation();
+        if (v.checkLength(txtMatKhau.getText()) == false) {
+            MsgBox.alert(DoiMatKhauJDailog.this, "Lỗi", "Mật khẩu cũ không được để trống", Alert.AlertType.ERROR);
+            txtMatKhau.requestFocus();
+            return false;
+        } else if (v.checkLength(txtMatKhau1.getText()) == false) {
+            MsgBox.alert(DoiMatKhauJDailog.this, "Lỗi", "Mật khẩu mới không được để trống", Alert.AlertType.ERROR);
+            txtMatKhau1.requestFocus();
+            return false;
+        } else if (txtMatKhau1.getText().length() < 6) {
+            MsgBox.alert(DoiMatKhauJDailog.this, "Lỗi", "Mật khẩu phải tối thiểu 6 ký tự", Alert.AlertType.ERROR);
+            txtMatKhau1.requestFocus();
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -171,20 +190,23 @@ public class DoiMatKhauJDailog extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void doiMatKhau() {
-        System.out.println(Auth.user.getMatKhau());
-        if (Auth.user.getMatKhau().equals(txtMatKhau.getText().trim())) {
-            if (txtMatKhau1.getText().trim().equals(txtMatKhau2.getText().trim())) {
-                Auth.user.setMatKhau(txtMatKhau1.getText().trim());
-                nv.update(Auth.user);
-                MsgBox.alert(this, "Thông báo", "Cập nhật mật khẩu thành công!", Alert.AlertType.SUCCESS);
-                dispose();
+        if (check()) {
 
+            System.out.println(Auth.user.getMatKhau());
+            if (Auth.user.getMatKhau().equals(txtMatKhau.getText().trim())) {
+                if (txtMatKhau1.getText().trim().equals(txtMatKhau2.getText().trim())) {
+                    Auth.user.setMatKhau(txtMatKhau1.getText().trim());
+                    nv.update(Auth.user);
+                    MsgBox.alert(this, "Thông báo", "Cập nhật mật khẩu thành công!", Alert.AlertType.SUCCESS);
+                    dispose();
+
+                } else {
+                    MsgBox.alert(null, "Cập nhật mật khẩu thất bại!", "Mật khẩu không khớp!", Alert.AlertType.ERROR);
+
+                }
             } else {
-                MsgBox.alert(null, "Cập nhật mật khẩu thất bại!", "Mật khẩu không khớp!", Alert.AlertType.ERROR);
-
+                MsgBox.alert(null, "Cập nhật mật khẩu thất bại!", "Mật khẩu cũ không đúng!", Alert.AlertType.ERROR);
             }
-        } else {
-            MsgBox.alert(null, "Cập nhật mật khẩu thất bại!", "Mật khẩu cũ không đúng!", Alert.AlertType.ERROR);
         }
     }
 }
