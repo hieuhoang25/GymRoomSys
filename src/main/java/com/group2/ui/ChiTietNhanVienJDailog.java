@@ -20,6 +20,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,12 +32,13 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
 //   kt  = false sửa
 
     NhanVienDAO nvDAO = new NhanVienDAO();
+    DefaultTableModel model;
 
     /**
      * Creates new form ChiTietNhanVienJDailog
      */
-    public ChiTietNhanVienJDailog(boolean kt, NhanVien nv) {
-
+    public ChiTietNhanVienJDailog(boolean kt, NhanVien nv,JTable tb) {
+        model = (DefaultTableModel) tb.getModel();
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
@@ -318,7 +320,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void conBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conBtn1ActionPerformed
-        // TODO add your handling code here:
+        
         dispose();
     }//GEN-LAST:event_conBtn1ActionPerformed
 
@@ -408,7 +410,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                 txtHoTen.requestFocus();
                 return;
             }
-            if (Validation.checkToDate(txtNgaySinh.getText(), "yyyy-MM-dd") == false) {
+            if (new Validation().checkDate(txtNgaySinh.getText()) == false) {
                 MsgBox.alert(this, "Thông báo", "Ngày sinh không hợp lệ", Alert.AlertType.ERROR);
                 txtNgaySinh.requestFocus();
                 return;
@@ -440,7 +442,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                 txtHoTen.requestFocus();
                 return;
             }
-            if (Validation.checkToDate(txtNgaySinh.getText(), "yyyy-MM-dd") == false) {
+            if (new Validation().checkDate(txtNgaySinh.getText()) == false) {
                 MsgBox.alert(this, "Thông báo", "Ngày sinh không hợp lệ", Alert.AlertType.ERROR);
                 txtNgaySinh.requestFocus();
                 return;
@@ -458,6 +460,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
 
             nvDAO.update(nv);
             MsgBox.alert(this, "Thông báo", "Sửa nhân viên thành công!", Alert.AlertType.SUCCESS);
+            fillToTable();
 
         } catch (Exception e) {
             MsgBox.alert(this, "Sửa nhân viên thất bại !", "Mã nhân viên hoặc số điện thoại đã tồn tại!", Alert.AlertType.ERROR);
@@ -476,6 +479,14 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
             ImageIcon ic = GImage.read("nvIMG/", file.getName());
             imgHinh.setImage(ic);
             imgHinh.setToolTipText(file.getName());
+        }
+    }
+     public void fillToTable() {
+        model.setRowCount(0);
+        List<NhanVien> listNV = nvDAO.selectAll();
+        for (NhanVien nv : listNV) {
+            Object row[] = {nv.getMaNV(),nv.getSoDT(),nv.getHoTen(), nv.getChucVu(), nv.getNgaySinh(), nv.getDiaChi()};
+            model.addRow(row);
         }
     }
 }

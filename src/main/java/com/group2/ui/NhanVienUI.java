@@ -177,7 +177,7 @@ public class NhanVienUI extends javax.swing.JPanel {
         } else if (evt.getClickCount() == 2) {
             th = false;
             NhanVien nv = nvDAO.selectById((String) tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 0));
-            new ChiTietNhanVienJDailog(th,nv).setVisible(true);
+            new ChiTietNhanVienJDailog(th,nv,tblNhanVien).setVisible(true);
         }
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
@@ -205,7 +205,7 @@ public class NhanVienUI extends javax.swing.JPanel {
     private void menuSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSuaActionPerformed
         th = false;
         NhanVien nv = nvDAO.selectById((String) tblNhanVien.getValueAt(tblNhanVien.getSelectedRow(), 0));
-        new ChiTietNhanVienJDailog(th, nv).setVisible(true);
+        new ChiTietNhanVienJDailog(th, nv,tblNhanVien).setVisible(true);
         fillToTable();
     }//GEN-LAST:event_menuSuaActionPerformed
 
@@ -218,7 +218,7 @@ public class NhanVienUI extends javax.swing.JPanel {
         tblNhanVien.getTableHeader().setOpaque(false);
     }
 
-    private void fillToTable() {
+    public void fillToTable() {
         model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
         List<NhanVien> listNV = nvDAO.selectAll();

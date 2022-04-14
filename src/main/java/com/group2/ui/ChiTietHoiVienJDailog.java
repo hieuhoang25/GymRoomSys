@@ -35,6 +35,7 @@ public class ChiTietHoiVienJDailog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         fillHoiVien("" + ID);
         initTabs("" + ID);
+        imgHinh.setEnabled(false);
     }
 
 //    ChiTietHoiVienJDailog(Object valueAt) {
