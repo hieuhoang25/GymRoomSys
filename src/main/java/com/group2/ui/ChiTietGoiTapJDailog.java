@@ -61,7 +61,6 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
         m.setRowCount(0);
         m.setRowCount(0);
         for (GoiTap gt : dao.selectAll()) {
-
             Object[] ob = {gt.getMaGT(), gt.getTenGoiTap(), gt.getGia(), gt.getThoiLuong()};
             m.addRow(ob);
 
@@ -109,7 +108,6 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
         jLabel2.setBackground(new java.awt.Color(0, 102, 204));
         jLabel2.setOpaque(true);
 
-        txtMaGT.setText("gym");
         txtMaGT.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtMaGT.setLabelText("Mã gói tập");
 
@@ -220,17 +218,17 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         if (check) {
-            GoiTap gt = new GoiTap();
-            gt.setGia(Float.valueOf(txtGia.getText()));
-            gt.setMaGT(txtMaGT.getText());
-            gt.setMaLoai(StringUtils.lowerCase(cboLoaiGT.getSelectedItem().toString()));
-            gt.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
-            gt.setTenGoiTap(txtTenGT.getText());
-            for(GoiTap g : list){
-                if(txtMaGT.getText().toLowerCase().equalsIgnoreCase(g.getMaGT())){
-                     MsgBox.alert(this, "Lỗi", "Mã gói tập đã tồn tại", Alert.AlertType.ERROR);
-                     txtMaGT.requestFocus();
-                     return;
+//            GoiTap gt = new GoiTap();
+//            gt.setGia(Float.valueOf(txtGia.getText()));
+//            gt.setMaGT(txtMaGT.getText());
+//            gt.setMaLoai(StringUtils.lowerCase(cboLoaiGT.getSelectedItem().toString()));
+//            gt.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
+//            gt.setTenGoiTap(txtTenGT.getText());
+            for (GoiTap g : list) {
+                if (txtMaGT.getText().toLowerCase().equalsIgnoreCase(g.getMaGT())) {
+                    MsgBox.alert(this, "Lỗi", "Mã gói tập đã tồn tại", Alert.AlertType.ERROR);
+                    txtMaGT.requestFocus();
+                    return;
                 }
             }
             //check ma
@@ -264,7 +262,7 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
             gt.setMaLoai(StringUtils.lowerCase(cboLoaiGT.getSelectedItem().toString()));
             gt.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
             gt.setTenGoiTap(txtTenGT.getText());
-           
+
             dao.insert(gt);
             fillTable(model1);
             MsgBox.alert(ChiTietGoiTapJDailog.this, "Thông báo", "Thêm thành công", Alert.AlertType.SUCCESS);
@@ -272,11 +270,11 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
             new QLGoiTapUI().setVisible(true);
 
         } else {
-             for(GoiTap g : list){
-                if(txtMaGT.getText().toLowerCase().equalsIgnoreCase(g.getMaGT())){
-                     MsgBox.alert(this, "Lỗi", "Mã gói tập đã tồn tại", Alert.AlertType.ERROR);
-                     txtMaGT.requestFocus();
-                     return;
+            for (GoiTap g : list) {
+                if (txtMaGT.getText().toLowerCase().equalsIgnoreCase(g.getMaGT())) {
+                    MsgBox.alert(this, "Lỗi", "Mã gói tập đã tồn tại", Alert.AlertType.ERROR);
+                    txtMaGT.requestFocus();
+                    return;
                 }
             }
             GoiTap gt = new GoiTap();
@@ -295,11 +293,11 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void cboLoaiGTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLoaiGTActionPerformed
-        if(cboLoaiGT.getSelectedItem().toString().equalsIgnoreCase("gym")){
+        if (cboLoaiGT.getSelectedItem().toString().equalsIgnoreCase("gym")) {
             txtMaGT.setText("gym");
-        }else if(cboLoaiGT.getSelectedItem().toString().equalsIgnoreCase("yoga")){
+        } else if (cboLoaiGT.getSelectedItem().toString().equalsIgnoreCase("yoga")) {
             txtMaGT.setText("yoga");
-        }else{
+        } else {
             txtMaGT.setText("boxing");
         }
     }//GEN-LAST:event_cboLoaiGTActionPerformed
