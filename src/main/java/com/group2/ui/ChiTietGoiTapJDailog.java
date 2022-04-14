@@ -215,14 +215,8 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         if (check) {
-            GoiTap gt = new GoiTap();
-            gt.setGia(Float.valueOf(txtGia.getText()));
-            gt.setMaGT(txtMaGT.getText());
-            gt.setMaLoai(StringUtils.lowerCase(cboLoaiGT.getSelectedItem().toString()));
-            gt.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
-            gt.setTenGoiTap(txtTenGT.getText());
-            //check ma
-            if (Validation.checkLength(txtMaGT.getText()) == false) {
+             //check ma
+            if (Validation.checkLength(txtMaGT.getText()) == false || txtMaGT.getText().isEmpty()) {
                 MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại mã gói tập", Alert.AlertType.ERROR);
                 txtMaGT.requestFocus();
                 return;
@@ -245,6 +239,14 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
                 txtThoiLuong.requestFocus();
                 return;
             }
+            //
+            GoiTap gt = new GoiTap();
+            gt.setGia(Float.valueOf(txtGia.getText()));
+            gt.setMaGT(txtMaGT.getText());
+            gt.setMaLoai(StringUtils.lowerCase(cboLoaiGT.getSelectedItem().toString()));
+            gt.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
+            gt.setTenGoiTap(txtTenGT.getText());
+           
             dao.insert(gt);
             fillTable(model1);
             MsgBox.alert(ChiTietGoiTapJDailog.this, "Thông báo", "Thêm thành công", Alert.AlertType.SUCCESS);

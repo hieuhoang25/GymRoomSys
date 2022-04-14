@@ -149,7 +149,7 @@ public class SanPhamUI extends javax.swing.JPanel {
         main.setLayout(mainLayout);
         mainLayout.setHorizontalGroup(
             mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 827, Short.MAX_VALUE)
+            .addGap(0, 859, Short.MAX_VALUE)
         );
         mainLayout.setVerticalGroup(
             mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,7 +184,7 @@ public class SanPhamUI extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(150, 150, 150));
         jLabel6.setText("Danh mục");
 
-        cboLoaiSP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất cả", "Sữa tăng cân", "Sữa tăng cơ", "Bao tay", "Giày thể thao", "Quần Thể Thao", "Áo thể thao" }));
+        cboLoaiSP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất cả", "Sữa tăng cân", "Sữa tăng cơ", "Phụ kiện thân trên", "Thời trang fitness", "Thực phẩm và tạp hóa thể thao", "Phụ kiện thân dưới", "Vitamin và khoáng chất", "Tăng sức mạnh", "BCAA và Amino Acids" }));
         cboLoaiSP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cboLoaiSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,7 +244,7 @@ public class SanPhamUI extends javax.swing.JPanel {
                             .addGroup(gradientBackGround1Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(cboLoaiSP, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
+                            .addComponent(cboLoaiSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)

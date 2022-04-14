@@ -39,7 +39,7 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
         if (kt == true) {
             titile.setText("Sửa thông tin sản phẩm");
 
-            cboLoaiSP.setSelectedItem(GJDBC.value("select TenLoai from LoaiSanPham where MaLoaiSP = ?", sp.getMaLoai())+"");
+            cboLoaiSP.setSelectedItem(GJDBC.value("select TenLoai from LoaiSanPham where MaLoaiSP = ?", sp.getMaLoai()) + "");
             txtTen.setText(sp.getTenSP().trim());
             txtDonGia.setText(sp.getDonGia() + "");
             txtSoLuong.setText(sp.getSoLuong() + "");
@@ -51,7 +51,7 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
                 imageView1.setImage(GImage.read("sanphamIMG/", sp.getHinh()));
                 imageView1.setToolTipText(sp.getHinh());
             } else {
-                imageView1.setImage(GImage.read("khachhangIMG", "macdinh.png"));
+                imageView1.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
                 imageView1.setToolTipText("macdinh.png");
             }
             main.remove(btnLuu);
@@ -193,7 +193,7 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
         txtMa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtMa.setLabelText("Mã sản phẩm");
 
-        cboLoaiSP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sữa tăng cân", "Sữa tăng cơ", "Bao tay", "Giày thể thao", "Quần Thể Thao", "Áo thể thao" }));
+        cboLoaiSP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sữa tăng cân", "Sữa tăng cơ", "Phụ kiện thân trên", "Thời trang fitness", "Thực phẩm và tạp hóa thể thao", "Phụ kiện thân dưới", "Vitamin và khoáng chất", "Tăng sức mạnh", "BCAA và Amino Acids" }));
         cboLoaiSP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cboLoaiSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -358,13 +358,13 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
         sp.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
         sp.setNhaSanXuat(txtNhaSanXuat.getText());
         sp.setGhiChu(txtGhiChu.getText());
-        sp.setMaLoai(String.valueOf(GJDBC.value("select MaLoaiSP from LoaiSanPham where TenLoai = ? ",String.valueOf(cboLoaiSP.getSelectedItem()))));
+        sp.setMaLoai(String.valueOf(GJDBC.value("select MaLoaiSP from LoaiSanPham where TenLoai = ? ", String.valueOf(cboLoaiSP.getSelectedItem()))));
         sp.setHinh(imageView1.getToolTipText());
         return sp;
     }
 
     public void suaSanPham() {
-        SanPham sp = getForm();
+
         try {
             //check mã
             if (Validation.checkLength(txtMa.getText()) == false) {
@@ -372,6 +372,7 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
                 txtMa.requestFocus();
                 return;
             }
+
             //check tên
             if (Validation.checkLength(txtTen.getText()) == false) {
                 MsgBox.alert(this, "Thông báo", "Vui lòng nhập lại tên sản phẩm!", Alert.AlertType.ERROR);
@@ -396,6 +397,7 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
                 txtNhaSanXuat.requestFocus();
                 return;
             }
+            SanPham sp = getForm();
             spDAO.update(sp);
             MsgBox.alert(this, "Thông báo", "Cập nhật sản phẩm thành công!", Alert.AlertType.SUCCESS);
 
@@ -406,12 +408,17 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
     }
 
     public void themSanPham() {
-        SanPham sp = getForm();
+
         List<SanPham> list = spDAO.selectAll();
         try {
             // check ma
+            if (Validation.checkLength(txtMa.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Vui lòng nhập lại mã sản phẩm!", Alert.AlertType.ERROR);
+                txtMa.requestFocus();
+                return;
+            }
             for (SanPham sanpham : list) {
-                if (sp.getMaSP().equals(sanpham.getMaSP())) {
+                if (txtMa.getText().equals(sanpham.getMaSP())) {
                     MsgBox.alert(this, "Lỗi", "Mã sp đã tồn tại", Alert.AlertType.ERROR);
                     txtMa.requestFocus();
                     return;
@@ -441,7 +448,7 @@ public class ChiTietSanPhamJDailog extends javax.swing.JDialog {
                 txtNhaSanXuat.requestFocus();
                 return;
             }
-
+            SanPham sp = getForm();
             spDAO.insert(sp);
             MsgBox.alert(this, "Thông báo", "Thêm sản phẩm thành công!", Alert.AlertType.SUCCESS);
         } catch (Exception e) {

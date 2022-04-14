@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class SanPhamDAO extends GymSysDAO<SanPham, String> {
 
-    final String INSERT_SQL = "INSERT INTO SanPham (MaSP, TenSP, DonGia, SoLuong, NhaSanXuat, Hinh, GhiChu)  VALUES  (?, ?, ?, ?, ?, ?, ?)";
+    final String INSERT_SQL = "INSERT INTO SanPham (MaSP, TenSP, DonGia, SoLuong, NhaSanXuat, Maloai, Hinh, GhiChu)  VALUES  (?, ?, ?, ?, ?, ?, ?, ?)";
     final String UPDATE_SQL = "UPDATE  SanPham  SET TenSP =?,  DonGia=?,  SoLuong=? , NhaSanXuat=?, MaLoai =?, Hinh=?, GhiChu=? WHERE  MaSP=?";
     final String DELETE_SQL = "DELETE FROM SanPham WHERE MaSP=?";
     final String SELECT_ALL_SQL = "SELECT * FROM SanPham";
@@ -27,7 +27,7 @@ public class SanPhamDAO extends GymSysDAO<SanPham, String> {
     @Override
     public void insert(SanPham entity) {
         GJDBC.update(INSERT_SQL, entity.getMaSP(), entity.getTenSP(), entity.getDonGia(), entity.getSoLuong(),
-                entity.getNhaSanXuat(), entity.getHinh(), entity.getGhiChu());
+                entity.getNhaSanXuat(), entity.getMaLoai(),entity.getHinh(), entity.getGhiChu());
     }
 
     @Override
