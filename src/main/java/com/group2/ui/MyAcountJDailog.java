@@ -59,7 +59,6 @@ public class MyAcountJDailog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         imgHinh = new com.group2.swing.ImageView();
         txtMa = new com.group2.swing.TextField();
-        txtMatKhau = new com.group2.swing.TextField();
         txtHoTen = new com.group2.swing.TextField();
         rdoQL = new com.group2.swing.RadioButtonCustom();
         rdoNV = new com.group2.swing.RadioButtonCustom();
@@ -68,6 +67,7 @@ public class MyAcountJDailog extends javax.swing.JDialog {
         txtNgaySinh = new com.group2.swing.TextField();
         textAreaScroll1 = new com.group2.swing.TextAreaScroll();
         txtDiaChi = new com.group2.swing.TextArea();
+        txtMatKhau = new com.group2.swing.PasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
@@ -116,13 +116,9 @@ public class MyAcountJDailog extends javax.swing.JDialog {
         );
 
         txtMa.setEditable(false);
+        txtMa.setBackground(new java.awt.Color(255, 255, 255));
         txtMa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtMa.setLabelText("Mã nhân viên");
-
-        txtMatKhau.setEditable(false);
-        txtMatKhau.setBackground(new java.awt.Color(255, 255, 255));
-        txtMatKhau.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtMatKhau.setLabelText("Mật khẩu");
 
         txtHoTen.setEditable(false);
         txtHoTen.setBackground(new java.awt.Color(255, 255, 255));
@@ -160,6 +156,12 @@ public class MyAcountJDailog extends javax.swing.JDialog {
         txtDiaChi.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         textAreaScroll1.setViewportView(txtDiaChi);
 
+        txtMatKhau.setEditable(false);
+        txtMatKhau.setBackground(new java.awt.Color(255, 255, 255));
+        txtMatKhau.setEchoChar('\u2022');
+        txtMatKhau.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtMatKhau.setLabelText("Mật khẩu");
+
         javax.swing.GroupLayout mainLayout = new javax.swing.GroupLayout(main);
         main.setLayout(mainLayout);
         mainLayout.setHorizontalGroup(
@@ -175,15 +177,13 @@ public class MyAcountJDailog extends javax.swing.JDialog {
                             .addGroup(mainLayout.createSequentialGroup()
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32)
-                                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(mainLayout.createSequentialGroup()
                                         .addGap(3, 3, 3)
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtNgaySinh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-                                        .addComponent(txtHoTen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtMatKhau, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtMa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtMa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(mainLayout.createSequentialGroup()
                                         .addGap(2, 2, 2)
                                         .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +193,8 @@ public class MyAcountJDailog extends javax.swing.JDialog {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(rdoNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(rdoPT, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                .addComponent(rdoPT, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(titile)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 12, Short.MAX_VALUE)))
@@ -213,7 +214,7 @@ public class MyAcountJDailog extends javax.swing.JDialog {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(mainLayout.createSequentialGroup()
                         .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(7, 7, 7)
                         .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,7 +228,7 @@ public class MyAcountJDailog extends javax.swing.JDialog {
                     .addComponent(rdoNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdoPT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textAreaScroll1, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                .addComponent(textAreaScroll1, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
                 .addGap(54, 54, 54))
         );
 
@@ -275,7 +276,7 @@ public class MyAcountJDailog extends javax.swing.JDialog {
     private com.group2.swing.TextArea txtDiaChi;
     private com.group2.swing.TextField txtHoTen;
     private com.group2.swing.TextField txtMa;
-    private com.group2.swing.TextField txtMatKhau;
+    private com.group2.swing.PasswordField txtMatKhau;
     private com.group2.swing.TextField txtNgaySinh;
     // End of variables declaration//GEN-END:variables
 }

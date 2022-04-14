@@ -160,7 +160,7 @@
                       <Font name="Tahoma" size="14" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Th&#xf4;ng k&#xea; l&#x1b0;&#x1ee3;ng &#x111;&#x103;ng k&#xed; c&#x1ee7;a h&#x1ed9;i vi&#xea;n theo lo&#x1ea1;i g&#xf3;i t&#x1ead;p"/>
+                    <Property name="text" type="java.lang.String" value="Th&#xf4;ng k&#xea; l&#x1b0;&#x1ee3;ng &#x111;&#x103;ng k&#xfd; c&#x1ee7;a h&#x1ed9;i vi&#xea;n theo lo&#x1ea1;i g&#xf3;i t&#x1ead;p"/>
                   </Properties>
                 </Component>
               </SubComponents>

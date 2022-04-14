@@ -102,7 +102,7 @@ public class ThongKeUI extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Thông kê lượng đăng kí của hội viên theo loại gói tập");
+        jLabel3.setText("Thông kê lượng đăng ký của hội viên theo loại gói tập");
 
         javax.swing.GroupLayout gradientBackGround1Layout = new javax.swing.GroupLayout(gradientBackGround1);
         gradientBackGround1.setLayout(gradientBackGround1Layout);
