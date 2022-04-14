@@ -16,7 +16,8 @@ import com.group2.utils.Auth;
 import com.group2.utils.GDate;
 import java.awt.Color;
 import java.util.List;
-
+import javax.swing.JFrame;
+import net.miginfocom.swing.MigLayout;
 
 /**
  *
@@ -34,7 +35,7 @@ public class GymSysJFrame extends javax.swing.JFrame {
     Integer ID;
     HomeUI h = new HomeUI();
     Auth auth = new Auth();
-    public static String trangThai,maKH;
+    public static String trangThai, maKH;
 
     /**
      * Creates new form GymSysJFrame
@@ -73,7 +74,7 @@ public class GymSysJFrame extends javax.swing.JFrame {
                         main.removeAll();
                         HomeUI hui = new HomeUI();
                         main.add(hui);
-                        status1.setListModelCheckIn(hui.getDlmList1(),hui.getCard4());
+                        status1.setListModelCheckIn(hui.getDlmList1(), hui.getCard4());
 
                         main.revalidate();
                     } else {
@@ -119,7 +120,7 @@ public class GymSysJFrame extends javax.swing.JFrame {
                         main.removeAll();
                         HomeUI hui = new HomeUI();
                         main.add(hui);
-                        status1.setListModelCheckIn(hui.getDlmList1(),hui.getCard4());
+                        status1.setListModelCheckIn(hui.getDlmList1(), hui.getCard4());
 
                         main.revalidate();
                     } else {
@@ -151,6 +152,13 @@ public class GymSysJFrame extends javax.swing.JFrame {
                                             SanPhamUI ui = new SanPhamUI();
                                             menu2.setPanel(ui.getMain());
                                             main.add(ui);
+                                            if (GymSysJFrame.this.getExtendedState() == JFrame.MAXIMIZED_BOTH) {
+
+                                                ui.getMain().setLayout(new MigLayout("wrap 5, insets 5"));
+
+                                            } else {
+                                                ui.getMain().setLayout(new MigLayout("wrap 4, insets 20"));
+                                            }
                                             main.revalidate();
 
                                         }

@@ -157,8 +157,7 @@ public class ThongKeDAO {
     }
 
     public Integer thongKeGoiTap(String loaiGT) {
-        String sql = "select COUNT(ct.MaGT) as 'SL' from CTGoiTap ct join GoiTap gt\n"
-                + "on ct.MaGT = gt.MaGT where ct.MaGT LIKE ? group by ct.MaGT";
+        String sql = "select COUNT(ct.MaGT) as 'SL' from CTGoiTap ct join GoiTap gt on ct.MaGT = gt.MaGT where gt.MaLoai like ? group by gt.MaLoai";
         Integer n = 0;
         try {
             ResultSet rs = GJDBC.query(sql, "%" + loaiGT + "%");

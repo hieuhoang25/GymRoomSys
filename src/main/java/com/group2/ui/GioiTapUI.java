@@ -30,7 +30,7 @@ public class GioiTapUI extends javax.swing.JPanel {
     public GioiTapUI() {
         initComponents();
         desginUI();
-        main.setLayout(new MigLayout("wrap 4, insets 30"));
+        main.setLayout(new MigLayout("wrap 4, insets 15"));
 //        addItemGoiTap(new EpisodePackModel());
 //        addItemGoiTap(new EpisodePackModel());
 //        addItemGoiTap(new EpisodePackModel());

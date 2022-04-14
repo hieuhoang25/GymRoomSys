@@ -10,6 +10,7 @@ import com.group2.swing.ModelChart;
 import com.group2.swing.ModelPolarAreaChart;
 import com.group2.swing.ScrollBarCustom;
 import java.awt.Color;
+import java.util.Calendar;
 import javax.swing.DefaultComboBoxModel;
 
 /**
@@ -41,11 +42,14 @@ public class ThongKeUI extends javax.swing.JPanel {
 
         chart.addLegend("Gói tập", new Color(240, 80, 83));
         chart.addLegend("Sản phẩm", new Color(0, 78, 146));
-
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        comboBoxSuggestion2.setSelectedItem(year);
         int nam = (int) comboBoxSuggestion2.getSelectedItem();
 
         chart.getModel().clear();
         chart.getBlankPlotChart().setMaxValues(0);
+
         for (int i = 1; i <= 12; i++) {
             chart.addData(new ModelChart("Tháng " + i, new double[]{thongKeDAO.thongKeGoiTapTheoThang(i, nam), thongKeDAO.thongKeSanPhamTheoThang(i, nam),}));
         }
