@@ -505,7 +505,7 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
 //         TODO add your handling code here:
-       
+
         if (GioHangSP.listSP.size() == 0) {
             MsgBox.alert(null, "Giỏ hàng trống", "Vui lòng chọn sản phẩm hoặc quét mã!", Alert.AlertType.ERROR);
         } else {
@@ -534,32 +534,30 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
                 return;
             }
             // chek địa chỉ
-             if (Validation.checkLength(txtDiaChi.getText()) == false) {
+            if (Validation.checkLength(txtDiaChi.getText()) == false) {
                 txtDiaChi.requestFocus();
                 MsgBox.alert(this, "Lỗi", "Vui lòng nhập địa chỉ", Alert.AlertType.ERROR);
                 return;
             }
-             
+
             if (MsgBox.confirm(null, "Khách hàng có muốn xuất hóa đơn không?")) {
                 hdctdao.themKHVaHD(txtSDT.getText(), Auth.user.getMaNV(), txtGhiChu.getText(), txtHoVaTen.getText(), txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, null, txtEmail.getText());
                 for (SanPhamMua sanPhamMua : GioHangSP.listSP) {
                     hdctdao.themSPVaoHD(sanPhamMua.getMaSP(),
                             sanPhamMua.getSoLuong(), sanPhamMua.getThanhTien());
                 }
-
-                dispose();
                 BillSP billSP = new BillSP();
                 billSP.printBill(txtSDT.getText(), Auth.user.getMaNV());
-//                BuildBillSP.createBillSP("HDSP"+txtSDT.getText()+"-"+ GDate.toString(new Date(), "hh-mm-ss-dd-MM-yyyy"), txtSDT.getText(), txtHoVaTen.getText(), txtDiaChi.getText(),txtGhiChu.getText() ,(rdoTienMat.isSelected() ? rdoTienMat.getText():rdoThe.getText()));
                 GioHangSP.listSP.clear();
                 gioHangPanel.setSLSanPham();
+                dispose();
+
             } else {
                 hdctdao.themKHVaHD(txtSDT.getText(), Auth.user.getMaNV(), txtGhiChu.getText(), txtHoVaTen.getText(), txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, null, txtEmail.getText());
                 for (SanPhamMua sanPhamMua : GioHangSP.listSP) {
                     hdctdao.themSPVaoHD(sanPhamMua.getMaSP(),
                             sanPhamMua.getSoLuong(), sanPhamMua.getThanhTien());
                 }
-                MsgBox.alert(this, "Thông báo", "Mua sản phẩm thành công", Alert.AlertType.SUCCESS);
                 GioHangSP.listSP.clear();
                 gioHangPanel.setSLSanPham();
                 this.dispose();
@@ -589,17 +587,17 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
     KhachHangDAO daoKH = new KhachHangDAO();
     SanPhamDAO dao = new SanPhamDAO();
     List<SanPham> list = dao.selectAll();
-    
+
     private void thanhToan() {
         String keyword = txtSDT.getText();
         List<KhachHang> kh = daoKH.selectNotInCourse(keyword);
         if (kh.size() > 0) {
-           txtGhiChu.setText("");
+            txtGhiChu.setText("");
             txtHoVaTen.setText(kh.get(0).getHoTen());
             txtNgaySinh.setText(kh.get(0).getNgaySinh().toString());
             txtEmail.setText(kh.get(0).getEmail());
             txtDiaChi.setText(kh.get(0).getDiaChi());
-            
+
             if (kh.get(0).isGioiTinh() == true) {
                 rdoNam.setSelected(true);
             } else {

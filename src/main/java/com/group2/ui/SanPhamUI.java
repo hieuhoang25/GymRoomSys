@@ -397,6 +397,7 @@ public class SanPhamUI extends javax.swing.JPanel {
             MsgBox.alert(null, "Giỏ hàng trống", "Vui lòng chọn sản phẩm hoặc quét mã!", Alert.AlertType.ERROR);
         } else {
             new HoaDonSanPhamJDailog(gioHangPanel1).setVisible(true);
+            fillProcduct(cboLoaiSP.getSelectedItem().toString());
 
         }
 

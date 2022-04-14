@@ -43,8 +43,9 @@ public class ThongKeUI extends javax.swing.JPanel {
         chart.addLegend("Sản phẩm", new Color(0, 78, 146));
 
         int nam = (int) comboBoxSuggestion2.getSelectedItem();
-                chart.getModel().clear();
 
+        chart.getModel().clear();
+        chart.getBlankPlotChart().setMaxValues(0);
         for (int i = 1; i <= 12; i++) {
             chart.addData(new ModelChart("Tháng " + i, new double[]{thongKeDAO.thongKeGoiTapTheoThang(i, nam), thongKeDAO.thongKeSanPhamTheoThang(i, nam),}));
         }
@@ -219,6 +220,8 @@ public class ThongKeUI extends javax.swing.JPanel {
 
         int nam = (int) comboBoxSuggestion2.getSelectedItem();
         chart.getModel().clear();
+        chart.getBlankPlotChart().setMaxValues(0);
+
         for (int i = 1; i <= 12; i++) {
             chart.addData(new ModelChart("Tháng " + i, new double[]{thongKeDAO.thongKeGoiTapTheoThang(i, nam), thongKeDAO.thongKeSanPhamTheoThang(i, nam),}));
         }

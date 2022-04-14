@@ -77,6 +77,10 @@ public class Chart extends javax.swing.JPanel {
         }
     }
 
+    public BlankPlotChart getBlankPlotChart() {
+        return blankPlotChart;
+    }
+
     public void clear() {
         animate = 0;
         blankPlotChart.setLabelCount(0);
