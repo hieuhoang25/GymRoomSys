@@ -177,6 +177,8 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
                 .addGap(0, 0, 0))
         );
 
+        txtMa.setEditable(false);
+        txtMa.setBackground(new java.awt.Color(255, 255, 255));
         txtMa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtMa.setLabelText("Số điện thoại");
 

@@ -89,6 +89,8 @@ public class ChiTietHoiVienJDailog extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        txtHoTen.setEditable(false);
+        txtHoTen.setBackground(new java.awt.Color(255, 255, 255));
         txtHoTen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtHoTen.setLabelText("Họ và tên");
         txtHoTen.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +99,8 @@ public class ChiTietHoiVienJDailog extends javax.swing.JDialog {
             }
         });
 
+        txtSDT.setEditable(false);
+        txtSDT.setBackground(new java.awt.Color(255, 255, 255));
         txtSDT.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtSDT.setLabelText("Số điện thoại");
         txtSDT.addActionListener(new java.awt.event.ActionListener() {
@@ -124,17 +128,23 @@ public class ChiTietHoiVienJDailog extends javax.swing.JDialog {
                 .addComponent(imgHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        buttonGroup1.add(rdoNam);
         rdoNam.setSelected(true);
         rdoNam.setText("Nam");
+        rdoNam.setEnabled(false);
         rdoNam.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
+        buttonGroup1.add(rdoNu);
         rdoNu.setText("Nữ");
+        rdoNu.setEnabled(false);
         rdoNu.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setText("Giới tính");
 
+        txtMaNV.setEditable(false);
+        txtMaNV.setBackground(new java.awt.Color(255, 255, 255));
         txtMaNV.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtMaNV.setLabelText("Mã nhân viên tạo");
 
@@ -142,6 +152,7 @@ public class ChiTietHoiVienJDailog extends javax.swing.JDialog {
         textAreaScroll1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         textAreaScroll1.setLabelText("Địa chỉ");
 
+        txtDiaChi.setEditable(false);
         txtDiaChi.setColumns(20);
         txtDiaChi.setRows(5);
         txtDiaChi.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N

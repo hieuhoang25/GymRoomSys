@@ -32,13 +32,15 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
     public ChiTietGoiTapJDailog(boolean c, GoiTap gt, DefaultTableModel model) {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
+          txtMaGT.setEditable(c);
+          txtMaGT.setBackground(Color.white);
+        cboLoaiGT.setEnabled(c);
         setLocationRelativeTo(null);
         check = c;
         txtGia.setText(String.valueOf(gt.getGia()));
-        txtMaGT.setText(gt.getMaGT().trim());
+        txtMaGT.setText(gt.getMaGT());
         txtTenGT.setText(gt.getTenGoiTap());
         txtThoiLuong.setText(String.valueOf(gt.getThoiLuong()));
-        System.out.println((gt.getMaLoai().substring(0, 1).toUpperCase() + gt.getMaLoai().substring(1, gt.getMaLoai().length())));
         cboLoaiGT.setSelectedItem((gt.getMaLoai().substring(0, 1).toUpperCase() + gt.getMaLoai().substring(1, gt.getMaLoai().length())).trim());
         model1 = model;
     }
@@ -55,10 +57,12 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         check = b;
         model1 = model;
+        txtMaGT.setEditable(b);
+       
+        cboLoaiGT.setEnabled(b);
     }
 
     public void fillTable(DefaultTableModel m) {
-        m.setRowCount(0);
         m.setRowCount(0);
         for (GoiTap gt : dao.selectAll()) {
             Object[] ob = {gt.getMaGT(), gt.getTenGoiTap(), gt.getGia(), gt.getThoiLuong()};
@@ -136,12 +140,8 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
         jLabel3.setText("Loại gói");
 
         cboLoaiGT.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gym", "Boxing", "Yoga" }));
+        cboLoaiGT.setFocusCycleRoot(true);
         cboLoaiGT.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        cboLoaiGT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboLoaiGTActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout gradientBackGround1Layout = new javax.swing.GroupLayout(gradientBackGround1);
         gradientBackGround1.setLayout(gradientBackGround1Layout);
@@ -219,12 +219,6 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         if (check) {
-//            GoiTap gt = new GoiTap();
-//            gt.setGia(Float.valueOf(txtGia.getText()));
-//            gt.setMaGT(txtMaGT.getText());
-//            gt.setMaLoai(StringUtils.lowerCase(cboLoaiGT.getSelectedItem().toString()));
-//            gt.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
-//            gt.setTenGoiTap(txtTenGT.getText());
             for (GoiTap g : list) {
                 if (txtMaGT.getText().toLowerCase().equalsIgnoreCase(g.getMaGT())) {
                     MsgBox.alert(this, "Lỗi", "Mã gói tập đã tồn tại", Alert.AlertType.ERROR);
@@ -298,16 +292,6 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btnLuuActionPerformed
-
-    private void cboLoaiGTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLoaiGTActionPerformed
-        if (cboLoaiGT.getSelectedItem().toString().equalsIgnoreCase("gym")) {
-            txtMaGT.setText("gym");
-        } else if (cboLoaiGT.getSelectedItem().toString().equalsIgnoreCase("yoga")) {
-            txtMaGT.setText("yoga");
-        } else {
-            txtMaGT.setText("boxing");
-        }
-    }//GEN-LAST:event_cboLoaiGTActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

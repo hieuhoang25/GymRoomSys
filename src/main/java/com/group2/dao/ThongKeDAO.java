@@ -180,7 +180,7 @@ public class ThongKeDAO {
     }
 
     public List<Integer> getYears() {
-        String sql = "select DISTINCT year(ThoiGianMua) from HoaDon";
+        String sql = "select DISTINCT year(ThoiGianMua) from HoaDon order by year(ThoiGianMua) desc";
         List<Integer> list = new ArrayList<>();
         ResultSet rs = GJDBC.query(sql);
         try {
