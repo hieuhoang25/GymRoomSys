@@ -32,8 +32,8 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
     public ChiTietGoiTapJDailog(boolean c, GoiTap gt, DefaultTableModel model) {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
-          txtMaGT.setEditable(c);
-          txtMaGT.setBackground(Color.white);
+        txtMaGT.setEditable(c);
+        txtMaGT.setBackground(Color.white);
         cboLoaiGT.setEnabled(c);
         setLocationRelativeTo(null);
         check = c;
@@ -43,6 +43,40 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
         txtThoiLuong.setText(String.valueOf(gt.getThoiLuong()));
         cboLoaiGT.setSelectedItem((gt.getMaLoai().substring(0, 1).toUpperCase() + gt.getMaLoai().substring(1, gt.getMaLoai().length())).trim());
         model1 = model;
+    }
+
+    public boolean checkError() {
+        //check ma
+        if (Validation.checkLength(txtMaGT.getText()) == false) {
+            MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại mã gói tập", Alert.AlertType.ERROR);
+            txtMaGT.requestFocus();
+            return false;
+        }
+        if (new Validation().checkMa(txtMaGT.getText()) == false) {
+            MsgBox.alert(this, "Thông báo", "Mã gói tập không hợp lệ - vd: gymFM", Alert.AlertType.ERROR);
+            txtMaGT.requestFocus();
+            return false;
+        }
+        //check tên
+        if (Validation.checkLength(txtTenGT.getText()) == false) {
+            MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại tên gói tập", Alert.AlertType.ERROR);
+            txtTenGT.requestFocus();
+            return false;
+        }
+        //check giá
+        if (Validation.checkDouble(txtGia.getText()) == false || txtMaGT.equals("")) {
+            MsgBox.alert(this, "Thông báo", "Vui lòng kiểm tra lại giá", Alert.AlertType.ERROR);
+            txtGia.requestFocus();
+            return false;
+        }
+        //check thời lượng
+        if (Validation.checkInt(txtThoiLuong.getText()) == false || txtThoiLuong.equals("")) {
+            MsgBox.alert(this, "Thông báo", "Vui lòng kiểm tra lại thời lượng", Alert.AlertType.ERROR);
+            txtThoiLuong.requestFocus();
+            return false;
+        }
+        return true;
+
     }
 
     ChiTietGoiTapJDailog() {
@@ -58,7 +92,7 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
         check = b;
         model1 = model;
         txtMaGT.setEditable(b);
-       
+
         cboLoaiGT.setEnabled(b);
     }
 
@@ -226,69 +260,40 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
                     return;
                 }
             }
-            //check ma
-            if (Validation.checkLength(txtMaGT.getText()) == false) {
-                MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại mã gói tập", Alert.AlertType.ERROR);
-                txtMaGT.requestFocus();
-                return;
-            }
-             if(new Validation().checkMa(txtMaGT.getText()) == false){
-                  MsgBox.alert(this, "Thông báo", "Mã gói tập không hợp lệ - vd: gymFM", Alert.AlertType.ERROR);
-                txtMaGT.requestFocus();
-                return;
-            }
-            //check tên
-            if (Validation.checkLength(txtTenGT.getText()) == false) {
-                MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại tên gói tập", Alert.AlertType.ERROR);
-                txtTenGT.requestFocus();
-                return;
-            }
-            //check giá
-            if (Validation.checkDouble(txtGia.getText()) == false || txtMaGT.equals("")) {
-                MsgBox.alert(this, "Thông báo", "Vui lòng kiểm tra lại giá", Alert.AlertType.ERROR);
-                txtGia.requestFocus();
-                return;
-            }
-            //check thời lượng
-            if (Validation.checkInt(txtThoiLuong.getText()) == false || txtThoiLuong.equals("")) {
-                MsgBox.alert(this, "Thông báo", "Vui lòng kiểm tra lại thời lượng", Alert.AlertType.ERROR);
-                txtThoiLuong.requestFocus();
-                return;
-            }
-            
-            //
-            GoiTap gt = new GoiTap();
-            gt.setGia(Float.valueOf(txtGia.getText()));
-            gt.setMaGT(txtMaGT.getText());
-            gt.setMaLoai(StringUtils.lowerCase(cboLoaiGT.getSelectedItem().toString()));
-            gt.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
-            gt.setTenGoiTap(txtTenGT.getText());
+            if (checkError()) {
 
-            dao.insert(gt);
-            fillTable(model1);
-            MsgBox.alert(ChiTietGoiTapJDailog.this, "Thông báo", "Thêm thành công", Alert.AlertType.SUCCESS);
-            this.dispose();
-            new QLGoiTapUI().setVisible(true);
+                //
+                GoiTap gt = new GoiTap();
+                gt.setGia(Float.valueOf(txtGia.getText()));
+                gt.setMaGT(txtMaGT.getText());
+                gt.setMaLoai(StringUtils.lowerCase(cboLoaiGT.getSelectedItem().toString()));
+                gt.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
+                gt.setTenGoiTap(txtTenGT.getText());
+
+                dao.insert(gt);
+                fillTable(model1);
+                MsgBox.alert(ChiTietGoiTapJDailog.this, "Thông báo", "Thêm thành công", Alert.AlertType.SUCCESS);
+                this.dispose();
+                new QLGoiTapUI().setVisible(true);
+
+            }
 
         } else {
-            for (GoiTap g : list) {
-                if (txtMaGT.getText().toLowerCase().equalsIgnoreCase(g.getMaGT())) {
-                    MsgBox.alert(this, "Lỗi", "Mã gói tập đã tồn tại", Alert.AlertType.ERROR);
-                    txtMaGT.requestFocus();
-                    return;
-                }
+
+            if (checkError()) {
+
+                GoiTap gt = new GoiTap();
+                gt.setGia(Float.valueOf(txtGia.getText()));
+                gt.setMaGT(txtMaGT.getText());
+                gt.setMaLoai(StringUtils.lowerCase(cboLoaiGT.getSelectedItem().toString()));
+                gt.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
+                gt.setTenGoiTap(txtTenGT.getText());
+                dao.update(gt);
+                fillTable(model1);
+                MsgBox.alert(ChiTietGoiTapJDailog.this, "Thông báo", "Thêm thành công", Alert.AlertType.SUCCESS);
+                this.dispose();
+                new QLGoiTapUI().setVisible(true);
             }
-            GoiTap gt = new GoiTap();
-            gt.setGia(Float.valueOf(txtGia.getText()));
-            gt.setMaGT(txtMaGT.getText());
-            gt.setMaLoai(StringUtils.lowerCase(cboLoaiGT.getSelectedItem().toString()));
-            gt.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
-            gt.setTenGoiTap(txtTenGT.getText());
-            dao.update(gt);
-            fillTable(model1);
-            MsgBox.alert(ChiTietGoiTapJDailog.this, "Thông báo", "Thêm thành công", Alert.AlertType.SUCCESS);
-            this.dispose();
-            new QLGoiTapUI().setVisible(true);
         }
 
     }//GEN-LAST:event_btnLuuActionPerformed

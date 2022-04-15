@@ -91,4 +91,7 @@ public class Validation {
            }
            return true;
        }
+        public static boolean checkNumber(String str) {
+        return str.matches("^[0-9]+$");
+    }
 }

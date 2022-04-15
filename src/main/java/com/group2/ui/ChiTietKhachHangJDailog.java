@@ -64,7 +64,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
                 imgHinh.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
                 imgHinh.setToolTipText("macdinh.png");
             }
-           
+
         } else {
             titile.setText("Thêm thông tin khách hàng mới");
             main.remove(btnSua);
@@ -407,6 +407,11 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
                 MsgBox.alert(this, "Lỗi", "Vui lòng nhập lại họ tên", Alert.AlertType.ERROR);
                 return;
             }
+            if (new Validation().checkName(txtHoTen.getText()) == false) {
+                txtHoTen.requestFocus();
+                MsgBox.alert(this, "Lỗi", "Họ tên không đúng định dạng", Alert.AlertType.ERROR);
+                return;
+            }
             //check Ngay sinh
             if (new Validation().checkDate(txtNgaySinh.getText()) == false) {
                 txtNgaySinh.requestFocus();
@@ -435,7 +440,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
                 }
             }
             //check Địa chỉ
-            if (Validation.checkLength(txtDiaChi.getText())==false) {
+            if (Validation.checkLength(txtDiaChi.getText()) == false) {
                 txtDiaChi.requestFocus();
                 MsgBox.alert(this, "Lỗi", "Vui lòng nhập địa chỉ", Alert.AlertType.ERROR);
                 return;

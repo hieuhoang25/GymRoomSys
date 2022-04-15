@@ -26,6 +26,8 @@ public class QLGoiTapUI extends javax.swing.JPanel {
     GoiTapDAO goiTapDAO = new GoiTapDAO();
     List<GoiTap> list = goiTapDAO.selectAll();
     DecimalFormat df = new DecimalFormat("###,###.###");
+    static boolean trangThai = true;
+    // trang thai true la them goi tap , false la chinh sua
 
     /**
      * Creates new form QLGoiTapUI
@@ -198,13 +200,14 @@ public class QLGoiTapUI extends javax.swing.JPanel {
 
     private void tblGTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGTMouseClicked
         if (evt.getClickCount() == 2) {
+            trangThai = false;
             GoiTap gt = goiTapDAO.selectById(tblGT.getValueAt(tblGT.getSelectedRow(), 0));
             new ChiTietGoiTapJDailog(false, gt, model).setVisible(true);
         }
     }//GEN-LAST:event_tblGTMouseClicked
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-
+        trangThai = true;
         new ChiTietGoiTapJDailog(true, model).setVisible(true);
     }//GEN-LAST:event_button1ActionPerformed
 

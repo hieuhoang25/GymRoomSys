@@ -392,6 +392,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                 txtMa.requestFocus();
                 return;
             }
+           
             //CHECK MA NV KHÔNG ĐƯỢC CÓ KHOẢNG TRẮNG
             if (new Validation().checkMa(txtMa.getText()) == false) {
                 MsgBox.alert(this, "Thông báo", "Mã nhân viên không hợp lệ - vd: NV01", Alert.AlertType.ERROR);
@@ -421,7 +422,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                 return;
             }
             if (new Validation().checkDate(txtNgaySinh.getText()) == false) {
-                MsgBox.alert(this, "Thông báo", "Ngày sinh không hợp lệ", Alert.AlertType.ERROR);
+                MsgBox.alert(this, "Thông báo", "Vui lòng kiểm tra lại định dạng ngày 'yyyy-MM-dd'", Alert.AlertType.ERROR);
                 txtNgaySinh.requestFocus();
                 return;
             }
@@ -430,6 +431,12 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                 txtDiaChi.requestFocus();
                 return;
             }
+            if (Validation.checkExperession(txtSoDT.getText(), "^(84|0[3|5|7|8|9])[0-9]{8}$") == false) {
+                txtSoDT.requestFocus();
+                MsgBox.alert(this, "Lỗi", "Số điện thoại không đúng định dạng", Alert.AlertType.ERROR);
+                return;
+            }
+
             NhanVien nv = getForm();
             nvDAO.insert(nv);
             MsgBox.alert(this, "Thông báo", "Thêm nhân viên thành công!", Alert.AlertType.SUCCESS);
@@ -447,8 +454,13 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                 txtMatKhau.requestFocus();
                 return;
             }
+              if (new Validation().checkName(txtHoTen.getText()) == false) {
+                txtHoTen.requestFocus();
+                MsgBox.alert(this, "Lỗi", "Họ tên không hợp lệ", Alert.AlertType.ERROR);
+                return;
+            }
             if (Validation.checkLength(txtHoTen.getText()) == false) {
-                MsgBox.alert(this, "Thông báo", "Họ tên không hợp lệ", Alert.AlertType.ERROR);
+                MsgBox.alert(this, "Thông báo", "Vui lòng kiểm tra lại định dạng ngày 'yyyy-MM-dd'", Alert.AlertType.ERROR);
                 txtHoTen.requestFocus();
                 return;
             }
