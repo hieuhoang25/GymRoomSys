@@ -259,8 +259,11 @@ void dangNhap() {
         String MatKhauString = new String(txtMatKhau.getPassword());
         NhanVien nv = nvDAO.selectById(TenDangNhapString);
 
+        if(nv == null){
+             MsgBox.alert(this, "Đăng nhập thất bại", "Tên đăng nhập hoặc mật khẩu không chính xác !", Alert.AlertType.ERROR);
+             return;
+        }
         if (!nv.getMaNV().trim().equals(TenDangNhapString)) {
-            JOptionPane.showMessageDialog(this, "Sai tên đăng nhập");
             MsgBox.alert(this, "Đăng nhập thất bại", "Tên đăng nhập hoặc mật khẩu không chính xác !", Alert.AlertType.ERROR);
         } else {
             if (!nv.getMatKhau().trim().equals(MatKhauString)) {
