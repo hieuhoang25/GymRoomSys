@@ -769,10 +769,10 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
                 }
 
                 if (MsgBox.confirm(null, "Khách hàng có muốn xuất hóa đơn không?")) {
-
+       
                     new HoaDonCTDAO().themHoaDonGoiTap(txtSDT.getText(), Auth.user.getMaNV(),
                             null, txtHoVaTen.getText(),
-                            txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, f.getName(), txtEmail.getText(), qrcode);
+                            txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, f.getName()+".png", txtEmail.getText(), qrcode);
                     for (GoiTap gt : GioHangGT.listGT) {
                         new HoaDonCTDAO().themHDCTGoiTap(gt.getMaGT(), txtSDT.getText(), gt.getGia());
                     }

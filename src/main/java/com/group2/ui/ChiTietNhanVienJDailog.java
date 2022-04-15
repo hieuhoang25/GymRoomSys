@@ -37,7 +37,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
     /**
      * Creates new form ChiTietNhanVienJDailog
      */
-    public ChiTietNhanVienJDailog(boolean kt, NhanVien nv,JTable tb) {
+    public ChiTietNhanVienJDailog(boolean kt, NhanVien nv, JTable tb) {
         model = (DefaultTableModel) tb.getModel();
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
@@ -320,7 +320,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void conBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conBtn1ActionPerformed
-        
+
         dispose();
     }//GEN-LAST:event_conBtn1ActionPerformed
 
@@ -384,7 +384,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
     }
 
     private void themNhanVien() {
-        NhanVien nv = getForm();
+
         List<NhanVien> list = nvDAO.selectAll();
         try {
             if (Validation.checkLength(txtMa.getText()) == false) {
@@ -393,19 +393,19 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                 return;
             }
             //CHECK MA NV KHÔNG ĐƯỢC CÓ KHOẢNG TRẮNG
-            if(new Validation().checkMa(txtMa.getText()) == false){
-                  MsgBox.alert(this, "Thông báo", "Mã nhân viên không hợp lệ - vd: NV01", Alert.AlertType.ERROR);
+            if (new Validation().checkMa(txtMa.getText()) == false) {
+                MsgBox.alert(this, "Thông báo", "Mã nhân viên không hợp lệ - vd: NV01", Alert.AlertType.ERROR);
                 txtMa.requestFocus();
                 return;
             }
             for (NhanVien nhanvien : list) {
-                if (nv.getMaNV().equals(nhanvien.getMaNV())) {
+                if (txtMa.getText().equalsIgnoreCase(nhanvien.getMaNV())) {
                     MsgBox.alert(this, "Thông báo", "Mã nhân viên đã tồn tại", Alert.AlertType.ERROR);
                     txtMa.requestFocus();
                     return;
                 }
             }
-            if(new Validation().checkName(txtHoTen.getText()) == false){
+            if (new Validation().checkName(txtHoTen.getText()) == false) {
                 txtHoTen.requestFocus();
                 MsgBox.alert(this, "Lỗi", "Họ tên không hợp lệ", Alert.AlertType.ERROR);
                 return;
@@ -430,6 +430,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                 txtDiaChi.requestFocus();
                 return;
             }
+            NhanVien nv = getForm();
             nvDAO.insert(nv);
             MsgBox.alert(this, "Thông báo", "Thêm nhân viên thành công!", Alert.AlertType.SUCCESS);
 
@@ -440,7 +441,6 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
     }
 
     private void suaNhanVien() {
-        NhanVien nv = getForm();
         try {
             if (Validation.correctString(txtMatKhau.getText()) == false) {
                 MsgBox.alert(this, "Thông báo", "Mật khẩu không hợp lệ", Alert.AlertType.ERROR);
@@ -467,7 +467,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                 txtDiaChi.requestFocus();
                 return;
             }
-
+            NhanVien nv = getForm();
             nvDAO.update(nv);
             MsgBox.alert(this, "Thông báo", "Sửa nhân viên thành công!", Alert.AlertType.SUCCESS);
             fillToTable();
@@ -491,11 +491,12 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
             imgHinh.setToolTipText(file.getName());
         }
     }
-     public void fillToTable() {
+
+    public void fillToTable() {
         model.setRowCount(0);
         List<NhanVien> listNV = nvDAO.selectAll();
         for (NhanVien nv : listNV) {
-            Object row[] = {nv.getMaNV(),nv.getSoDT(),nv.getHoTen(), nv.getChucVu(), nv.getNgaySinh(), nv.getDiaChi()};
+            Object row[] = {nv.getMaNV(), nv.getSoDT(), nv.getHoTen(), nv.getChucVu(), nv.getNgaySinh(), nv.getDiaChi()};
             model.addRow(row);
         }
     }
