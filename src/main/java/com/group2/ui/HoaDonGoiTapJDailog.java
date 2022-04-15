@@ -65,7 +65,7 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
         if (!GymSysJFrame.maKH.equals("")) {
             loadDataOfPerSon();
             imgHinh.setImage(GImage.read("khachhangIMG/", GymSysJFrame.maKH + ".png"));
-            f = new File("khachhangIMG/", GymSysJFrame.maKH);
+            f = new File("khachhangIMG/", GymSysJFrame.maKH+".png");
         }
         txtTongTien.setText(df.format(GioHangGT.tongTienGH()) + "₫");
         tongTienTT.setText(df.format(GioHangGT.tienThanhToan()) + "₫");

@@ -66,9 +66,13 @@ public class PanelCTGoiTap extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
+        txtMaGoiTap.setEditable(false);
+        txtMaGoiTap.setBackground(new java.awt.Color(255, 255, 255));
         txtMaGoiTap.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtMaGoiTap.setLabelText("Mã gói tập");
 
+        txtLoaiGoiTap.setEditable(false);
+        txtLoaiGoiTap.setBackground(new java.awt.Color(255, 255, 255));
         txtLoaiGoiTap.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtLoaiGoiTap.setLabelText("Loại gói tập");
         txtLoaiGoiTap.addActionListener(new java.awt.event.ActionListener() {
@@ -77,9 +81,13 @@ public class PanelCTGoiTap extends javax.swing.JPanel {
             }
         });
 
+        txtNgayDangKi.setEditable(false);
+        txtNgayDangKi.setBackground(new java.awt.Color(255, 255, 255));
         txtNgayDangKi.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtNgayDangKi.setLabelText("Ngày đăng kí");
 
+        txtNgayHetHan.setEditable(false);
+        txtNgayHetHan.setBackground(new java.awt.Color(255, 255, 255));
         txtNgayHetHan.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtNgayHetHan.setLabelText("Ngày hết hạn");
 

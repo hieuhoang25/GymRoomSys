@@ -52,7 +52,7 @@ public class ItemCartPanel extends javax.swing.JPanel {
         }
 
         lblTenSP.setText(spm.getTenSP());
-        lblMaSP.setText(spm.getMaSP());
+       
         lblDonGia.setText(df.format(spm.getDonGia()) + "₫");
         lblThanhTien.setText(df.format(spm.getThanhTien()) + "₫");
         spSoLuong.setValue(spm.getSoLuong());
@@ -67,15 +67,23 @@ public class ItemCartPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblTenSP = new javax.swing.JTextArea();
         imgHinh = new com.group2.swing.ImageView();
         btnXoa = new com.group2.swing.ButtonIcon();
-        lblTenSP = new javax.swing.JLabel();
-        lblMaSP = new javax.swing.JLabel();
         spSoLuong = new javax.swing.JSpinner();
         lblDonGia = new javax.swing.JLabel();
         lblThanhTien = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+
+        lblTenSP.setEditable(false);
+        lblTenSP.setColumns(20);
+        lblTenSP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblTenSP.setLineWrap(true);
+        lblTenSP.setRows(5);
+        lblTenSP.setText("Sinh to bosdsad\n");
+        lblTenSP.setWrapStyleWord(true);
+        lblTenSP.setBorder(null);
 
         imgHinh.setImage(new javax.swing.ImageIcon(getClass().getResource("/com/group2/icons/mas.PNG"))); // NOI18N
 
@@ -85,13 +93,6 @@ public class ItemCartPanel extends javax.swing.JPanel {
                 btnXoaActionPerformed(evt);
             }
         });
-
-        lblTenSP.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        lblTenSP.setText("ON SERIOUS MASS 6 LBS");
-
-        lblMaSP.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
-        lblMaSP.setForeground(new java.awt.Color(150, 150, 150));
-        lblMaSP.setText("Mã sản phẩm");
 
         spSoLuong.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         spSoLuong.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -114,41 +115,32 @@ public class ItemCartPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(imgHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblTenSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblMaSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(6, 6, 6)
+                .addComponent(imgHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblDonGia, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblDonGia, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblMaSP)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(lblDonGia, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(spSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(imgHinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(imgHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDonGia, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(spSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -183,8 +175,7 @@ public class ItemCartPanel extends javax.swing.JPanel {
     private com.group2.swing.ButtonIcon btnXoa;
     private com.group2.swing.ImageView imgHinh;
     private javax.swing.JLabel lblDonGia;
-    private javax.swing.JLabel lblMaSP;
-    private javax.swing.JLabel lblTenSP;
+    private javax.swing.JTextArea lblTenSP;
     private javax.swing.JLabel lblThanhTien;
     private javax.swing.JSpinner spSoLuong;
     // End of variables declaration//GEN-END:variables

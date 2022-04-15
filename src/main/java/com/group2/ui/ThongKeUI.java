@@ -42,9 +42,7 @@ public class ThongKeUI extends javax.swing.JPanel {
 
         chart.addLegend("Gói tập", new Color(240, 80, 83));
         chart.addLegend("Sản phẩm", new Color(0, 78, 146));
-        Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        comboBoxSuggestion2.setSelectedItem(year);
+        
         int nam = (int) comboBoxSuggestion2.getSelectedItem();
 
         chart.getModel().clear();
@@ -116,14 +114,14 @@ public class ThongKeUI extends javax.swing.JPanel {
                         .addGap(8, 8, 8))
                     .addGroup(gradientBackGround1Layout.createSequentialGroup()
                         .addGap(93, 93, 93)
-                        .addComponent(polarAreaChart2, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                        .addComponent(polarAreaChart2, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                         .addGap(78, 78, 78)))
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(gradientBackGround1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(gradientBackGround1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+                        .addGap(15, 15, 15))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gradientBackGround1Layout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addComponent(polarAreaChart1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
