@@ -32,6 +32,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
     KhachHangDAO khDAO = new KhachHangDAO();
     //HoaDonDao hdDAO = new HoaDonDao();
     ThongKeDAO tkDAO = new ThongKeDAO();
+    private String email,sdt;
 
     /**
      * Creates new form ChiTietKhachHangJDailog
@@ -41,9 +42,12 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
 
     public ChiTietKhachHangJDailog(boolean kt, KhachHang kh) {
         this.kh = kh;
+        email = kh.getEmail();
+        sdt = kh.getSoDT();
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
+        txtNgaySinh.setToolTipText("Định dạng yyyy-mm-dd, vd: 2022-12-31");
         designJList();
         if (kt == false) {
             titile.setText("Sửa thông tin khách hàng");
@@ -77,6 +81,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
+        txtNgaySinh.setToolTipText("Định dạng yyyy-mm-dd, vd: 2022-12-31");
         designJList();
         imgHinh.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
         if (kt == false) {
@@ -177,7 +182,6 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
                 .addGap(0, 0, 0))
         );
 
-        txtMa.setEditable(false);
         txtMa.setBackground(new java.awt.Color(255, 255, 255));
         txtMa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtMa.setLabelText("Số điện thoại");
@@ -426,26 +430,43 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
             }
             List<KhachHang> list = khDAO.selectAll();
 
-            for (KhachHang khachHang : list) {
-                if (khachHang.equals(kh)) {
-                    if (kh.getEmail().equals(khachHang.getEmail())) {
-                        //return;
-                    }
-                } else {
-                    if (khachHang.getEmail().equals(kh.getEmail())) {
-                        MsgBox.alert(this, "Lỗi", "Email đã tồn tại", Alert.AlertType.ERROR);
-                        txtEmail.requestFocus();
-                        return;
-                    }
+//            for (KhachHang khachHang : list) {
+//                if (khachHang.equals(kh)) {
+//                    if (kh.getEmail().equals(khachHang.getEmail())) {
+//                        //return;
+//                    }
+//                } else {
+//                    if (khachHang.getEmail().equals(kh.getEmail())) {
+//                        MsgBox.alert(this, "Lỗi", "Email đã tồn tại", Alert.AlertType.ERROR);
+//                        txtEmail.requestFocus();
+//                        return;
+//                    }
+//                }
+//            }
+            //check trùng email 
+            for(KhachHang khachHang : list){
+                if(!khachHang.getEmail().equals(email) && khachHang.getEmail().equals(txtEmail.getText())){
+                    MsgBox.alert(this, "Lỗi", "Email đã tồn tại", Alert.AlertType.ERROR);
+                    txtEmail.requestFocus();
+                    return;
                 }
             }
+            //check trùng sdt
+              for(KhachHang khachHang : list){
+                if(!khachHang.getSoDT().equals(sdt) && khachHang.getSoDT().equals(txtMa.getText())){
+                    MsgBox.alert(this, "Lỗi", "Số điện thoại đã tồn tại", Alert.AlertType.ERROR);
+                    txtMa.requestFocus();
+                    return;
+                }
+            }
+            
             //check Địa chỉ
             if (Validation.checkLength(txtDiaChi.getText()) == false) {
                 txtDiaChi.requestFocus();
                 MsgBox.alert(this, "Lỗi", "Vui lòng nhập địa chỉ", Alert.AlertType.ERROR);
                 return;
             }
-            khDAO.update(kh);
+            khDAO.update1(kh,sdt);
             MsgBox.alert(this, "Thông báo", "Cập nhật thông tin khách thành công!", Alert.AlertType.SUCCESS);
         } catch (Exception e) {
             MsgBox.alert(this, "Cập nhật thất bại", "Vui lòng kiểm tra lại thông tin!", Alert.AlertType.ERROR);

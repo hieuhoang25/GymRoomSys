@@ -33,6 +33,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
 
     NhanVienDAO nvDAO = new NhanVienDAO();
     DefaultTableModel model;
+    private String sdt;
 
     /**
      * Creates new form ChiTietNhanVienJDailog
@@ -42,6 +43,8 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
+        txtNgaySinh.setToolTipText("Định dạng yyyy-mm-dd, vd: 2022-12-31");
+        sdt = nv.getSoDT();
         if (kt == false) {
             titile.setText("Sửa thông tin nhân viên");
             txtMa.setText(nv.getMaNV().trim());
@@ -74,6 +77,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
+        txtNgaySinh.setToolTipText("Định dạng yyyy-mm-dd, vd: 2022-12-31");
         txtMa.setEditable(true);
         imgHinh.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
         if (kt == false) {
@@ -480,6 +484,13 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                 return;
             }
             NhanVien nv = getForm();
+                for(NhanVien n : nvDAO.selectAll()){
+                if(!n.getSoDT().equals(sdt) && n.getSoDT().equals(txtSoDT.getText())){
+                    MsgBox.alert(this, "Lỗi", "Số điện thoại đã tồn tại", Alert.AlertType.ERROR);
+                    txtSoDT.requestFocus();
+                    return;
+                }
+            }
             nvDAO.update(nv);
             MsgBox.alert(this, "Thông báo", "Sửa nhân viên thành công!", Alert.AlertType.SUCCESS);
             fillToTable();

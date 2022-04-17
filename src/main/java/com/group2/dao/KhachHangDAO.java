@@ -34,6 +34,10 @@ public class KhachHangDAO extends GymSysDAO<KhachHang, Object> {
         GJDBC.update(UPDATE_SQL,entity.getSoDT(), entity.getHoTen(), entity.getDiaChi(), entity.getNgaySinh(),
                 entity.isGioiTinh(), entity.getHinh(), entity.getEmail(), entity.getSoDT());
     }
+    public void update1(KhachHang entity,String sdt) {
+        GJDBC.update(UPDATE_SQL,entity.getSoDT(), entity.getHoTen(), entity.getDiaChi(), entity.getNgaySinh(),
+                entity.isGioiTinh(), entity.getHinh(), entity.getEmail(), sdt);
+    }
 
     @Override
     public void delete(Object id) {

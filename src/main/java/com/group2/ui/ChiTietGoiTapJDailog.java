@@ -83,6 +83,7 @@ public class ChiTietGoiTapJDailog extends javax.swing.JDialog {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
+     
     }
 
     ChiTietGoiTapJDailog(boolean b, DefaultTableModel model) {
