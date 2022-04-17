@@ -304,8 +304,8 @@ public class Menu extends javax.swing.JPanel {
             listMenuItem2.addItem(new MenuItemModel("/com/group2/icons/icons8_product_documents_48px.png", "Sản phẩm", MenuItemModel.MenuItemType.MENUITEM));
             listMenuItem2.addItem(new MenuItemModel("/com/group2/icons/icons8_gym_48px.png", "Trang chủ", MenuItemModel.MenuItemType.EMPTY));
 //10
-            listMenuItem2.addItem(new MenuItemModel("/com/group2/icons/icons8_chart_30px.png", "Thống kê dữ liệu", MenuItemModel.MenuItemType.MENUITEM));
-            listMenuItem2.addItem(new MenuItemModel("/com/group2/icons/icons8_gym_48px.png", "Trang chủ", MenuItemModel.MenuItemType.EMPTY));
+//            listMenuItem2.addItem(new MenuItemModel("/com/group2/icons/icons8_chart_30px.png", "Thống kê dữ liệu", MenuItemModel.MenuItemType.MENUITEM));
+//            listMenuItem2.addItem(new MenuItemModel("/com/group2/icons/icons8_gym_48px.png", "Trang chủ", MenuItemModel.MenuItemType.EMPTY));
 
         }
 

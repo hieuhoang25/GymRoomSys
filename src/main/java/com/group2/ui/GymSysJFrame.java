@@ -129,11 +129,12 @@ public class GymSysJFrame extends javax.swing.JFrame {
                             main.add(new HoiVienUI());
                             main.revalidate();
                         } else {
-                            if (index == 10) {
-                                main.removeAll();
-                                main.add(new ThongKeUI());
-                                main.revalidate();
-                            } else {
+//                            if (index == 10) {
+//                                main.removeAll();
+//                                main.add(new ThongKeUI());
+//                                main.revalidate();
+//                            } else {
+                                {
                                 if (index == 4) {
                                     main.removeAll();
                                     main.add(new KhachHangUI());
