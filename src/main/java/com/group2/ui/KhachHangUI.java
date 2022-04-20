@@ -11,6 +11,7 @@ import com.group2.swing.Alert;
 import com.group2.swing.AvataTbHoiVien;
 import com.group2.swing.AvataTbKhachHang;
 import com.group2.swing.ScrollBarCustom;
+import com.group2.utils.GDate;
 import com.group2.utils.MsgBox;
 import java.awt.Color;
 import java.awt.Font;
@@ -154,7 +155,7 @@ public class KhachHangUI extends javax.swing.JPanel {
         model.setRowCount(0);
         List<KhachHang> list = khDAO.selectAll();
         for (KhachHang kh : list) {
-            Object row[] = {kh.getSoDT(), kh.getHoTen(), kh.getDiaChi(), kh.getNgaySinh(), kh.isGioiTinh() ? "Nam" : "Nữ",kh.getEmail()};
+            Object row[] = {kh.getSoDT(), kh.getHoTen(), kh.getDiaChi(), GDate.toString(kh.getNgaySinh(), "dd/MM/yyyy") , kh.isGioiTinh() ? "Nam" : "Nữ",kh.getEmail()};
             model.addRow(row);
         }
     }

@@ -10,6 +10,7 @@ import com.group2.entity.NhanVien;
 import com.group2.swing.Alert;
 import com.group2.swing.AvataTbNhanVien;
 import com.group2.swing.ScrollBarCustom;
+import com.group2.utils.GDate;
 import com.group2.utils.MsgBox;
 import java.awt.Color;
 import java.awt.Font;
@@ -223,7 +224,7 @@ public class NhanVienUI extends javax.swing.JPanel {
         model.setRowCount(0);
         List<NhanVien> listNV = nvDAO.selectAll();
         for (NhanVien nv : listNV) {
-            Object row[] = {nv.getMaNV(),nv.getSoDT(),nv.getHoTen(), nv.getChucVu(), nv.getNgaySinh(), nv.getDiaChi()};
+            Object row[] = {nv.getMaNV(),nv.getSoDT(),nv.getHoTen(), nv.getChucVu(), GDate.toString(nv.getNgaySinh(), "dd/MM/yyyy"), nv.getDiaChi()};
             model.addRow(row);
         }
     }
@@ -233,7 +234,7 @@ public class NhanVienUI extends javax.swing.JPanel {
         model.setRowCount(0);
         List<NhanVien> listNV = nvDAO.timNhanVien("%" + txtTim.getText() + "%", "%" + txtTim.getText() + "%");
         for (NhanVien nv : listNV) {
-            Object row[] = {nv.getMaNV(), nv.getSoDT(), nv.getHoTen(), nv.getChucVu(), nv.getNgaySinh(), nv.getDiaChi()};
+            Object row[] = {nv.getMaNV(), nv.getSoDT(), nv.getHoTen(), nv.getChucVu(), GDate.toString(nv.getNgaySinh(), "dd/MM/yyyy"), nv.getDiaChi()};
             model.addRow(row);
         }
     }

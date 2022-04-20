@@ -89,7 +89,7 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
             txtSDT.requestFocus();
             return false;
         } else if (v.checkDate(txtNgaySinh.getText()) == false) {
-            MsgBox.alert(HoaDonGoiTapJDailog.this, "Lỗi", "Vui lòng kiểm tra lại định dạng ngày 'yyyy-MM-dd'", Alert.AlertType.ERROR);
+            MsgBox.alert(HoaDonGoiTapJDailog.this, "Lỗi", "Vui lòng kiểm tra lại định dạng ngày 'dd/MM/yyyy'", Alert.AlertType.ERROR);
             txtNgaySinh.requestFocus();
             return false;
         } else if (v.checkEmail(txtEmail.getText()) == false) {
@@ -110,7 +110,7 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
             txtSDT.setText(kh.get(0).getSoDT());
             txtDiaChi.setText(kh.get(0).getDiaChi());
             txtHoVaTen.setText(kh.get(0).getHoTen());
-            txtNgaySinh.setText(kh.get(0).getNgaySinh().toString());
+            txtNgaySinh.setText(GDate.toString(kh.get(0).getNgaySinh(), "dd/MM/yyyy"));
             if (kh.get(0).isGioiTinh() == true) {
                 rdoNam.setSelected(true);
             } else {
@@ -680,7 +680,7 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
         if (kh.size() > 0) {
             txtDiaChi.setText(kh.get(0).getDiaChi());
             txtHoVaTen.setText(kh.get(0).getHoTen());
-            txtNgaySinh.setText(kh.get(0).getNgaySinh().toString());
+            txtNgaySinh.setText(GDate.toString(kh.get(0).getNgaySinh(), "dd/MM/yyyy"));
 //          GImage.read("khachhangIMG/", kh.get(0).getHinh() == null ? "macdinh.png":GImage.read("khachhangIMG/", kh.get(0).getHinh()));
             imgHinh.setImage(GImage.read("khachhangIMG/", kh.get(0).getHinh() == null ? "macdinh.png" : kh.get(0).getHinh()));
             f = new File("khachhangIMG/", kh.get(0).getHinh() == null ? "macdinh.png" : kh.get(0).getHinh());
@@ -773,7 +773,7 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
 
                     new HoaDonCTDAO().themHoaDonGoiTap(txtSDT.getText(), Auth.user.getMaNV(),
                             null, txtHoVaTen.getText(),
-                            txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, f.getName() + ".png", txtEmail.getText(), qrcode);
+                            txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "dd/MM/yyyy"), rdoNam.isSelected() ? 1 : 0, f.getName() + ".png", txtEmail.getText(), qrcode);
                     for (GoiTap gt : GioHangGT.listGT) {
                         new HoaDonCTDAO().themHDCTGoiTap(gt.getMaGT(), txtSDT.getText(), gt.getGia());
                     }
@@ -786,7 +786,7 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
                 } else {
                     new HoaDonCTDAO().themHoaDonGoiTap(txtSDT.getText(), Auth.user.getMaNV(),
                             null, txtHoVaTen.getText(),
-                            txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, f.getName(), txtEmail.getText(), qrcode);
+                            txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "dd/MM/yyyy"), rdoNam.isSelected() ? 1 : 0, f.getName(), txtEmail.getText(), qrcode);
                     for (GoiTap gt : GioHangGT.listGT) {
                         new HoaDonCTDAO().themHDCTGoiTap(gt.getMaGT(), txtSDT.getText(), gt.getGia());
                     }

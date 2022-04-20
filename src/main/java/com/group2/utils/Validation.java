@@ -83,7 +83,7 @@ public class Validation {
         return str.matches("^[a-zA-Z]+\\w+@{1}[a-zA-Z]+\\.{1}(com){1}(.vn)?$");
     }
        public boolean checkDate(String str){
-           return str.matches("((?:19|20)\\d\\d)-(0?[1-9]|1[012])-([12][0-9]|3[01]|0?[1-9])");
+           return str.matches("^([0-2][0-9]|(3)[0-1])(\\/)(((0)[0-9])|((1)[0-2]))(\\/)\\d{4}$");
        }
        public boolean checkMa(String str){
            if(str.replaceAll("[^ ]", "").length() > 0){

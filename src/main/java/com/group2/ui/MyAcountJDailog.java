@@ -6,6 +6,7 @@
 package com.group2.ui;
 
 import com.group2.entity.NhanVien;
+import com.group2.utils.GDate;
 import com.group2.utils.GImage;
 import java.awt.Color;
 
@@ -27,7 +28,7 @@ public class MyAcountJDailog extends javax.swing.JDialog {
         txtHoTen.setText(nv.getHoTen().trim());
         txtDiaChi.setText(nv.getDiaChi().trim());
         txtMatKhau.setText(nv.getMatKhau().trim());
-        txtNgaySinh.setText(nv.getNgaySinh() + "");
+        txtNgaySinh.setText(GDate.toString(nv.getNgaySinh(), "dd/MM/yyyy"));
         if (nv.getChucVu().equalsIgnoreCase("PT")) {
             rdoPT.setSelected(true);
         } else if (nv.getChucVu().equalsIgnoreCase("Nhân viên")) {

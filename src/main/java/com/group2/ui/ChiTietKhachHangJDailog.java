@@ -47,7 +47,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
-        txtNgaySinh.setToolTipText("Định dạng yyyy-mm-dd, vd: 2022-12-31");
+        txtNgaySinh.setToolTipText("Định dạng dd/MM/yyyy");
         designJList();
         if (kt == false) {
             titile.setText("Sửa thông tin khách hàng");
@@ -55,7 +55,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
             txtDiaChi.setText(kh.getDiaChi());
             txtHoTen.setText(kh.getHoTen());
             txtEmail.setText(kh.getEmail());
-            txtNgaySinh.setText(kh.getNgaySinh() == null ? "":GDate.toString(kh.getNgaySinh(), "yyyy-MM-dd"));
+            txtNgaySinh.setText(kh.getNgaySinh() == null ? "":GDate.toString(kh.getNgaySinh(), "dd/MM/yyyy"));
             if (kh.isGioiTinh() == true) {
                 rdoNam.setSelected(true);
             } else {
@@ -384,7 +384,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
         KhachHang kh = new KhachHang();
         kh.setSoDT(txtMa.getText());
         kh.setHoTen(txtHoTen.getText());
-        kh.setNgaySinh(txtNgaySinh.getText().length()==0 ? null:GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"));
+        kh.setNgaySinh(txtNgaySinh.getText().length()==0 ? null:GDate.toDate(txtNgaySinh.getText(), "dd/MM/yyyy"));
         kh.setEmail(txtEmail.getText());
         if (rdoNam.isSelected()) {
             kh.setGioiTinh(true);
@@ -397,7 +397,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
     }
 
     private void suaKhachHang() {
-        KhachHang kh = getForm();
+     
         try {
             //check sđt
             if (Validation.checkExperession(txtMa.getText(), "^(84|0[3|5|7|8|9])[0-9]{8}$") == false) {
@@ -420,7 +420,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
             if (txtNgaySinh.getText().length() != 0) {
                 if (new Validation().checkDate(txtNgaySinh.getText()) == false) {
                     txtNgaySinh.requestFocus();
-                    MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại định dạng ngày 'yyyy-MM-dd'", Alert.AlertType.ERROR);
+                    MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại định dạng ngày 'dd/MM/yyyy'", Alert.AlertType.ERROR);
                     return;
                 }
             }
@@ -464,7 +464,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
                 }
             }
             
-         
+            KhachHang kh = getForm();
             khDAO.update1(kh,sdt);
             MsgBox.alert(this, "Thông báo", "Cập nhật thông tin khách thành công!", Alert.AlertType.SUCCESS);
         } catch (Exception e) {

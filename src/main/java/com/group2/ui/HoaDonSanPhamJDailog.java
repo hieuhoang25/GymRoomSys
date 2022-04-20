@@ -534,7 +534,7 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
             if (txtNgaySinh.getText().length() != 0) {
                 if (new Validation().checkDate(txtNgaySinh.getText()) == false) {
                     txtNgaySinh.requestFocus();
-                    MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại định dạng ngày 'yyyy-MM-dd'", Alert.AlertType.ERROR);
+                    MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại định dạng ngày 'dd/MM/yyyy'", Alert.AlertType.ERROR);
                     return;
                 }
             }
@@ -549,7 +549,7 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
 
 
             if (MsgBox.confirm(null, "Khách hàng có muốn xuất hóa đơn không?")) {
-                hdctdao.themKHVaHD(txtSDT.getText(), Auth.user.getMaNV(), txtGhiChu.getText(), txtHoVaTen.getText(), txtDiaChi.getText(),txtNgaySinh.getText().length()==0 ? null : GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, null, txtEmail.getText());
+                hdctdao.themKHVaHD(txtSDT.getText(), Auth.user.getMaNV(), txtGhiChu.getText(), txtHoVaTen.getText(), txtDiaChi.getText(),txtNgaySinh.getText().length()==0 ? null : GDate.toDate(txtNgaySinh.getText(), "dd/MM/yyyy"), rdoNam.isSelected() ? 1 : 0, null, txtEmail.getText());
                 for (SanPhamMua sanPhamMua : GioHangSP.listSP) {
                     hdctdao.themSPVaoHD(sanPhamMua.getMaSP(),
                             sanPhamMua.getSoLuong(), sanPhamMua.getThanhTien());
@@ -561,7 +561,7 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
                 dispose();
 
             } else {
-                hdctdao.themKHVaHD(txtSDT.getText(), Auth.user.getMaNV(), txtGhiChu.getText(), txtHoVaTen.getText(), txtDiaChi.getText(),txtNgaySinh.getText().length()==0 ? null :  GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, null, txtEmail.getText());
+                hdctdao.themKHVaHD(txtSDT.getText(), Auth.user.getMaNV(), txtGhiChu.getText(), txtHoVaTen.getText(), txtDiaChi.getText(),txtNgaySinh.getText().length()==0 ? null :  GDate.toDate(txtNgaySinh.getText(), "dd/MM/yyyy"), rdoNam.isSelected() ? 1 : 0, null, txtEmail.getText());
                 for (SanPhamMua sanPhamMua : GioHangSP.listSP) {
                     hdctdao.themSPVaoHD(sanPhamMua.getMaSP(),
                             sanPhamMua.getSoLuong(), sanPhamMua.getThanhTien());
@@ -606,7 +606,7 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
         if (kh.size() > 0) {
             txtGhiChu.setText("");
             txtHoVaTen.setText(kh.get(0).getHoTen());
-            txtNgaySinh.setText(kh.get(0).getNgaySinh().toString());
+            txtNgaySinh.setText(GDate.toString(kh.get(0).getNgaySinh(), "dd/MM/yyyy"));
             txtEmail.setText(kh.get(0).getEmail());
             txtDiaChi.setText(kh.get(0).getDiaChi());
 

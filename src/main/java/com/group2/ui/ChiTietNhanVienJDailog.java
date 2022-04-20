@@ -43,7 +43,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
-        txtNgaySinh.setToolTipText("Định dạng yyyy-mm-dd, vd: 2022-12-31");
+        txtNgaySinh.setToolTipText("Định dạng dd/MM/yyyy");
         sdt = nv.getSoDT();
         if (kt == false) {
             titile.setText("Sửa thông tin nhân viên");
@@ -51,7 +51,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
             txtHoTen.setText(nv.getHoTen().trim());
             txtDiaChi.setText(nv.getDiaChi().trim());
             txtMatKhau.setText(nv.getMatKhau().trim());
-            txtNgaySinh.setText(nv.getNgaySinh() + "");
+            txtNgaySinh.setText(GDate.toString(nv.getNgaySinh(), "dd/MM/yyyy"));
             txtSoDT.setText(nv.getSoDT());
             if (nv.getChucVu().equalsIgnoreCase("PT")) {
                 rdoPT.setSelected(true);
@@ -77,7 +77,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
-        txtNgaySinh.setToolTipText("Định dạng yyyy-mm-dd, vd: 2022-12-31");
+        txtNgaySinh.setToolTipText("Định dạng dd/MM/yyyy");
         txtMa.setEditable(true);
         imgHinh.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
         if (kt == false) {
@@ -373,7 +373,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
         nv.setMaNV(txtMa.getText());
         nv.setMatKhau(txtMatKhau.getText());
         nv.setHoTen(txtHoTen.getText());
-        nv.setNgaySinh(GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"));
+        nv.setNgaySinh(GDate.toDate(txtNgaySinh.getText(), "dd/MM/yyyy"));
         nv.setSoDT(txtSoDT.getText());
         if (rdoNV.isSelected()) {
             nv.setChucVu("Nhân viên");
@@ -426,7 +426,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                 return;
             }
             if (new Validation().checkDate(txtNgaySinh.getText()) == false) {
-                MsgBox.alert(this, "Thông báo", "Vui lòng kiểm tra lại định dạng ngày 'yyyy-MM-dd'", Alert.AlertType.ERROR);
+                MsgBox.alert(this, "Thông báo", "Vui lòng kiểm tra lại định dạng ngày 'dd/MM/yyyy'", Alert.AlertType.ERROR);
                 txtNgaySinh.requestFocus();
                 return;
             }
@@ -464,7 +464,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
                 return;
             }
             if (Validation.checkLength(txtHoTen.getText()) == false) {
-                MsgBox.alert(this, "Thông báo", "Vui lòng kiểm tra lại định dạng ngày 'yyyy-MM-dd'", Alert.AlertType.ERROR);
+                MsgBox.alert(this, "Thông báo", "Vui lòng kiểm tra lại định dạng ngày 'dd/MM/yyyy'", Alert.AlertType.ERROR);
                 txtHoTen.requestFocus();
                 return;
             }
@@ -519,7 +519,7 @@ public class ChiTietNhanVienJDailog extends javax.swing.JDialog {
         model.setRowCount(0);
         List<NhanVien> listNV = nvDAO.selectAll();
         for (NhanVien nv : listNV) {
-            Object row[] = {nv.getMaNV(), nv.getSoDT(), nv.getHoTen(), nv.getChucVu(), nv.getNgaySinh(), nv.getDiaChi()};
+            Object row[] = {nv.getMaNV(), nv.getSoDT(), nv.getHoTen(), nv.getChucVu(),GDate.toString(nv.getNgaySinh(), "dd/MM/yyyy"), nv.getDiaChi()};
             model.addRow(row);
         }
     }
