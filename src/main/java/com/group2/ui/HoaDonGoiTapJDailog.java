@@ -50,9 +50,8 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
      * Creates new form ChiTietGoiTap1JDailog
      */
     public HoaDonGoiTapJDailog(GioHangGTPanel gioHangGTPanel) {
-        for (int i = 0; i < 7; i++) {
-            clone.add(i, "");
-        }
+
+        clearClone();
         this.gioHangGTPanel = gioHangGTPanel;
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
@@ -65,11 +64,19 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
         if (!GymSysJFrame.maKH.equals("")) {
             loadDataOfPerSon();
             imgHinh.setImage(GImage.read("khachhangIMG/", GymSysJFrame.maKH + ".png"));
-            f = new File("khachhangIMG/", GymSysJFrame.maKH+".png");
+            f = new File("khachhangIMG/", GymSysJFrame.maKH + ".png");
         }
         txtTongTien.setText(df.format(GioHangGT.tongTienGH()) + "₫");
         tongTienTT.setText(df.format(GioHangGT.tienThanhToan()) + "₫");
 
+    }
+
+    public void clearClone() {
+        if (clone.size() != 7) {
+            for (int i = 0; i < 7; i++) {
+                clone.add(i, "");
+            }
+        }
     }
 
     public boolean check() {
@@ -81,7 +88,7 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
             MsgBox.alert(this, "Lỗi", "Số điện thoại không đúng định dạng", Alert.AlertType.ERROR);
             txtSDT.requestFocus();
             return false;
-        } else if (v.checkDate(txtNgaySinh.getText()) == false)  {
+        } else if (v.checkDate(txtNgaySinh.getText()) == false) {
             MsgBox.alert(HoaDonGoiTapJDailog.this, "Lỗi", "Vui lòng kiểm tra lại định dạng ngày 'yyyy-MM-dd'", Alert.AlertType.ERROR);
             txtNgaySinh.requestFocus();
             return false;
@@ -665,6 +672,7 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
     File f;
     DefaultTableModel model;
     private void txtSDTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTKeyReleased
+      
         String keyword = txtSDT.getText();
         GymSysJFrame.maKH = keyword;
         List<KhachHang> kh = daoKH.selectNotInCourse(keyword);
@@ -688,23 +696,16 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
             txtTongTien.setText(df.format(GioHangGT.tongTienGH()) + "₫");
             tongTienTT.setText(df.format(GioHangGT.tienThanhToan()) + "₫");
         } else {
-            txtDiaChi.setText(clone.get(4));
-            if (clone.get(1).equals("nam")) {
-                rdoNam.setSelected(true);
-            } else {
-                rdoNu.setSelected(true);
-            }
-            if (clone.get(5).equals("true")) {
-                rdoTienMat.setSelected(true);
-            } else {
-                rdoThe.setSelected(true);
-            }
-            txtHoVaTen.setText(clone.get(0));
-            txtNgaySinh.setText(clone.get(2));
+
+            txtDiaChi.setText("");
+            rdoNam.setSelected(true);
+            rdoTienMat.setSelected(true);
+            txtHoVaTen.setText("");
+            txtNgaySinh.setText("");
             giamGia.setText("0%");
             GioHangGT.giamGia = 0;
-            txtEmail.setText(clone.get(3));
-            txtGhiChu.setText(clone.get(6));
+            txtEmail.setText("");
+            txtGhiChu.setText("");
             txtTongTien.setText(df.format(GioHangGT.tongTienGH()) + "₫");
             tongTienTT.setText(df.format(GioHangGT.tienThanhToan()) + "₫");
             imgHinh.setImage(GImage.read("khachhangIMG/", "macdinh.png"));
@@ -769,10 +770,10 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
                 }
 
                 if (MsgBox.confirm(null, "Khách hàng có muốn xuất hóa đơn không?")) {
-       
+
                     new HoaDonCTDAO().themHoaDonGoiTap(txtSDT.getText(), Auth.user.getMaNV(),
                             null, txtHoVaTen.getText(),
-                            txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, f.getName()+".png", txtEmail.getText(), qrcode);
+                            txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, f.getName() + ".png", txtEmail.getText(), qrcode);
                     for (GoiTap gt : GioHangGT.listGT) {
                         new HoaDonCTDAO().themHDCTGoiTap(gt.getMaGT(), txtSDT.getText(), gt.getGia());
                     }
