@@ -139,6 +139,9 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
         txtSDT.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtSDT.setLabelText("Số điện thoại");
         txtSDT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSDTKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSDTKeyReleased(evt);
             }
@@ -521,33 +524,32 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
                 MsgBox.alert(this, "Lỗi", "Họ tên không được để trống", Alert.AlertType.ERROR);
                 return;
             }
-            
-            if(new Validation().checkName(txtHoVaTen.getText()) == false){
+
+            if (new Validation().checkName(txtHoVaTen.getText()) == false) {
                 txtHoVaTen.requestFocus();
                 MsgBox.alert(this, "Lỗi", "Họ tên không hợp lệ", Alert.AlertType.ERROR);
                 return;
             }
             // check ngày sinh
-            if (new Validation().checkDate(txtNgaySinh.getText()) == false) {
-                txtNgaySinh.requestFocus();
-                MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại định dạng ngày 'yyyy-MM-dd'", Alert.AlertType.ERROR);
-                return;
+            if (txtNgaySinh.getText().length() != 0) {
+                if (new Validation().checkDate(txtNgaySinh.getText()) == false) {
+                    txtNgaySinh.requestFocus();
+                    MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại định dạng ngày 'yyyy-MM-dd'", Alert.AlertType.ERROR);
+                    return;
+                }
             }
-            // check Email
-            if (Validation.checkExperession(txtEmail.getText(), "^\\w+@\\w+(\\.\\w+){1,2}$") == false) {
-                txtEmail.requestFocus();
-                MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại email", Alert.AlertType.ERROR);
-                return;
-            }
-            // chek địa chỉ
-            if (Validation.checkLength(txtDiaChi.getText()) == false) {
-                txtDiaChi.requestFocus();
-                MsgBox.alert(this, "Lỗi", "Vui lòng nhập địa chỉ", Alert.AlertType.ERROR);
-                return;
+            if (txtEmail.getText().length() != 0) {
+                // check Email
+                if (Validation.checkExperession(txtEmail.getText(), "^\\w+@\\w+(\\.\\w+){1,2}$") == false) {
+                    txtEmail.requestFocus();
+                    MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại email", Alert.AlertType.ERROR);
+                    return;
+                }
             }
 
+
             if (MsgBox.confirm(null, "Khách hàng có muốn xuất hóa đơn không?")) {
-                hdctdao.themKHVaHD(txtSDT.getText(), Auth.user.getMaNV(), txtGhiChu.getText(), txtHoVaTen.getText(), txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, null, txtEmail.getText());
+                hdctdao.themKHVaHD(txtSDT.getText(), Auth.user.getMaNV(), txtGhiChu.getText(), txtHoVaTen.getText(), txtDiaChi.getText(),txtNgaySinh.getText().length()==0 ? null : GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, null, txtEmail.getText());
                 for (SanPhamMua sanPhamMua : GioHangSP.listSP) {
                     hdctdao.themSPVaoHD(sanPhamMua.getMaSP(),
                             sanPhamMua.getSoLuong(), sanPhamMua.getThanhTien());
@@ -559,7 +561,7 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
                 dispose();
 
             } else {
-                hdctdao.themKHVaHD(txtSDT.getText(), Auth.user.getMaNV(), txtGhiChu.getText(), txtHoVaTen.getText(), txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, null, txtEmail.getText());
+                hdctdao.themKHVaHD(txtSDT.getText(), Auth.user.getMaNV(), txtGhiChu.getText(), txtHoVaTen.getText(), txtDiaChi.getText(),txtNgaySinh.getText().length()==0 ? null :  GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, null, txtEmail.getText());
                 for (SanPhamMua sanPhamMua : GioHangSP.listSP) {
                     hdctdao.themSPVaoHD(sanPhamMua.getMaSP(),
                             sanPhamMua.getSoLuong(), sanPhamMua.getThanhTien());
@@ -572,6 +574,10 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_button1ActionPerformed
+
+    private void txtSDTKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSDTKeyPressed
 
     /**
      * @param args the command line arguments
@@ -620,6 +626,8 @@ public class HoaDonSanPhamJDailog extends javax.swing.JDialog {
             txtHoVaTen.setText("");
             txtNgaySinh.setText("");
             giamGia.setText("0%");
+            txtEmail.setText("");
+            txtDiaChi.setText("");
             txtGhiChu.setText("");
             GioHangSP.giamGia = 0;
             txtTongTien.setText(df.format(GioHangSP.tongTienGH()) + "₫");

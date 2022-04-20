@@ -431,6 +431,5 @@ public class SanPhamUI extends javax.swing.JPanel {
     private void designUI() {
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane1.setHorizontalScrollBar(new ScrollBarCustom());
-
     }
 }

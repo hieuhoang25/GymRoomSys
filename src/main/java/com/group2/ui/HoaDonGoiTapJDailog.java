@@ -730,8 +730,8 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
         if (txtSDT.getText().equals("")) {
             MsgBox.alert(HoaDonGoiTapJDailog.this, "Lỗi", "Bạn chưa nhập đầy đủ thông tin", Alert.AlertType.ERROR);
         } else {
-            Boolean n = MsgBox.confirm(this, "Khách hàng đã có ảnh chưa ? ");
-            if (n) {
+            Boolean n = MsgBox.confirm(this, "Khách hàng đã có ảnh chưa ?");
+            if (!n) {
                 GymSysJFrame.maKH = txtSDT.getText();
                 TakePicture t = new TakePicture(gioHangGTPanel);
                 t.start();

@@ -14,8 +14,10 @@ import com.group2.entity.ThongKe;
 import com.group2.swing.EventSelected;
 import com.group2.utils.Auth;
 import com.group2.utils.GDate;
+import com.group2.utils.GImage;
 import java.awt.Color;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import net.miginfocom.swing.MigLayout;
 
@@ -43,6 +45,7 @@ public class GymSysJFrame extends javax.swing.JFrame {
     public GymSysJFrame() {
         maKH = "";
         initComponents();
+        this.setIconImage(new ImageIcon(GImage.getAppIcon()).getImage());
         status1.setListModelCheckIn(homeUI1.getDlmList1(), homeUI1.getCard4());
         checkInDAO.deleteCheckIn(GDate.toDate(java.time.LocalDate.now().toString(), "yyyy-MM-dd"));
         hoiVienDAO.kiemTraHVHetHan();

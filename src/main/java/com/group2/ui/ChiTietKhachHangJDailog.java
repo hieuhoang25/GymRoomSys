@@ -55,7 +55,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
             txtDiaChi.setText(kh.getDiaChi());
             txtHoTen.setText(kh.getHoTen());
             txtEmail.setText(kh.getEmail());
-            txtNgaySinh.setText(GDate.toString(kh.getNgaySinh(), "yyyy-MM-dd"));
+            txtNgaySinh.setText(kh.getNgaySinh() == null ? "":GDate.toString(kh.getNgaySinh(), "yyyy-MM-dd"));
             if (kh.isGioiTinh() == true) {
                 rdoNam.setSelected(true);
             } else {
@@ -384,7 +384,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
         KhachHang kh = new KhachHang();
         kh.setSoDT(txtMa.getText());
         kh.setHoTen(txtHoTen.getText());
-        kh.setNgaySinh(GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"));
+        kh.setNgaySinh(txtNgaySinh.getText().length()==0 ? null:GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"));
         kh.setEmail(txtEmail.getText());
         if (rdoNam.isSelected()) {
             kh.setGioiTinh(true);
@@ -416,17 +416,21 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
                 MsgBox.alert(this, "Lỗi", "Họ tên không đúng định dạng", Alert.AlertType.ERROR);
                 return;
             }
-            //check Ngay sinh
-            if (new Validation().checkDate(txtNgaySinh.getText()) == false) {
-                txtNgaySinh.requestFocus();
-                MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại định dạng ngày 'yyyy-MM-dd'", Alert.AlertType.ERROR);
-                return;
+              // check ngày sinh
+            if (txtNgaySinh.getText().length() != 0) {
+                if (new Validation().checkDate(txtNgaySinh.getText()) == false) {
+                    txtNgaySinh.requestFocus();
+                    MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại định dạng ngày 'yyyy-MM-dd'", Alert.AlertType.ERROR);
+                    return;
+                }
             }
-            //check Email
-            if (Validation.checkExperession(txtEmail.getText(), "^\\w+@\\w+(\\.\\w+){1,2}$") == false) {
-                txtEmail.requestFocus();
-                MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại email", Alert.AlertType.ERROR);
-                return;
+            if (txtEmail.getText().length() != 0) {
+                // check Email
+                if (Validation.checkExperession(txtEmail.getText(), "^\\w+@\\w+(\\.\\w+){1,2}$") == false) {
+                    txtEmail.requestFocus();
+                    MsgBox.alert(this, "Lỗi", "Vui lòng kiểm tra lại email", Alert.AlertType.ERROR);
+                    return;
+                }
             }
             List<KhachHang> list = khDAO.selectAll();
 
@@ -460,12 +464,7 @@ public class ChiTietKhachHangJDailog extends javax.swing.JDialog {
                 }
             }
             
-            //check Địa chỉ
-            if (Validation.checkLength(txtDiaChi.getText()) == false) {
-                txtDiaChi.requestFocus();
-                MsgBox.alert(this, "Lỗi", "Vui lòng nhập địa chỉ", Alert.AlertType.ERROR);
-                return;
-            }
+         
             khDAO.update1(kh,sdt);
             MsgBox.alert(this, "Thông báo", "Cập nhật thông tin khách thành công!", Alert.AlertType.SUCCESS);
         } catch (Exception e) {

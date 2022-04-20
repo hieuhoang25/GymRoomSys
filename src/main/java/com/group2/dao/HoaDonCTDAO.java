@@ -50,27 +50,16 @@ public class HoaDonCTDAO {
         return n;
     }
 
-    public void themHoaDonSanPham(String maKH, String maNV, String ghiChu, String maSP,
-            Integer soLg, Float tongTien, String hoTen, String diaChi, Date ngaySinh, Integer gioiTinh,
-            String hinh, String email) {
-        String sql = "{CALL pr_hoaDonSP (?,?,?,?,?,?,?,?,?,?,?,?)}";
-        try {
-            ResultSet rs = GJDBC.query(sql, maKH, maNV, ghiChu, maSP, soLg, tongTien,
-                    hoTen, diaChi, ngaySinh, gioiTinh, hinh, email);
-            rs.getStatement().getConnection().close();
-        } catch (Exception e) {
-            System.out.println("HoaDonCTDAO-themHoaDonSanPham: " + e.getMessage());
-        }
-    }
 
     public void themKHVaHD(String maKH, String maNV, String ghiChu, String hoTen, String diaChi, Date ngaySinh, Integer gioiTinh,
             String hinh, String email) {
         String sql = "{CALL proc_themKHvaHD (?,?,?,?,?,?,?,?,?)}";
         try {
-            ResultSet rs = GJDBC.query(sql, maKH, maNV, ghiChu,
+           GJDBC.query(sql, maKH, maNV, ghiChu,
                     hoTen, diaChi, ngaySinh, gioiTinh, hinh, email);
-            rs.getStatement().getConnection().close();
+         
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("HoaDonCTDAO-themHoaDonSanPham: " + e.getMessage());
         }
     }
@@ -79,9 +68,10 @@ public class HoaDonCTDAO {
             Integer soLg, Float tongTien) {
         String sql = "{CALL proc_themSPVaoHD (?,?,?)}";
         try {
-            ResultSet rs = GJDBC.query(sql,  maSP, soLg, tongTien);
-            rs.getStatement().getConnection().close();
+            GJDBC.query(sql,  maSP, soLg, tongTien);
+        
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("HoaDonCTDAO-themHoaDonSanPham: " + e.getMessage());
         }
     }
