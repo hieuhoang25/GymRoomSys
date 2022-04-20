@@ -17,7 +17,7 @@ import java.sql.SQLException;
  */
 public class GJDBC {
     private static String driver ="com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static String dburl = "jdbc:sqlserver://localhost:1433;databaseName=GymSysTem";
+    private static String dburl = "jdbc:sqlserver://localhost:1433;databaseName=GymSys";
     private static String user = "sa";
     private static String pass = "123";
     

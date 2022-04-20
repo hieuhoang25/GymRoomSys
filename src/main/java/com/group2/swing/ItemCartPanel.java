@@ -166,6 +166,7 @@ public class ItemCartPanel extends javax.swing.JPanel {
             tongTienTT.setText(df.format(GioHangSP.tienThanhToan()) + "₫");
         }else{
             MsgBox.alert(null, "Thông báo", "Vượt quá số lượng sản phẩm trong kho!", Alert.AlertType.ERROR);
+            spSoLuong.setValue(SoLuong);
         }
 
     }//GEN-LAST:event_spSoLuongStateChanged

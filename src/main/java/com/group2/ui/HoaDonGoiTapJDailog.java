@@ -49,10 +49,19 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
     /**
      * Creates new form ChiTietGoiTap1JDailog
      */
-    public HoaDonGoiTapJDailog(GioHangGTPanel gioHangGTPanel) {
-        for (int i = 0; i < 7; i++) {
-            clone.add(i, "");
+    public void clearClone() {
+        if (clone.size() != 7) {
+            for (int i = 0; i < 7; i++) {
+                clone.add(i, "");
+            }
         }
+    }
+
+    public HoaDonGoiTapJDailog(GioHangGTPanel gioHangGTPanel) {
+//        for (int i = 0; i < 7; i++) {
+//            clone.add(i, "");
+//        }
+        clearClone();
         this.gioHangGTPanel = gioHangGTPanel;
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
@@ -65,7 +74,7 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
         if (!GymSysJFrame.maKH.equals("")) {
             loadDataOfPerSon();
             imgHinh.setImage(GImage.read("khachhangIMG/", GymSysJFrame.maKH + ".png"));
-            f = new File("khachhangIMG/", GymSysJFrame.maKH+".png");
+            f = new File("khachhangIMG/", GymSysJFrame.maKH + ".png");
         }
         txtTongTien.setText(df.format(GioHangGT.tongTienGH()) + "₫");
         tongTienTT.setText(df.format(GioHangGT.tienThanhToan()) + "₫");
@@ -81,7 +90,7 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
             MsgBox.alert(this, "Lỗi", "Số điện thoại không đúng định dạng", Alert.AlertType.ERROR);
             txtSDT.requestFocus();
             return false;
-        } else if (v.checkDate(txtNgaySinh.getText()) == false)  {
+        } else if (v.checkDate(txtNgaySinh.getText()) == false) {
             MsgBox.alert(HoaDonGoiTapJDailog.this, "Lỗi", "Vui lòng kiểm tra lại định dạng ngày 'yyyy-MM-dd'", Alert.AlertType.ERROR);
             txtNgaySinh.requestFocus();
             return false;
@@ -689,12 +698,12 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
             tongTienTT.setText(df.format(GioHangGT.tienThanhToan()) + "₫");
         } else {
             txtDiaChi.setText(clone.get(4));
-            if (clone.get(1).equals("nam")) {
+            if (clone.get(1).equals("nu")) {
                 rdoNam.setSelected(true);
             } else {
                 rdoNu.setSelected(true);
             }
-            if (clone.get(5).equals("true")) {
+            if (clone.get(5).equals("false")) {
                 rdoTienMat.setSelected(true);
             } else {
                 rdoThe.setSelected(true);
@@ -729,8 +738,8 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
         if (txtSDT.getText().equals("")) {
             MsgBox.alert(HoaDonGoiTapJDailog.this, "Lỗi", "Bạn chưa nhập đầy đủ thông tin", Alert.AlertType.ERROR);
         } else {
-            Boolean n = MsgBox.confirm(this, "Khách hàng đã có ảnh chưa ? ");
-            if (n) {
+            Boolean n = MsgBox.confirm(this, "Khách hàng đã có ảnh chưa ?");
+            if (!n) {
                 GymSysJFrame.maKH = txtSDT.getText();
                 TakePicture t = new TakePicture(gioHangGTPanel);
                 t.start();
@@ -769,10 +778,10 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
                 }
 
                 if (MsgBox.confirm(null, "Khách hàng có muốn xuất hóa đơn không?")) {
-       
+
                     new HoaDonCTDAO().themHoaDonGoiTap(txtSDT.getText(), Auth.user.getMaNV(),
                             null, txtHoVaTen.getText(),
-                            txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, f.getName()+".png", txtEmail.getText(), qrcode);
+                            txtDiaChi.getText(), GDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"), rdoNam.isSelected() ? 1 : 0, f.getName() + ".png", txtEmail.getText(), qrcode);
                     for (GoiTap gt : GioHangGT.listGT) {
                         new HoaDonCTDAO().themHDCTGoiTap(gt.getMaGT(), txtSDT.getText(), gt.getGia());
                     }

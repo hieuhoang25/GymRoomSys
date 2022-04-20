@@ -29,7 +29,7 @@ import javax.swing.ImageIcon;
 public class GImage {
 
     public static Image getAppIcon() {
-        URL url = GImage.class.getResource("/Hinh/fpt.png");
+        URL url = GImage.class.getResource("/com/group2/icons/logo.png");
         return new ImageIcon(url).getImage();
     }
 
@@ -99,7 +99,7 @@ public class GImage {
             }
             Path path = FileSystems.getDefault().getPath(dst.getPath());
             MatrixToImageWriter.writeToPath(matrix, "PNG", path);
-            Email.sendEmail(email, "Mã QR Hội Viên", "",
+            Email.sendEmail(email, "Ma QR HV "+sdt , "",
                 "Hãy dùng mã qr của mình để checkin khi vào phòng tập hihi! :))", dst);
             return dst.getName();
         } catch (Exception ex) {

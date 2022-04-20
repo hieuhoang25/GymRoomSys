@@ -10,6 +10,7 @@ import com.group2.entity.NhanVien;
 import com.group2.swing.Alert;
 import com.group2.swing.Slide;
 import com.group2.utils.Auth;
+import com.group2.utils.GImage;
 import com.group2.utils.MsgBox;
 import java.awt.Color;
 import javax.swing.ImageIcon;
@@ -29,6 +30,7 @@ public class DangNhapJDialog extends javax.swing.JFrame {
      */
     public DangNhapJDialog() {
         initComponents();
+        this.setIconImage(new ImageIcon(GImage.getAppIcon()).getImage());
         getContentPane().setBackground(Color.white);
         slideshow1.initSlideshow(new Slide(new ImageIcon(getClass().getResource("/com/group2/icons/logo2.PNG"))), new Slide(new ImageIcon(getClass().getResource("/com/group2/icons/dnbk1.jpg"))), new Slide(new ImageIcon(getClass().getResource("/com/group2/icons/dnbk3.jpg"))));
 
@@ -79,7 +81,6 @@ public class DangNhapJDialog extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 153, 153));
         jLabel1.setText("Đăng Nhập");
 
-        txtTenDangNhap.setText("NV01");
         txtTenDangNhap.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtTenDangNhap.setLabelText("Tên đăng nhập");
         txtTenDangNhap.setLineColor(new java.awt.Color(69, 124, 235));

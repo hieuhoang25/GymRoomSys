@@ -73,5 +73,48 @@
             <version>4.5.1-2</version>
         </dependency>
     </dependencies>
-    
+    <build>
+        <finalName>GymSys</finalName>
+        <plugins>
+            <!-- Nếu project sử dụng thư viện thì sử dụng -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>
+                               ${project.build.directory}/libs
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+                        <!-- Buil project-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>
+                                libs/
+                            </classpathPrefix>
+                            <mainClass>
+                              com.group2.ui.GymSysJFrame
+                            </mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <!---->
+        </plugins>
+    </build>
 </project>
