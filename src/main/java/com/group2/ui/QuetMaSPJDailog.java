@@ -226,21 +226,22 @@ public class QuetMaSPJDailog extends javax.swing.JDialog {
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         // TODO add your handling code here:
-        int SoLuong = spDAO.selectById(txtMa.getText()).getSoLuong();
-        if (SoLuong >= Integer.parseInt(spSL.getValue() + "")) {
-            SanPhamMua sanPhamMua = getSanPhamMua();
-            if (sanPhamMua == null) {
-                MsgBox.alert(null, "Thông báo", "Sản phẩm này không tồn tại", Alert.AlertType.ERROR);
-            } else {
-                sanPhamMua.setSoLuong((int) spSL.getValue());
+        SanPhamMua sanPhamMua = getSanPhamMua();
+        if (sanPhamMua == null) {
+            MsgBox.alert(null, "Thông báo", "Sản phẩm này không tồn tại", Alert.AlertType.ERROR);
+        } else {
+            int SoLuong = spDAO.selectById(txtMa.getText()).getSoLuong();
+            if (SoLuong>=Integer.parseInt(spSL.getValue() + "")){
+                 sanPhamMua.setSoLuong((int) spSL.getValue());
                 GioHangSP.spDaMua(sanPhamMua);
                 gioHangPanel.setSLSanPham();
                 MsgBox.alert(null, "Thông báo", "Thêm vào giỏ hàng thành công!", Alert.AlertType.SUCCESS);
                 txtMa.setText("");
                 fillToList();
             }
-        } else {
-            MsgBox.alert(null, "Thông báo", "Vượt quá số lượng sản phẩm trong kho!", Alert.AlertType.ERROR);
+            else{
+                            MsgBox.alert(null, "Thông báo", "Vượt quá số lượng sản phẩm trong kho!", Alert.AlertType.ERROR);
+            }
         }
 
     }//GEN-LAST:event_button1ActionPerformed

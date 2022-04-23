@@ -672,7 +672,7 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
     File f;
     DefaultTableModel model;
     private void txtSDTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTKeyReleased
-      
+
         String keyword = txtSDT.getText();
         GymSysJFrame.maKH = keyword;
         List<KhachHang> kh = daoKH.selectNotInCourse(keyword);
@@ -781,6 +781,7 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
                     billgt.printBill(txtSDT.getText(), Auth.user.getMaNV());
                     GioHangGT.clearGT();
                     this.dispose();
+                    MsgBox.alert(this, "Thông báo", "Mua gói tập thành công", Alert.AlertType.SUCCESS);
                     clone.clear();
                     GymSysJFrame.maKH = "";
                 } else {
@@ -790,10 +791,10 @@ public class HoaDonGoiTapJDailog extends javax.swing.JDialog {
                     for (GoiTap gt : GioHangGT.listGT) {
                         new HoaDonCTDAO().themHDCTGoiTap(gt.getMaGT(), txtSDT.getText(), gt.getGia());
                     }
-                    MsgBox.alert(this, "Thông báo", "Mua gói tập thành công", Alert.AlertType.SUCCESS);
                     GioHangGT.clearGT();
                     gioHangGTPanel.setSLGoiTap();
                     this.dispose();
+                    MsgBox.alert(this, "Thông báo", "Mua gói tập thành công", Alert.AlertType.SUCCESS);
                     clone.clear();
                     GymSysJFrame.maKH = "";
 
