@@ -30,17 +30,17 @@ public class DoiMatKhauJDailog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }
 
-    public boolean check() {
+    public boolean check(String txtMatKhauCu,String txtMatKhauMoi1, String txtMatKhauMoi2) {
         Validation v = new Validation();
-        if (v.checkLength(txtMatKhau.getText()) == false) {
+        if (v.checkLength(txtMatKhauCu) == false) {
             MsgBox.alert(DoiMatKhauJDailog.this, "Lỗi", "Mật khẩu cũ không được để trống", Alert.AlertType.ERROR);
             txtMatKhau.requestFocus();
             return false;
-        } else if (v.checkLength(txtMatKhau1.getText()) == false) {
+        } else if (v.checkLength(txtMatKhauMoi1) == false) {
             MsgBox.alert(DoiMatKhauJDailog.this, "Lỗi", "Mật khẩu mới không được để trống", Alert.AlertType.ERROR);
             txtMatKhau1.requestFocus();
             return false;
-        } else if (txtMatKhau1.getText().length() < 6) {
+        } else if (txtMatKhauMoi2.length() < 6) {
             MsgBox.alert(DoiMatKhauJDailog.this, "Lỗi", "Mật khẩu phải tối thiểu 6 ký tự", Alert.AlertType.ERROR);
             txtMatKhau1.requestFocus();
             return false;
@@ -171,7 +171,10 @@ public class DoiMatKhauJDailog extends javax.swing.JDialog {
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         // TODO add your handling code here:
-        doiMatKhau();
+        String txtMatKhauCu = txtMatKhau.getText().trim();
+        String txtMatKhauMoi1 = txtMatKhau1.getText().trim();
+        String txtMatKhauMoi2 = txtMatKhau1.getText().trim();
+        doiMatKhau(txtMatKhauCu, txtMatKhauMoi1, txtMatKhauMoi2);
     }//GEN-LAST:event_button1ActionPerformed
 
     /**
@@ -189,13 +192,13 @@ public class DoiMatKhauJDailog extends javax.swing.JDialog {
     private com.group2.swing.PasswordField txtMatKhau2;
     // End of variables declaration//GEN-END:variables
 
-    private void doiMatKhau() {
-        if (check()) {
+    public  void doiMatKhau(String txtMatKhauCu,String txtMatKhauMoi1, String txtMatKhauMoi2) {
+        if (check(txtMatKhauCu, txtMatKhauMoi1, txtMatKhauMoi2)) {
 
             System.out.println(Auth.user.getMatKhau());
-            if (Auth.user.getMatKhau().equals(txtMatKhau.getText().trim())) {
-                if (txtMatKhau1.getText().trim().equals(txtMatKhau2.getText().trim())) {
-                    Auth.user.setMatKhau(txtMatKhau1.getText().trim());
+            if (Auth.user.getMatKhau().equals(txtMatKhauCu)) {
+                if (txtMatKhauMoi1.equals(txtMatKhauMoi2)) {
+                    Auth.user.setMatKhau(txtMatKhauMoi1);
                     nv.update(Auth.user);
                     MsgBox.alert(this, "Thông báo", "Cập nhật mật khẩu thành công!", Alert.AlertType.SUCCESS);
                     dispose();

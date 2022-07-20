@@ -204,7 +204,9 @@ public class DangNhapJDialog extends javax.swing.JFrame {
     }//GEN-LAST:event_conBtn1ActionPerformed
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-        dangNhap();
+         String TenDangNhapString = txtTenDangNhap.getText().trim();
+        String MatKhauString = new String(txtMatKhau.getPassword());
+        dangNhap(TenDangNhapString,MatKhauString);
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     /**
@@ -255,9 +257,8 @@ public class DangNhapJDialog extends javax.swing.JFrame {
     private com.group2.swing.PasswordField txtMatKhau;
     private com.group2.swing.TextField txtTenDangNhap;
     // End of variables declaration//GEN-END:variables
-void dangNhap() {
-        String TenDangNhapString = txtTenDangNhap.getText().trim();
-        String MatKhauString = new String(txtMatKhau.getPassword());
+void dangNhap(String TenDangNhapString, String MatKhauString ) {
+       
         NhanVien nv = nvDAO.selectById(TenDangNhapString);
 
         if(nv == null){

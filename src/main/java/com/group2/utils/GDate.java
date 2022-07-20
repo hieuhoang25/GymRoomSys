@@ -29,6 +29,9 @@ public class GDate {
     }
 
     public static String toString(Date date, String pattern) {
+        if (date==null){
+            return "";
+        }
         sdf.applyPattern(pattern);
         return sdf.format(date);
     }
