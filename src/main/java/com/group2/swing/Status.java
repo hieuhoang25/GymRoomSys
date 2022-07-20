@@ -11,8 +11,6 @@ import com.group2.entity.ChekIn;
 import com.group2.entity.HoiVien;
 import com.group2.ui.ChamSocKhachHangJDailog;
 import com.group2.ui.ChiTietHoiVienJDailog;
-import com.group2.ui.DangNhapJDialog;
-import com.group2.ui.GymSysJFrame;
 import com.group2.utils.Auth;
 import com.group2.utils.GImage;
 import com.group2.utils.MsgBox;
@@ -21,13 +19,10 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.Timer;
 
 /**
@@ -207,7 +202,7 @@ public class Status extends javax.swing.JPanel {
     private void btnCheckInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckInActionPerformed
         // TODO add your handling code here:
 //        ev.selected(1);
-        checkIn();
+        checkIn(txtSDT.getText().trim());
     }//GEN-LAST:event_btnCheckInActionPerformed
 
     private void btnTakeCareOfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTakeCareOfActionPerformed
@@ -260,8 +255,8 @@ public class Status extends javax.swing.JPanel {
     CheckInDAO checkInDAO = new CheckInDAO();
     HoiVienDAO hvdao = new HoiVienDAO();
 
-    private void checkIn() {
-        String sdt = txtSDT.getText().trim();
+    public void checkIn(String input) {
+        String sdt = input;
         if (sdt != null && !sdt.equals("")) {
             if (checkInDAO.check(sdt) == false) {
                 MsgBox.alert(null, "Người này đã check in trong ngày", "Bạn không cần phải check in nữa", Alert.AlertType.ERROR);
