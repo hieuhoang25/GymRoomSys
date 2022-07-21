@@ -50,8 +50,10 @@ public class Status extends javax.swing.JPanel {
      * Creates new form Status
      */
     public Status() {
+     
         initComponents();
         init();
+    
         if (Auth.user.getHinh() != null) {
             imageAvatar2.setImage(GImage.read("nvIMG/", Auth.user.getHinh()));
 
@@ -256,6 +258,7 @@ public class Status extends javax.swing.JPanel {
     HoiVienDAO hvdao = new HoiVienDAO();
 
     public void checkIn(String input) {
+     
         String sdt = input;
         if (sdt != null && !sdt.equals("")) {
             if (checkInDAO.check(sdt) == false) {
@@ -264,8 +267,11 @@ public class Status extends javax.swing.JPanel {
 
                 HoiVien hv = hvdao.selectBySDT(sdt);
                 if (hv != null) {
-                    checkInDAO.insert(hv.getID());
-                    fillToList();
+                    checkInDAO.insert(hv.getID()); 
+                    //Dùng y để bỏ qua fillToList khi test
+                    if(dlmList1 != null){
+                        fillToList(); 
+                    }           
                     MsgBox.alert(null, "Thông báo", "Check in thành công cho hội viên!", Alert.AlertType.SUCCESS);
                     txtSDT.setText("");
                     new ChiTietHoiVienJDailog(hv.getID()).setVisible(true);

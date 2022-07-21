@@ -6,43 +6,11 @@
 package com.group2.dao;
 
 import com.group2.entity.NhanVien;
-import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.fail;
 
-/**
- *
- * @author HieuHoang
- */
+
 public class NhanVienDAOIT {
-    
-    public NhanVienDAOIT() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
-
-    /**
-     * Test of insert method, of class NhanVienDAO.
-     */
-    @Test
+    @org.junit.Test
     public void testInsert() {
         System.out.println("insert");
         NhanVien entity = null;
