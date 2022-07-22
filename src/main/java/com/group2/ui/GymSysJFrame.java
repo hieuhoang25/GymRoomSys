@@ -42,6 +42,12 @@ public class GymSysJFrame extends javax.swing.JFrame {
     /**
      * Creates new form GymSysJFrame
      */
+    public void dangxuat() {
+        GymSysJFrame.this.setVisible(false);
+        new DangNhapJDialog().setVisible(true);
+        
+    }
+
     public GymSysJFrame() {
         maKH = "";
         initComponents();
@@ -57,8 +63,7 @@ public class GymSysJFrame extends javax.swing.JFrame {
             public void selected(int index) {
                 System.out.println(index);
                 if (index == 2) {
-                    GymSysJFrame.this.setVisible(false);
-                    new DangNhapJDialog().setVisible(true);
+                   dangxuat();
                 } else {
                     if (index == 0) {
                         new MyAcountJDailog(Auth.user).setVisible(true);
@@ -78,7 +83,6 @@ public class GymSysJFrame extends javax.swing.JFrame {
                         HomeUI hui = new HomeUI();
                         main.add(hui);
                         status1.setListModelCheckIn(hui.getDlmList1(), hui.getCard4());
-
                         main.revalidate();
                     } else {
                         if (index == 2) {
@@ -107,7 +111,6 @@ public class GymSysJFrame extends javax.swing.JFrame {
                                             main.revalidate();
                                         } else {
                                             if (index == 8) {
-
                                                 main.removeAll();
                                                 main.add(new QLSanPhamUI());
                                                 main.revalidate();
@@ -137,7 +140,7 @@ public class GymSysJFrame extends javax.swing.JFrame {
 //                                main.add(new ThongKeUI());
 //                                main.revalidate();
 //                            } else {
-                                {
+                            {
                                 if (index == 4) {
                                     main.removeAll();
                                     main.add(new KhachHangUI());
