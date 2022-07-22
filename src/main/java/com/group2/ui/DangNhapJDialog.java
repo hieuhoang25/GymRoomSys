@@ -257,7 +257,7 @@ public class DangNhapJDialog extends javax.swing.JFrame {
     private com.group2.swing.PasswordField txtMatKhau;
     private com.group2.swing.TextField txtTenDangNhap;
     // End of variables declaration//GEN-END:variables
-void dangNhap(String TenDangNhapString, String MatKhauString ) {
+public void dangNhap(String TenDangNhapString, String MatKhauString ) {
        
         NhanVien nv = nvDAO.selectById(TenDangNhapString);
 

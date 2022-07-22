@@ -42,6 +42,7 @@ public class GymSysJFrame extends javax.swing.JFrame {
     /**
      * Creates new form GymSysJFrame
      */
+
     public GymSysJFrame() {
         maKH = "";
         initComponents();
@@ -57,6 +58,7 @@ public class GymSysJFrame extends javax.swing.JFrame {
             public void selected(int index) {
                 System.out.println(index);
                 if (index == 2) {
+                    Auth.clear();
                     GymSysJFrame.this.setVisible(false);
                     new DangNhapJDialog().setVisible(true);
                 } else {
