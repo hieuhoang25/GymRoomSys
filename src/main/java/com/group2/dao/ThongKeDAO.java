@@ -123,7 +123,7 @@ public class ThongKeDAO {
     }
 
     public Integer thongKeKhachHang() {
-        String sql = "select COUNT(*) as 'SLKH' from KhachHang where SoDT not in (select SoDT from HoiVien);";
+        String sql = "select COUNT(*) as 'SLKH' from KhachHang";
         Integer n = 0;
         try {
             ResultSet rs = GJDBC.query(sql);

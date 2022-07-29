@@ -60,7 +60,7 @@ public class HoaDonCTDAO {
          
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("HoaDonCTDAO-themHoaDonSanPham: " + e.getMessage());
+            System.out.println("HoaDonCTDAO-themKHVaHD: " + e.getMessage());
         }
     }
 
@@ -72,7 +72,7 @@ public class HoaDonCTDAO {
         
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("HoaDonCTDAO-themHoaDonSanPham: " + e.getMessage());
+            System.out.println("HoaDonCTDAO-themSPVaoHD: " + e.getMessage());
         }
     }
 }
