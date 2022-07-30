@@ -65,7 +65,7 @@ public class CheckInDAO {
         } catch (Exception e) {
             System.out.println("CheckInDAO-SoHVCheckIn(): " + e.getMessage());
         }
-        return list;
+        return list; 
     }
 
     public void deleteCheckIn(Date date) {
