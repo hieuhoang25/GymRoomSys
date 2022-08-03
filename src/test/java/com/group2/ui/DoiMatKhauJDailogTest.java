@@ -53,7 +53,6 @@ public class DoiMatKhauJDailogTest {
             dangnhap.dangNhap("NV03", "123456");
             doiMK = new DoiMatKhauJDailog();
             doiMK.doiMatKhau("123456", "1234567", "123456a");
-            Assert.fail("Mật khẩu mới không đúng");
     }
 
     // mk mới với số kí tự nhỏ hơn 6
@@ -63,7 +62,6 @@ public class DoiMatKhauJDailogTest {
             dangnhap.dangNhap("NV04", "123456");
             doiMK = new DoiMatKhauJDailog();
             doiMK.doiMatKhau("123456", "123", "123");
-            Assert.fail("Mật khẩu nhở hơn 6 kí tự");
     }
 
     // mk mới với số kí tự lớn hơn 14
@@ -71,7 +69,7 @@ public class DoiMatKhauJDailogTest {
     public void testDoiMatKhau5() {
         try {
             dangnhap = new DangNhapJDialog();
-            dangnhap.dangNhap("NV05", "123456a");
+            dangnhap.dangNhap("NV05", "123456");
             doiMK = new DoiMatKhauJDailog();
             doiMK.doiMatKhau("123456", "0123456789zxcvf", "0123456789zxcvf");
         } catch (Exception e) {
