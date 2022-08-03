@@ -6,6 +6,7 @@
 package com.group2.dao;
 
 import com.group2.entity.NhanVien;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.junit.After;
@@ -43,12 +44,16 @@ public class NhanVienTest {
     /**
      * Test of insert method, of class NhanVienDAO.
      */
-    @Test
+    @Test()
     public void testInsert() {
         System.out.println("Testcase1-insert nhan vien");
         NhanVien entity = null;
         NhanVienDAO instance = new NhanVienDAO();
-        instance.insert(entity);
+        try {
+            instance.insert(entity);
+        } catch (Exception e) {
+        }
+        
     }
 
     @Test
@@ -57,7 +62,7 @@ public class NhanVienTest {
         NhanVien entity = new NhanVien("NV10", "123456", "Nguyễn Văn An", "Quản lý", "an.png", "Quận 12", new Date("13/02/1999"));
         NhanVienDAO instance = new NhanVienDAO();
         try {
-                    instance.insert(entity);
+            instance.insert(entity);
         } catch (Exception e) {
         }
 
@@ -68,7 +73,11 @@ public class NhanVienTest {
         System.out.println("Testcase3-insert nhan vien");
         NhanVien entity = new NhanVien("NV01", "123456", "Nguyễn Văn An", "Quản lý", "an.png", "Quận 12", new Date("13/02/1999"));
         NhanVienDAO instance = new NhanVienDAO();
-        instance.insert(entity);
+        try {
+             instance.insert(entity);
+        } catch (Exception e) {
+        }
+       
     }
 
     /**
@@ -140,47 +149,53 @@ public class NhanVienTest {
     /**
      * Test of selectAll method, of class NhanVienDAO.
      */
-    @Test
-    public void testSelectAll() {
-        System.out.println("selectAll");
-        NhanVienDAO instance = new NhanVienDAO();
-        List<NhanVien> expResult = null;
-        List<NhanVien> result = instance.selectAll();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+   
 
     /**
      * Test of selectById method, of class NhanVienDAO.
      */
     @Test
     public void testSelectById() {
-        System.out.println("selectById");
+        System.out.println("Testcase 1 -selectById");
         String id = "NV01";
         NhanVienDAO instance = new NhanVienDAO();
-        NhanVien expResult = null;
         NhanVien result = instance.selectById(id);
-        assertEquals(expResult, result);
-       
+        assertNotNull(result);
+
+    }
+    @Test
+    public void testSelectById1() {
+        System.out.println("Testcase 2 - selectById");
+        String id = "NV11";
+        NhanVienDAO instance = new NhanVienDAO();
+        NhanVien result = instance.selectById(id);
+        assertNull(result);
+
     }
 
     /**
      * Test of selectBySql method, of class NhanVienDAO.
      */
- 
-
     /**
      * Test of timNhanVien method, of class NhanVienDAO.
      */
     @Test
-    public void testTimNhanVien() {
-        System.out.println("timNhanVien");
-        String[] args = null;
+    public void testTimNhanVienTheoHoTen() {
+        System.out.println("Testcase1 - timNhanVien");
+        String[] args = new String[]{"NV0"};
         NhanVienDAO instance = new NhanVienDAO();
-        List<NhanVien> expResult = null;
+        int length = 6;
         List<NhanVien> result = instance.timNhanVien(args);
-        assertEquals(expResult, result);
+        assertEquals(length, result.size());
     }
 
+    @Test
+    public void testTimNhanVienTheoHoTen1() {
+        System.out.println("Testcase2 - timNhanVien");
+        String[] args = new String[]{"aaa"};
+        NhanVienDAO instance = new NhanVienDAO();
+        int length = 0;
+        List<NhanVien> result = instance.timNhanVien(args);
+        assertEquals(length, result.size());
+    }
 }

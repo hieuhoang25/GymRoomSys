@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="4" passed="4" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2022-08-03T09:07:57 ICT" name="Suite" finished-at="2022-08-03T09:08:18 ICT" duration-ms="20460">
+    <groups>
+    </groups>
+    <test started-at="2022-08-03T09:07:57 ICT" name="Test" finished-at="2022-08-03T09:08:18 ICT" duration-ms="20460">
+      <class name="com.group2.other.DangNhapTest">
+        <test-method is-config="true" signature="setUpClass()[pri:0, instance:com.group2.other.DangNhapTest@5c30a9b0]" started-at="2022-08-03T09:07:57 ICT" name="setUpClass" finished-at="2022-08-03T09:07:58 ICT" duration-ms="918" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method signature="testDangNhap()[pri:0, instance:com.group2.other.DangNhapTest@5c30a9b0]" started-at="2022-08-03T09:07:58 ICT" name="testDangNhap" finished-at="2022-08-03T09:08:04 ICT" duration-ms="5353" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDangNhap -->
+        <test-method signature="testDangNhap1()[pri:0, instance:com.group2.other.DangNhapTest@5c30a9b0]" started-at="2022-08-03T09:08:04 ICT" name="testDangNhap1" finished-at="2022-08-03T09:08:06 ICT" duration-ms="1895" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDangNhap1 -->
+        <test-method signature="testDangNhap2()[pri:0, instance:com.group2.other.DangNhapTest@5c30a9b0]" started-at="2022-08-03T09:08:06 ICT" name="testDangNhap2" finished-at="2022-08-03T09:08:13 ICT" duration-ms="6822" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDangNhap2 -->
+        <test-method signature="testDangNhap3()[pri:0, instance:com.group2.other.DangNhapTest@5c30a9b0]" started-at="2022-08-03T09:08:13 ICT" name="testDangNhap3" finished-at="2022-08-03T09:08:18 ICT" duration-ms="5380" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDangNhap3 -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.group2.other.DangNhapTest@5c30a9b0]" started-at="2022-08-03T09:08:18 ICT" name="tearDownClass" finished-at="2022-08-03T09:08:18 ICT" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- com.group2.other.DangNhapTest -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>
