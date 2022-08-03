@@ -5,13 +5,10 @@
  */
 package com.group2.other;
 
+import org.testng.annotations.*;
+
 import com.group2.ui.DangNhapJDialog;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+
 
 /**
  *
@@ -33,13 +30,7 @@ public class DangNhapTest {
     public static void tearDownClass() {
     }
 
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
+   
 
 
     /**
