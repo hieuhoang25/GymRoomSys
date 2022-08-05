@@ -1,0 +1,4 @@
+input,regex,expected
+,,false
+12/05/2001,dd/MM/yyyy,true
+12/05/2001,dd-MM-yyyy,false

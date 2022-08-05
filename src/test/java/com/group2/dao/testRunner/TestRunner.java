@@ -6,11 +6,12 @@ package com.group2.dao.testRunner;
 
 import com.group2.dao.NhanVienTest;
 import com.group2.dao.ThongKeDAOTest;
-import com.group2.other.DangNhapTest;
-import com.group2.swing.CheckInTest;
-import com.group2.ui.DoiMatKhauJDailogTest;
-import com.group2.ui.TestDangXuat;
-import com.group2.utils.ValidationIT;
+import com.poly.test.CheckInTest;
+import com.poly.test.DangNhapTest;
+import com.poly.test.DoiMatKhauJDailogTest;
+import com.poly.test.TestDangXuat;
+import com.poly.test.ValidationIT;
+
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
@@ -21,8 +22,8 @@ import org.junit.runner.notification.Failure;
  */
 public class TestRunner {
     public static void main(String[] args) {
-        Result result = JUnitCore.runClasses(NhanVienTest.class, ThongKeDAOTest.class,
-                DangNhapTest.class, CheckInTest.class, DoiMatKhauJDailogTest.class,
+        Result result = JUnitCore.runClasses(
+              DangNhapTest.class, CheckInTest.class, DoiMatKhauJDailogTest.class,
                 TestDangXuat.class, ValidationIT.class);
         for (Failure failure : result.getFailures()) {
             System.out.println("fall: " + failure.toString());
