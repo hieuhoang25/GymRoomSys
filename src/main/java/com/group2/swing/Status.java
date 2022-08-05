@@ -286,7 +286,36 @@ public class Status extends javax.swing.JPanel {
             MsgBox.alert(null, "Check in thất bại!", "Vui lòng nhập số điện thoại để check in!", Alert.AlertType.ERROR);
         }
     }
+    
+    public boolean checkin(String input){
+          String sdt = input;
+        if (sdt != null && !sdt.equals("")) {
+            if (checkInDAO.check(sdt) == false) {
+                return false;
+//                MsgBox.alert(null, "Người này đã check in trong ngày", "Bạn không cần phải check in nữa", Alert.AlertType.ERROR);
+            } else {
 
+                HoiVien hv = hvdao.selectBySDT(sdt);
+                if (hv != null) {
+                    return true;
+//                    checkInDAO.insert(hv.getID());
+//                    fillToList();
+//                    MsgBox.alert(null, "Thông báo", "Check in thành công cho hội viên!", Alert.AlertType.SUCCESS);
+//                    txtSDT.setText("");
+//                    new ChiTietHoiVienJDailog(hv.getID()).setVisible(true);
+                } else {
+                    return false;
+//                    MsgBox.alert(null, "Check in thất bại!", "Số điện thoại này không phải của hội viên", Alert.AlertType.ERROR);
+
+                }
+
+            }
+        } else {
+            return false;
+          //  MsgBox.alert(null, "Check in thất bại!", "Vui lòng nhập số điện thoại để check in!", Alert.AlertType.ERROR);
+        }
+    }
+    
     private void fillToList() {
         dlmList1.removeAllElements();
         for (ChekIn chekIn : checkInDAO.SoHVCheckIn()) {

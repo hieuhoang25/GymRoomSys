@@ -280,4 +280,23 @@ public class DangNhapJDialog extends javax.swing.JFrame {
             }
         }
     }
+  public boolean dangNhapToApp(String TenDangNhapString, String MatKhauString ) {
+       
+        NhanVien nv = nvDAO.selectById(TenDangNhapString);
+
+        if(nv == null){
+              return false;
+        }
+        if (!nv.getMaNV().trim().equals(TenDangNhapString)) {
+            return false;
+            } else {
+            if (!nv.getMatKhau().trim().equals(MatKhauString)) {
+                return false;
+               
+            } else {
+                 Auth.user = nv;
+                return true;
+            }
+        }
+    }
 }
