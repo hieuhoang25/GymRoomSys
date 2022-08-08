@@ -1,4 +1,0 @@
-input,expected
-,false
-12.5a,false
-0.5,true

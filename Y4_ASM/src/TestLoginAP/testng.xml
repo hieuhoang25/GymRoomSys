@@ -5,8 +5,8 @@
   <classes>
   	
   	<class name="TestLoginAP.TestLoginAP"></class>
-  	<parameter name="username" value="input username"></parameter>
-  	<parameter name="password" value="input password"></parameter>
+  	<parameter name="username" value="standard_user"></parameter>
+  	<parameter name="password" value="secret_sauce"></parameter>
   </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

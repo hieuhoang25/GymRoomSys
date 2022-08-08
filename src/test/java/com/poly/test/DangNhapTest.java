@@ -9,19 +9,22 @@ import com.group2.config.ReportTest;
 import com.group2.config.TestCase;
 import com.group2.swing.Status;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
-
 import com.group2.ui.DangNhapJDialog;
+
+import static org.testng.Assert.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 /**
  *
@@ -36,12 +39,12 @@ public class DangNhapTest {
     public DangNhapTest() {
     }
 
-    @BeforeAll
+    @BeforeClass
     public static void setUpClass() {
         dangNhapJDialog = new DangNhapJDialog();
     }
 
-    @AfterAll
+    @AfterClass
     public static void tearDownClass() {
         try {
             ReportTest.writeExcel(list, "src/books.xlsx", "Chức năng đăng nhập");
@@ -57,31 +60,45 @@ public class DangNhapTest {
      * Test of dangNhap method, of class DangNhapJDialog.
      * 
      */
+	@DataProvider(name = "testcase")
+	public Iterator<Object[]> createData1() {
+		List<Object[]> result = new ArrayList<>();
+		result.add(new Object[] {"","" ,false});
+		result.add(new Object[] {"NV01921","2213",false});
+		result.add(new Object[] {"NV01","123456",true});
+		result.add(new Object[] {"NV02","123456",true});
+//	 return new Object[][][] {
+//	   {  },
+//	   { "NV01","123456",true },
+//	   {"NV02","123456",true}
+		return result.iterator();
+	 };
+	
     static int id = 0;
-	@ParameterizedTest
-	@CsvFileSource(resources = "/login.csv", numLinesToSkip = 1)
-	public void testCheck(String username,String password, String expected) {
+    @Test(dataProvider = "testcase")
+	public void testCheck(String username,String password, boolean expected) {
 		System.out.println("Dang nhap");
 		DangNhapJDialog instance = new DangNhapJDialog();
 		id++;
-		if (expected.equalsIgnoreCase("false")) {
+		if (expected==false) {
 			try {
-				Assertions.assertFalse(instance.dangNhapToApp(username, password));
+		
+				assertFalse(instance.dangNhapToApp(username, password));
 				list.add(new TestCase("TC"+id, "Đăng nhập : boolean dangNhapToApp(username, password)", "username: "+username+", password: "+password, "false", "Pass"));
 
 			} catch (Throwable e) {
 				// TODO: handle exception
 				list.add(new TestCase("TC"+id, "Đăng nhập : boolean dangNhapToApp(username, password)", "username: "+username+", password: "+password, "false", "Fail"));
-				Assertions.fail(e);
+				fail();
 			}
 		} else {
 			try {
-				Assertions.assertTrue(instance.dangNhapToApp(username, password));
+				assertTrue(instance.dangNhapToApp(username, password));
 				list.add(new TestCase("TC"+id, "Đăng nhập : boolean dangNhapToApp(username, password)", "username: "+username+", password: "+password, "true", "Pass"));
 			} catch (Throwable e) {
 				// TODO: handle exception
 				list.add(new TestCase("TC"+id, "Đăng nhập : boolean dangNhapToApp(username, password)", "username: "+username+", password: "+password, "true", "Fail"));
-				Assertions.fail(e);
+				fail();
 			}
 		}
 

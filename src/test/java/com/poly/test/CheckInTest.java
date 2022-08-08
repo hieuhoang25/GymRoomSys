@@ -10,16 +10,21 @@ import com.group2.swing.Status;
 import com.group2.ui.DangNhapJDialog;
 import com.group2.utils.Auth;
 
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.junit.After;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+
 
 
 public class CheckInTest {
@@ -27,13 +32,13 @@ public class CheckInTest {
 	public static DangNhapJDialog dangNhapJDialog;
 	static ArrayList<TestCase> list = new ArrayList<>();
 
-	@BeforeAll
+	@BeforeClass
 	public static void setUpClass() {
 //        dangNhapJDialog = new DangNhapJDialog();
 //        dangNhapJDialog.dangNhap("NV01", "123456");
 	}
 
-	@AfterAll
+	@AfterClass
 	public static void tearDownClass() {
 		try {
 			ReportTest.writeExcel(list, "src/books.xlsx", "Chức năng check in");
@@ -42,41 +47,49 @@ public class CheckInTest {
 		}
 	}
 
-	@BeforeEach
+	@BeforeTest
 	public void setUp() {
 		dangNhapJDialog = new DangNhapJDialog();
 		dangNhapJDialog.dangNhapToApp("NV01", "123456");
 	}
+	@DataProvider(name = "testcase")
+	public Object[][] createData1() {
+	 return new Object[][] {
+	   { "0769089058",false },
+	   { "0776274144",true},
+	 };
+	}
+	 
 
-	@After
+	@AfterTest
 	public void tearDown() {
 		Auth.clear();
 	}
 	static int id =0;
-	@ParameterizedTest
-	@CsvFileSource(resources = "/checkin.csv", numLinesToSkip = 1)
-	public void testCheck(String input, String expected) {
+	@Test(dataProvider = "testcase")
+	public void testCheck(String input, boolean expected) {
 		System.out.println("checkIn");
 		id++;
 		Status instance = new Status();
-		if (expected.equalsIgnoreCase("false")) {
+		if (expected==false) {
 			try {
-				Assertions.assertFalse(instance.checkin(input));
+				
+				assertFalse(instance.checkin(input));
 				list.add(new TestCase("TC"+id, "Check in hội viên: boolean checkin(input)", input, "false", "Pass"));
 
 			} catch (Throwable e) {
 				// TODO: handle exception
 				list.add(new TestCase("TC"+id, "Check in hội viên: boolean checkin(input)", input, "false", "Fail"));
-				Assertions.fail(e);
+				fail();
 			}
 		} else {
 			try {
-				Assertions.assertTrue(instance.checkin(input));
+				assertTrue(instance.checkin(input));
 				list.add(new TestCase("TC"+id, "Check in hội viên: boolean checkin(input)", input, "true", "Pass"));
 			} catch (Throwable e) {
 				// TODO: handle exception
 				list.add(new TestCase("TC"+id, "Check in hội viên: boolean checkin(input)", input, "true", "Fail"));
-				Assertions.fail(e);
+				fail();
 			}
 		}
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test thread-count="5" name="Test">
+    <classes>
+      <class name="com.poly.test.TestDangXuat"/>
+      <class name="com.group2.dao.ThongKeDAOTest"/>
+      <class name="com.poly.test.ValidationIT"/>
+      <class name="com.poly.test.CheckInTest"/>
+      <class name="com.poly.test.DangNhapTest"/>
+      <class name="com.poly.test.DoiMatKhauJDailogTest"/>
+      <class name="com.group2.dao.NhanVienTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

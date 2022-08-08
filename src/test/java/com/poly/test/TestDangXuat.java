@@ -11,60 +11,62 @@ import com.group2.ui.DangNhapJDialog;
 import com.group2.ui.GymSysJFrame;
 import com.group2.utils.Auth;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-
+import static org.testng.Assert.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import org.junit.BeforeClass;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.Test;
 
 /**
  *
  * @author lenovo
  */
 public class TestDangXuat {
-	 static ArrayList<TestCase> list = new ArrayList<>();
+	static ArrayList<TestCase> list = new ArrayList<>();
 	static DangNhapJDialog dangnhap;
-     
-    public TestDangXuat() {
-    }
-    @BeforeAll
-    public static void setUpClass() {
-        dangnhap = new DangNhapJDialog();
-        dangnhap.dangNhap("NV04", "123456");
-    }
-    @AfterAll
-    public static void tearDownClass() {
-        try {
-            ReportTest.writeExcel(list, "src/books.xlsx", "Chức năng đăng xuất");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-    @Test
-    public void testDangxuat() {
-        //Auth.user = new NhanVien("NV04", "123456", "Nguyễn Tài Nguyên", "Nhân viên", "NV04.png", "45 Đống Đa Hà Nội", 1999-09-23);
-        
-        GymSysJFrame main = new GymSysJFrame();
-        
-        try {
-        	   main.dangxuat();
-        	   System.out.println("hêlo");
-        	   
-        	   Assertions.assertTrue(Auth.user==null?true:false);
-        	   list.add(new TestCase("TC1", "Đăng xuất: dangxuat()", "", "Auth=null", "Pass"));
-        	   
+
+	public TestDangXuat() {
+	}
+
+	@BeforeClass
+	public static void setUpClass() {
+		dangnhap = new DangNhapJDialog();
+		dangnhap.dangNhap("NV04", "123456");
+	}
+
+	@AfterClass
+	public static void tearDownClass() {
+		try {
+			ReportTest.writeExcel(list, "src/books.xlsx", "Chức năng đăng xuất");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testDangxuat() {
+		// Auth.user = new NhanVien("NV04", "123456", "Nguyễn Tài Nguyên", "Nhân viên",
+		// "NV04.png", "45 Đống Đa Hà Nội", 1999-09-23);
+
+		GymSysJFrame main = new GymSysJFrame();
+
+		try {
+			main.dangxuat();
+			System.out.println("hêlo");
+
+			assertTrue(Auth.user == null ? true : false);
+			list.add(new TestCase("TC1", "Đăng xuất: dangxuat()", "", "Auth=null", "Pass"));
+
 		} catch (Throwable e) {
 			// TODO: handle exception
 			System.out.println(Auth.user);
-			
-			list.add(new TestCase("TC1", "Đăng xuất: dangxuat()", "", "Auth=null", "Fail"));
-			Assertions.fail(e);
-		}
-     
-    }    
-}
 
+			list.add(new TestCase("TC1", "Đăng xuất: dangxuat()", "", "Auth=null", "Fail"));
+			fail();
+		}
+
+	}
+}

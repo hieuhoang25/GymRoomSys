@@ -2,25 +2,25 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-08-05T16:24:43 ICT" name="Suite" finished-at="2022-08-05T16:25:17 ICT" duration-ms="34485">
+  <suite started-at="2022-08-06T09:08:41 ICT" name="Suite" finished-at="2022-08-06T09:08:54 ICT" duration-ms="12952">
     <groups>
     </groups>
-    <test started-at="2022-08-05T16:24:43 ICT" name="Test" finished-at="2022-08-05T16:25:17 ICT" duration-ms="34485">
+    <test started-at="2022-08-06T09:08:41 ICT" name="Test" finished-at="2022-08-06T09:08:54 ICT" duration-ms="12952">
       <class name="TestLoginAP.TestLoginAP">
-        <test-method is-config="true" signature="suiteSetup()[pri:0, instance:TestLoginAP.TestLoginAP@55b7a4e0]" started-at="2022-08-05T16:24:43 ICT" name="suiteSetup" finished-at="2022-08-05T16:25:10 ICT" duration-ms="27022" status="PASS">
+        <test-method is-config="true" signature="suiteSetup()[pri:0, instance:TestLoginAP.TestLoginAP@5cee5251]" started-at="2022-08-06T09:08:41 ICT" name="suiteSetup" finished-at="2022-08-06T09:08:51 ICT" duration-ms="10486" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- suiteSetup -->
-        <test-method signature="LoginAp(java.lang.String,java.lang.String)[pri:0, instance:TestLoginAP.TestLoginAP@55b7a4e0]" started-at="2022-08-05T16:25:10 ICT" name="LoginAp" finished-at="2022-08-05T16:25:17 ICT" duration-ms="7431" status="PASS">
+        <test-method signature="LoginAp(java.lang.String,java.lang.String)[pri:0, instance:TestLoginAP.TestLoginAP@5cee5251]" started-at="2022-08-06T09:08:51 ICT" name="LoginAp" finished-at="2022-08-06T09:08:54 ICT" duration-ms="2405" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[justluvyou99@gmail.com]]>
+                <![CDATA[standard_user]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[Bello3006]]>
+                <![CDATA[secret_sauce]]>
               </value>
             </param>
           </params>

@@ -1,5 +1,0 @@
-username,password,expected
- , ,false
-NV01921,2213,false
-NV01,123456,true
-NV02,123456,true

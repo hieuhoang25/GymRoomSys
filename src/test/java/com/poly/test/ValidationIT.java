@@ -8,19 +8,19 @@ package com.poly.test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
+import static org.testng.Assert.*;
+import org.junit.BeforeClass;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import com.group2.config.ReportTest;
 import com.group2.config.TestCase;
 import com.group2.ui.DangNhapJDialog;
 import com.group2.utils.Validation;
-
-import org.junit.jupiter.api.Assertions;
 
 /**
  *
@@ -32,12 +32,12 @@ public class ValidationIT {
 	public ValidationIT() {
 	}
 
-	@BeforeAll
+	@BeforeClass
 	public static void setUpClass() {
 
 	}
 
-	@AfterAll
+	@AfterClass
 	public static void tearDownClass() {
 		try {
 			ReportTest.writeExcel(list, "src/books.xlsx", "Validation");
@@ -56,7 +56,7 @@ public class ValidationIT {
 		String str = "";
 		boolean expResult = false;
 		boolean result = Validation.checkLength(str);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 	}
 
 	// input: null
@@ -66,7 +66,7 @@ public class ValidationIT {
 		String str = null;
 		boolean expResult = false;
 		boolean result = Validation.checkLength(str);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 	}
 	// input: string
 
@@ -76,7 +76,7 @@ public class ValidationIT {
 		String str = "string";
 		boolean expResult = true;
 		boolean result = Validation.checkLength(str);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class ValidationIT {
 		String str = "";
 		boolean expResult = false;
 		boolean result = Validation.correctString(str);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 	}
 
 	@Test
@@ -102,7 +102,7 @@ public class ValidationIT {
 		String str = "123";
 		boolean expResult = false;
 		boolean result = Validation.correctString(str);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 	}
 
 	@Test
@@ -111,23 +111,27 @@ public class ValidationIT {
 		String str = "1234567";
 		boolean expResult = true;
 		boolean result = Validation.correctString(str);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 	}
 
 	/**
 	 * Test of checkInt method, of class Validation.
 	 */
+	@DataProvider(name = "StringToInt")
+	public Object[][] data1() {
+		return new Object[][] { { "", false }, { "12a", false }, { "12", true } };
+	}
+
 	// chuyển string sang số nguyên
 	static int id = 0;
 
-	@ParameterizedTest
-	@CsvFileSource(resources = "/ValidateStringToInt.csv", numLinesToSkip = 1)
-	public void testCheckInt(String input, String expected) {
+	@Test(dataProvider = "StringToInt")
+	public void testCheckInt(String input, boolean expected) {
 		System.out.println("checkInt");
 		id++;
-		if (expected.equalsIgnoreCase("false")) {
+		if (expected = false) {
 			try {
-				Assertions.assertFalse(Validation.checkInt(input));
+				assertFalse(Validation.checkInt(input));
 				list.add(new TestCase("TC" + id, "Kiểm tra chuổi có phải là số nguyên : boolean checkInt(input)",
 						"input: " + input, "false", "Pass"));
 
@@ -135,95 +139,110 @@ public class ValidationIT {
 				// TODO: handle exception
 				list.add(new TestCase("TC" + id, "Kiểm tra chuổi có phải là số nguyên : boolean checkInt(input)",
 						"input: " + input, "false", "Pass"));
-				Assertions.fail(e);
+				fail();
 			}
 		} else {
 			try {
-				Assertions.assertTrue(Validation.checkInt(input));
+				assertTrue(Validation.checkInt(input));
 				list.add(new TestCase("TC" + id, "Kiểm tra chuổi có phải là số nguyên : boolean checkInt(input)",
 						"input: " + input, "true", "Pass"));
 			} catch (Throwable e) {
 				// TODO: handle exception
 				list.add(new TestCase("TC" + id, "Kiểm tra chuổi có phải là số nguyên : boolean checkInt(input)",
 						"input: " + input, "true", "Fail"));
-				Assertions.fail(e);
+				fail();
 			}
 		}
 	}
-
-
-
-
 
 	/**
 	 * Test of checkDouble method, of class Validation.
 	 */
-	@ParameterizedTest
-	@CsvFileSource(resources = "/ValidateStringToDouble.csv", numLinesToSkip = 1)
-	public void testCheckDouble(String input, String expected) {
+
+	@DataProvider(name = "StringToDouble")
+	public Object[][] data2() {
+		return new Object[][] { { "", false }, { "12.5a", false }, { "0.5", true } };
+	}
+
+	@Test(dataProvider = "StringToDouble")
+	public void testCheckDouble(String input, boolean expected) {
 		System.out.println("checkDouble");
 		id++;
-		if (expected.equalsIgnoreCase("false")) {
+		if (expected==false) {
 			try {
-				Assertions.assertFalse(Validation.checkDouble(input));
-				list.add(new TestCase("TC" + id, "Kiểm tra chuổi có phải là số thực : boolean checkDouble(input)",
-						"input: " + input, "false", "Pass"));
+				assertFalse(Validation.checkDouble(input));
+				list.add(
+						new TestCase("TC" + id, "Kiểm tra chuổi có phải là số thực : boolean checkDouble(input)",
+								"input: " + input, "false", "Pass"));
 
 			} catch (Throwable e) {
 				// TODO: handle exception
-				list.add(new TestCase("TC" + id, "Kiểm tra chuổi có phải là số thực : boolean checkDouble(input)",
-						"input: " + input, "false", "Pass"));
-				Assertions.fail(e);
+				list.add(
+						new TestCase("TC" + id, "Kiểm tra chuổi có phải là số thực : boolean checkDouble(input)",
+								"input: " + input, "false", "Pass"));
+				fail();
 			}
 		} else {
 			try {
-				Assertions.assertTrue(Validation.checkDouble(input));
-				list.add(new TestCase("TC" + id, "Kiểm tra chuổi có phải là số thực : boolean checkDouble(input)",
-						"input: " + input, "true", "Pass"));
+				assertTrue(Validation.checkDouble(input));
+				list.add(
+						new TestCase("TC" + id, "Kiểm tra chuổi có phải là số thực : boolean checkDouble(input)",
+								"input: " + input, "true", "Pass"));
 			} catch (Throwable e) {
 				// TODO: handle exception
-				list.add(new TestCase("TC" + id, "Kiểm tra chuổi có phải là số thực : boolean checkDouble(input)",
-						"input: " + input, "true", "Fail"));
-				Assertions.fail(e);
+				list.add(
+						new TestCase("TC" + id, "Kiểm tra chuổi có phải là số thực : boolean checkDouble(input)",
+								"input: " + input, "true", "Fail"));
+				fail();
 			}
 		}
 
 	}
 
-
-
 	/**
 	 * Test of checkToDate method, of class Validation.
 	 */
-	@ParameterizedTest
-	@CsvFileSource(resources = "/ValidateStringToDate.csv", numLinesToSkip = 1)
-	public void testCheckToDate(String input,String regex,String expected) {
+	@DataProvider(name = "StringToDate")
+	public Iterator<Object[]> data3() {
+		List<Object[]> result = new ArrayList<>();
+		result.add(new Object[] { "", "", false });
+		result.add(new Object[] { "12/05/2001", "dd/MM/yyyy", true });
+		result.add(new Object[] { "12/05/2001", "dd-MM-yyyy", false });
+		return result.iterator();
+	}
+
+	@Test(dataProvider = "StringToDate")
+	public void testCheckToDate(String input, String regex, boolean expected) {
 		System.out.println("checkToDate");
 		id++;
-		if (expected.equalsIgnoreCase("false")) {
+		if (expected = false) {
 			try {
-				Assertions.assertFalse(Validation.checkToDate(input, regex));
-				list.add(new TestCase("TC" + id, "Kiểm tra chuổi có phải là định dạng ngày không : boolean checkToDate(input, regex)",
-						"input: " + input+", regex: "+regex, "false", "Pass"));
+				assertFalse(Validation.checkToDate(input, regex));
+				list.add(new TestCase("TC" + id,
+						"Kiểm tra chuổi có phải là định dạng ngày không : boolean checkToDate(input, regex)",
+						"input: " + input + ", regex: " + regex, "false", "Pass"));
 
 			} catch (Exception e) {
 				// TODO: handle exception
-				list.add(new TestCase("TC" + id, "Kiểm tra chuổi có phải là định dạng ngày không : boolean checkToDate(input, regex)",
-						"input: " + input+", regex: "+regex, "false", "Pass"));
+				list.add(new TestCase("TC" + id,
+						"Kiểm tra chuổi có phải là định dạng ngày không : boolean checkToDate(input, regex)",
+						"input: " + input + ", regex: " + regex, "false", "Pass"));
+				fail();
 			}
 		} else {
 			try {
-				Assertions.assertTrue(Validation.checkToDate(input, regex));
-				list.add(new TestCase("TC" + id, "Kiểm tra chuổi có phải là định dạng ngày không : boolean checkToDate(input, regex)",
-						"input: " + input+", regex: "+regex, "true", "Pass"));
+				assertTrue(Validation.checkToDate(input, regex));
+				list.add(new TestCase("TC" + id,
+						"Kiểm tra chuổi có phải là định dạng ngày không : boolean checkToDate(input, regex)",
+						"input: " + input + ", regex: " + regex, "true", "Pass"));
 			} catch (Throwable e) {
 				// TODO: handle exception
-				list.add(new TestCase("TC" + id, "Kiểm tra chuổi có phải là định dạng ngày không : boolean checkToDate(input, regex)",
-						"input: " + input+", regex: "+regex, "true", "Fail"));
-				Assertions.fail(e);
+				list.add(new TestCase("TC" + id,
+						"Kiểm tra chuổi có phải là định dạng ngày không : boolean checkToDate(input, regex)",
+						"input: " + input + ", regex: " + regex, "true", "Fail"));
+				fail();
 			}
 		}
-	
 
 	}
 
@@ -237,7 +256,7 @@ public class ValidationIT {
 		String regex = "";
 		boolean expResult = false;
 		boolean result = Validation.checkToString(date, regex);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 
 	}
 
@@ -248,7 +267,7 @@ public class ValidationIT {
 		String regex = "dd/MM/yyyy";
 		boolean expResult = true;
 		boolean result = Validation.checkToString(date, regex);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 
 	}
 
@@ -259,7 +278,7 @@ public class ValidationIT {
 		String regex = "adsffaddas";
 		boolean expResult = false;
 		boolean result = Validation.checkToString(date, regex);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 
 	}
 
@@ -273,7 +292,7 @@ public class ValidationIT {
 		Validation instance = new Validation();
 		boolean expResult = false;
 		boolean result = instance.checkName(str);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 
 	}
 
@@ -284,7 +303,7 @@ public class ValidationIT {
 		Validation instance = new Validation();
 		boolean expResult = true;
 		boolean result = instance.checkName(str);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 
 	}
 
@@ -295,7 +314,7 @@ public class ValidationIT {
 		Validation instance = new Validation();
 		boolean expResult = false;
 		boolean result = instance.checkName(str);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 
 	}
 
@@ -309,7 +328,7 @@ public class ValidationIT {
 		Validation instance = new Validation();
 		boolean expResult = false;
 		boolean result = instance.checkEmail(str);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 
 	}
 
@@ -320,7 +339,7 @@ public class ValidationIT {
 		Validation instance = new Validation();
 		boolean expResult = false;
 		boolean result = instance.checkEmail(str);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 
 	}
 
@@ -331,7 +350,7 @@ public class ValidationIT {
 		Validation instance = new Validation();
 		boolean expResult = false;
 		boolean result = instance.checkEmail(str);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 
 	}
 
@@ -342,7 +361,7 @@ public class ValidationIT {
 		Validation instance = new Validation();
 		boolean expResult = true;
 		boolean result = instance.checkEmail(str);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 
 	}
 
@@ -356,7 +375,7 @@ public class ValidationIT {
 		Validation instance = new Validation();
 		boolean expResult = false;
 		boolean result = instance.checkDate(str);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 
 	}
 
@@ -367,7 +386,7 @@ public class ValidationIT {
 		Validation instance = new Validation();
 		boolean expResult = false;
 		boolean result = instance.checkDate(str);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 	}
 
 	@Test
@@ -377,7 +396,7 @@ public class ValidationIT {
 		Validation instance = new Validation();
 		boolean expResult = true;
 		boolean result = instance.checkDate(str);
-		Assertions.assertEquals(expResult, result);
+		assertEquals(expResult, result);
 	}
 
 	/**
