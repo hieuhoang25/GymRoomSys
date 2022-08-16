@@ -3,17 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.poly.test.ValidationIT">
+      <class name="com.poly.test.DoiMatKhauJDailogTest">
         <methods>
-          <include name="testCheckLength1"/>
-          <include name="testCheckInt" invocation-numbers="0 1"/>
-          <include name="testCheckToString"/>
-          <include name="testCheckName1"/>
-          <include name="testCheckToDate" invocation-numbers="0 2"/>
-          <include name="testCheckEmail3"/>
-          <include name="tearDownClass"/>
+          <include name="clear"/>
+          <include name="save"/>
+          <include name="testDoiMatKhau" invocation-numbers="3"/>
+          <include name="all"/>
         </methods>
-      </class> <!-- com.poly.test.ValidationIT -->
+      </class> <!-- com.poly.test.DoiMatKhauJDailogTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

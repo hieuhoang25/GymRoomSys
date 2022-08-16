@@ -37,7 +37,7 @@ public class CheckInTest {
 //        dangNhapJDialog = new DangNhapJDialog();
 //        dangNhapJDialog.dangNhap("NV01", "123456");
 	}
-
+	
 	@AfterClass
 	public static void tearDownClass() {
 		try {
@@ -52,6 +52,13 @@ public class CheckInTest {
 		dangNhapJDialog = new DangNhapJDialog();
 		dangNhapJDialog.dangNhapToApp("NV01", "123456");
 	}
+	 
+
+	@AfterTest
+	public void tearDown() {
+		Auth.clear();
+	}
+	
 	@DataProvider(name = "testcase")
 	public Object[][] createData1() {
 	 return new Object[][] {
@@ -59,12 +66,7 @@ public class CheckInTest {
 	   { "0776274144",true},
 	 };
 	}
-	 
 
-	@AfterTest
-	public void tearDown() {
-		Auth.clear();
-	}
 	static int id =0;
 	@Test(dataProvider = "testcase")
 	public void testCheck(String input, boolean expected) {
@@ -73,12 +75,10 @@ public class CheckInTest {
 		Status instance = new Status();
 		if (expected==false) {
 			try {
-				
 				assertFalse(instance.checkin(input));
 				list.add(new TestCase("TC"+id, "Check in hội viên: boolean checkin(input)", input, "false", "Pass"));
 
 			} catch (Throwable e) {
-				// TODO: handle exception
 				list.add(new TestCase("TC"+id, "Check in hội viên: boolean checkin(input)", input, "false", "Fail"));
 				fail();
 			}
@@ -87,7 +87,6 @@ public class CheckInTest {
 				assertTrue(instance.checkin(input));
 				list.add(new TestCase("TC"+id, "Check in hội viên: boolean checkin(input)", input, "true", "Pass"));
 			} catch (Throwable e) {
-				// TODO: handle exception
 				list.add(new TestCase("TC"+id, "Check in hội viên: boolean checkin(input)", input, "true", "Fail"));
 				fail();
 			}

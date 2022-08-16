@@ -54,41 +54,32 @@ public class DoiMatKhauJDailogTest {
 	public Iterator<Object[]> data(){
 		List<Object[]> result = new ArrayList<>();
 		result.add(new Object[] {"111111","123456a","123456a",false,"NV01","123456"});
-		result.add(new Object[] {"123456","1234567","123456a",false,"NV02","123456"});
-		result.add(new Object[] {"123456","123","123",false,"NV03","123456"});
+		result.add(new Object[] {"123456","1234567","123456a",false,"NV01","123456"});
+		result.add(new Object[] {"123456","123","123",false,"NV01","123456"});
 		result.add(new Object[] {"123456","0123456789zxcvf","0123456789zxcvf",false,"NV04","123456"});
-		result.add(new Object[] {"123456","123456a","123456a",true,"NV010","123456"});
+		result.add(new Object[] {"123456","123456a","123456a",true,"NV04","123456"});
 		return result.iterator();
 	}
-	
-	// Mật khẩu hiện tại không chính xác
 	static int id = 0;
-
 	@Test(dataProvider = "testcase")
     public void testDoiMatKhau(String oldpassword,String newpassword1,String newpassword2,boolean expected,String mavn, String pass) {
 		System.out.println("Dổi mật khẩu");
-		
 	    dangnhap.dangNhapToApp(mavn, pass);
 	    System.out.println(Auth.user.getMatKhau());
 		id++;
-            if (expected=false) {
+            if (expected==false) {
     			try {
     				assertFalse(doiMK.doiMatKhauUser(oldpassword, newpassword1, newpassword2));
     				list.add(new TestCase("TC"+id, "Đổi mật khẩu : boolean doiMatKhuUser(oldpassword, newpassword1, newpassword2)", "oldpassword: "+oldpassword+", newpassword1: "+newpassword1+", newpassword2: "+newpassword2+"\n"+"Ma NV: "+mavn+", pass: "+pass, "false", "Pass"));
-
     			} catch (Throwable e) {
-    				// TODO: handle exception
     				list.add(new TestCase("TC"+id, "Đổi mật khẩu : boolean doiMatKhuUser(oldpassword, newpassword1, newpassword2)", "oldpassword: "+oldpassword+", newpassword1: "+newpassword1+", newpassword2: "+newpassword2+"\n"+"Ma NV: "+mavn+", pass: "+pass, "false", "Fail"));
-
     				fail();
     			}
     		} else {
     			try {
     				assertTrue(doiMK.doiMatKhauUser(oldpassword, newpassword1, newpassword2));
     				list.add(new TestCase("TC"+id, "Đổi mật khẩu : boolean doiMatKhuUser(oldpassword, newpassword1, newpassword2)", "oldpassword: "+oldpassword+", newpassword1: "+newpassword1+", newpassword2: "+newpassword2+"\n"+"Ma NV: "+mavn+", pass: "+pass, "true", "Pass"));
-
     			} catch (Throwable e) {
-    				// TODO: handle exception
     				list.add(new TestCase("TC"+id, "Đổi mật khẩu : boolean doiMatKhuUser(oldpassword, newpassword1, newpassword2)", "oldpassword: "+oldpassword+", newpassword1: "+newpassword1+", newpassword2: "+newpassword2+"\n"+"Ma NV: "+mavn+", pass: "+pass, "true", "Fail"));
     				fail();
     			}

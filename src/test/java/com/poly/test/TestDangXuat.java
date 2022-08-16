@@ -34,7 +34,7 @@ public class TestDangXuat {
 	@BeforeClass
 	public static void setUpClass() {
 		dangnhap = new DangNhapJDialog();
-		dangnhap.dangNhap("NV04", "123456");
+		dangnhap.dangNhap("NV01", "123456");
 	}
 
 	@AfterClass
@@ -48,22 +48,15 @@ public class TestDangXuat {
 
 	@Test
 	public void testDangxuat() {
-		// Auth.user = new NhanVien("NV04", "123456", "Nguyễn Tài Nguyên", "Nhân viên",
-		// "NV04.png", "45 Đống Đa Hà Nội", 1999-09-23);
-
 		GymSysJFrame main = new GymSysJFrame();
-
 		try {
 			main.dangxuat();
 			System.out.println("hêlo");
-
 			assertTrue(Auth.user == null ? true : false);
 			list.add(new TestCase("TC1", "Đăng xuất: dangxuat()", "", "Auth=null", "Pass"));
 
 		} catch (Throwable e) {
-			// TODO: handle exception
 			System.out.println(Auth.user);
-
 			list.add(new TestCase("TC1", "Đăng xuất: dangxuat()", "", "Auth=null", "Fail"));
 			fail();
 		}
